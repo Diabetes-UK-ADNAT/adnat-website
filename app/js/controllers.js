@@ -1,15 +1,10 @@
 'use strict';
 
 /* Controllers */
-function Faq($scope) {
-  //Faq.query();
-  $scope.faqs = [
-	  {"question":"question one", "answer":"answer one", "category":"cat1"},
-	  {"question":"question two", "answer":"answer two", "category":"cat1"},
-	  {"question":"question three", "answer":"answer three", "category":"cat2"}
-  ];
+function Faq($scope, Faq) {
+  $scope.faqs = Faq.query();
 }
-//Faq.$inject = ['$scope'];
+Faq.$inject = ['$scope','Faq'];
 
 //HelloCntl.$inject = [];
 function HelloCntl() {
