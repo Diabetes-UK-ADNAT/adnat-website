@@ -1,0 +1,18 @@
+<form name="myForm">
+  <div class="control-group" ng-class="{error: myForm.question.$invalid}">
+    <label>Question</label>
+    <input type="text" name="question" ng-model="project.question" required>
+    <span ng-show="myForm.question.$error.required" class="help-inline"> Required</span>
+  </div>
+  <div class="control-group" ng-class="{error: myForm.answer.$invalid}">
+    <label>Answer</label>
+    <textarea name="answer" ng-model="project.answer"></textarea>
+    <span ng-show="myForm.answer.$error.required" class="help-inline">Required</span>
+  </div>
+  <!-- fixme category -->
+  <br>
+  <a href="#/faq" class="btn">Cancel</a>
+  <button ng-click="save()" ng-disabled="isClean() || myForm.$invalid" class="btn btn-primary">Save</button>
+  <!--button ng-click="destroy()" ng-show="faq._id" class="btn btn-danger">Delete</button-->
+  <button ng-click="destroy()" class="btn btn-danger">Delete</button>
+</form>

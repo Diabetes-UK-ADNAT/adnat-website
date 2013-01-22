@@ -6,7 +6,7 @@
 // In this case it is a simple value service.
 angular.module('myApp.services', []).value('version', '0.2');
 
-angular.module('myApp.services2', ['ngResource']).factory('Faq', function($resource) {
+angular.module('myApp.faq', ['ngResource']).factory('Faq', function($resource) {
 	//return $resource('faqs.json');
 	//return $resource('phones/:phoneId.json', {}, {
 	return $resource('faqs.json', {}, {

@@ -4,7 +4,13 @@
 function Faq($scope, Faq) {
   $scope.faqs = Faq.query();
 }
-Faq.$inject = ['$scope','Faq'];
+function FaqEdit($scope, Faq) {
+	console.log('faq edit');
+}
+function FaqNew($scope, Faq) {
+	console.log('faq new');
+}
+//Faq.$inject = ['$scope','Faq'];
 
 //HelloCntl.$inject = [];
 function HelloCntl() {
