@@ -1,0 +1,22 @@
+<div ng-controller="Group">
+
+	<form name="myForm">
+
+        <label>Parent Group:</label> <br/>
+		<select ng-model="contact.type">
+			<option ng-repeat="contact in form.contacts">contact.name</option>
+		</select>
+		<br/>
+
+        <label>Name:</label><br/>
+        <input type="text" ng-model="form.name" required/> <br/><br/>
+		<br/>
+
+		<button ng-click="cancel()" ng-disabled="isCancelDisabled()">Cancel</button>
+		<button ng-click="save()" ng-disabled="isSaveDisabled()">Save</button>
+    </form>
+
+    <hr/>
+    Debug View:
+    <pre>form={{form}}</pre>
+</div>
