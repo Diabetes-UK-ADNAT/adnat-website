@@ -1,12 +1,12 @@
 <form name="myForm">
   <div class="control-group" ng-class="{error: myForm.question.$invalid}">
     <label>Question</label>
-    <input type="text" name="question" ng-model="project.question" required>
+    <input type="text" name="question" ng-model="faq.question" required>
     <span ng-show="myForm.question.$error.required" class="help-inline"> Required</span>
   </div>
   <div class="control-group" ng-class="{error: myForm.answer.$invalid}">
     <label>Answer</label>
-    <textarea name="answer" ng-model="project.answer"></textarea>
+    <textarea name="answer" ng-model="faq.answer"></textarea>
     <span ng-show="myForm.answer.$error.required" class="help-inline">Required</span>
   </div>
   <!-- fixme category -->

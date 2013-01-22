@@ -9,8 +9,19 @@ angular.module('myApp.services', []).value('version', '0.2');
 angular.module('myApp.faq', ['ngResource']).factory('Faq', function($resource) {
 	//return $resource('faqs.json');
 	//return $resource('phones/:phoneId.json', {}, {
-	return $resource('faqs.json', {}, {
-		query: {method: 'GET', params: {phoneId: 'phones'}, isArray: true}
+	var Faq = $resource('faqs.json', {}, {
+		query: {method: 'GET', params: {faqId: 'faqs'}, isArray: true}
 	});
+
+	Faq.prototype.update = function(cb) {
+		return Faq.update({id: this.id},
+		angular.extend({}, this, {id: undefined}), cb);
+	};
+
+	Faq.prototype.destroy = function(cb) {
+		return Faq.remove({id: this.id}, cb);
+	};
+
+	return Faq;
 });
 

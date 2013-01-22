@@ -10,7 +10,6 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.faq', 'myApp.
 		$routeProvider.when('/user', {templateUrl: 'partials/user.html', controller: User});
 		$routeProvider.when('/group', {templateUrl: 'partials/group.html', controller: Group});
 		$routeProvider.when('/faq', {templateUrl: 'partials/faq.html', controller: Faq});
-		$routeProvider.when('/faq', {templateUrl: 'partials/faq.html', controller: Faq});
 		$routeProvider.when('/faq/edit/:faqId', {templateUrl: 'partials/faq-detail.html', controller: FaqEdit});
 		$routeProvider.when('/faq/new', {templateUrl: 'partials/faq-detail.html', controller: FaqNew});
 		$routeProvider.otherwise({redirectTo: '/view1'});

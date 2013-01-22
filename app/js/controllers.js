@@ -4,9 +4,32 @@
 function Faq($scope, Faq) {
   $scope.faqs = Faq.query();
 }
-function FaqEdit($scope, Faq) {
-	console.log('faq edit');
+
+function FaqEdit($scope, $location, $routeParams, Faq) {
+  console.log('faq edit');
+  console.log( $routeParams.faqId );
+  var self = this;
+/*
+  Faq.get({id: $routeParams.faqId}, function(faq) {
+    self.original = faq;
+    $scope.faq = new Faq(self.faq);
+});
+*/
+
+  $scope.isClean = function() {
+    return angular.equals(self.original, $scope.faq);
+  };
+ 
+  $scope.destroy = function() {
+    self.original.destroy(function() {
+      $location.path('/faq');
+    });
+  };
+  $scope.save = function() {
+	  console.log('save');
+  };
 }
+
 function FaqNew($scope, Faq) {
 	console.log('faq new');
 }
