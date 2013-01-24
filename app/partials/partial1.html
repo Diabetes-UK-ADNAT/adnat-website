@@ -1,1 +1,8 @@
 <p>This is the partial for view 1.</p>
+Welcome to ADNAT — the Adolescent Diabetes Needs Assessment Tool
+<div ng-controller="TabsDemoCtrl">
+    <tabs>
+        <pane heading="Static title">Static content</pane>
+        <pane ng-repeat="pane in panes" heading="{{pane.title}}">{{pane.content}}</pane>
+    </tabs>
+</div>
