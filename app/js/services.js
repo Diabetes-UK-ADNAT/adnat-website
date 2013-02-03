@@ -1,13 +1,11 @@
 'use strict';
 
-/* Services */
+var ROOT_SERVICES_URL = 'http://localhost\\:9000';
 
-// Demonstrate how to register services
-// In this case it is a simple value service.
 angular.module('myApp.services', []).value('version', '0.2');
 
 angular.module('myApp.faq', ['ngResource']).factory('Faq', function($resource) {
-   return $resource('faqs:id.json', {} );
+   return $resource(ROOT_SERVICES_URL+'/faqs:id.json', {} );
 });
 
 

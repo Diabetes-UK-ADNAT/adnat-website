@@ -11,7 +11,7 @@ function FaqCtrlEdit($scope, $location, $routeParams, Faq) {
 
     $scope.faq = Faq.get({id: $routeParams.faqId}, function(faq) {
         self.original = faq;
-        $scope.faq = faq;//new Faq(self.faq); 
+        $scope.faq = new Faq(self.original);
     });
 
 
@@ -21,9 +21,12 @@ function FaqCtrlEdit($scope, $location, $routeParams, Faq) {
 
     $scope.destroy = function() {
         console.log('destroy');
-        self.original.destroy(function() {
-            $location.path('/faq');
-        });
+        Faq.delete({id: $routeParams.faqId});
+        $location.path('/faq');
+// fixme callback?
+//        self.original.destroy(function() {
+//            $location.path('/faq');
+//        });
     };
     $scope.save = function() {
         console.log('save');
@@ -32,6 +35,9 @@ function FaqCtrlEdit($scope, $location, $routeParams, Faq) {
 
 function FaqCtrlNew($scope, Faq) {
     console.log('faq new');
+    $scope.save = function() {
+        console.log('save');
+    };
 }
 
 //FaqCtrl.$inject = ['$scope', '$routeParams', 'Faq'];
