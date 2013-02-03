@@ -9,8 +9,9 @@ angular.module('myApp.services', []).value('version', '0.2');
 angular.module('myApp.faq', ['ngResource']).factory('Faq', function($resource) {
 	//return $resource('faqs.json');
 	//return $resource('phones/:phoneId.json', {}, {
-	var Faq = $resource('faqs.json', {}, {
-		query: {method: 'GET', params: {faqId: 'faqs'}, isArray: true}
+	var Faq = $resource('faqs:id.json', {}, {
+		query: {method: 'GET', params: {faqId: 'faqs'}, isArray: true},
+		get: {method: 'GET', params: {faqId: 'faqs'}, isArray: false}
 	});
 
 	Faq.prototype.update = function(cb) {
