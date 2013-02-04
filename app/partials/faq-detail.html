@@ -1,4 +1,5 @@
 <form name="myForm">
+  <input type="hidden" name="id" ng-model="faq.id">
   <div class="control-group" ng-class="{error: myForm.question.$invalid}">
     <label>Question</label>
     <input type="text" name="question" ng-model="faq.question" required>

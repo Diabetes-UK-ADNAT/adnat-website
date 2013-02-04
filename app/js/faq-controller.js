@@ -30,7 +30,9 @@ function FaqCtrlEdit($scope, $location, $routeParams, Faq) {
     };
     $scope.save = function() {
         console.log('save');
+        console.log($scope.faq);
         Faq.save($scope.faq);
+        $location.path('/faq');
     };
 }
 
