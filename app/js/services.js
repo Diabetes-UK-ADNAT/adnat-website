@@ -1,13 +1,13 @@
 'use strict';
 
+//http://localhost:9000/faqs.json
 var ROOT_SERVICES_URL = 'http://localhost\\:9000';
 
 angular.module('myApp.services', []).value('version', '0.2');
 
 angular.module('myApp.faq', ['ngResource']).factory('Faq', function($resource) {
-   return $resource(ROOT_SERVICES_URL+'/faqs:id.json', {} );
+   return $resource(ROOT_SERVICES_URL+'/faqs/:id.json', {} );
 });
-
 
 	//return $resource('faqs.json');
 	//return $resource('phones/:phoneId.json', {}, {

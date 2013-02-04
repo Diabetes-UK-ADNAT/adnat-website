@@ -8,6 +8,7 @@
   </thead>
   <tbody>
   <tr ng-repeat="faq in faqs | filter:search | orderBy:'category'">
+    <td>{{faq.id}}</td>
     <td>{{faq.question}}</td>
     <td>{{faq.answer}}</td>
     <td>
