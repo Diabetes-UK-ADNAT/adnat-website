@@ -2,12 +2,12 @@
     <input type="hidden" name="id" ng-model="faq.id">
     <div class="control-group" ng-class="{error: myForm.question.$invalid}">
         <label>Question</label>
-        <input type="text" name="question" ng-model="faq.question" required>
+        <textarea name="question" ng-model="faq.question" required></textarea>
         <span ng-show="myForm.question.$error.required" class="help-inline"> Required</span>
     </div>
     <div class="control-group" ng-class="{error: myForm.answer.$invalid}">
         <label>Answer</label>
-        <textarea name="answer" ng-model="faq.answer"></textarea>
+        <textarea name="answer" ng-model="faq.answer" required></textarea>
         <span ng-show="myForm.answer.$error.required" class="help-inline">Required</span>
     </div>
     <div class="control-group" ng-class="{error: myForm.category.$invalid}">
@@ -15,7 +15,9 @@
         <select 
             name="category"
             ng-model="faq.category" 
-            ng-options="i.label as i.label for i in categoryOptions">
+            ng-options="i.label as i.label for i in categoryOptions"
+            required
+            >
         </select>
         <span ng-show="myForm.category.$error.required" class="help-inline">Required</span>
         <br>

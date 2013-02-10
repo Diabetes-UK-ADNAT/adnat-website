@@ -34,16 +34,26 @@
 	margin-bottom: 120px;
 }
 
-
+table {
+    margin-top: 1em;
+}
 thead, th {
-    padding: 8px;
-    background: lightgoldenrodyellow;
-    border: darkkhaki solid 1px;  
+    padding: 8px;   
+    border: #ccc solid 1px;
+    color: #333;
 }
 
 td {
     padding: 8px;
-    border: darkkhaki solid 1px;  
+    border: #ccc solid 1px;  
+    color: #333;
 }
 
+td.action, td.category {
+    text-align: center;
+}
+
+.search-select {
+    margin-top: 10px;
+}
 

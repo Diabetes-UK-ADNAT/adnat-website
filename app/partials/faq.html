@@ -1,27 +1,34 @@
-<input type="text" ng-model="search" class="search-query" placeholder="Search">
+<h1>FAQs</h1>
+
+<div>
+    <input type="text" ng-model="search" class="search-query" placeholder="Search">
+    <span>Category</span>
+    <select 
+        name="category"
+        ng-model="category" 
+        ng-options="i.label as i.label for i in categoryOptions"
+        class="search-select"
+        >
+        <option></option>
+    </select>
+    <span><a href="#/faq/new"><i class="icon-plus-sign"></i></a></span>
+</div>
+
 <table>
     <thead>
-        <tr>
-            <th>ADNAT FAQ</th>
-            <th><a href="#/faq/new"><i class="icon-plus-sign"></i></a></th>
-        </tr>
-    </thead>
-    <tbody>
-    <thead>
-    <th>UUID</th>
-    <th>Category</th>
     <th>Question</th>
     <th>Answer</th>
+    <th>Category</th>
     <th>Action</th>
 </thead>
-<tr ng-repeat="faq in faqs | filter:search | orderBy:'category'">
-    <td>{{faq.uuid}}</td>
-    <td>{{faq.category}}</td>
-    <td>{{faq.question}}</td>
-    <td>{{faq.answer}}</td>
-    <td>
-        <a href="#/faq/edit/{{faq.uuid}}"><i class="icon-pencil"></i></a>
-    </td>
-</tr>
+<tbody>
+    <tr ng-repeat="faq in faqs | filter:search | filter:category |orderBy:'category'">
+        <td>{{faq.question}}</td>
+        <td>{{faq.answer}}</td>
+        <td class="category">{{faq.category}}</td>
+        <td class="action">
+            <a href="#/faq/edit/{{faq.uuid}}"><i class="icon-pencil"></i></a>
+        </td>   
+    </tr>
 </tbody>
 </table>
