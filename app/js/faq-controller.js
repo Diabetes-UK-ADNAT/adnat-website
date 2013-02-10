@@ -8,6 +8,7 @@ function FaqCtrlEdit($scope, $location, $routeParams, Faq) {
     console.log('faq edit');
     console.log($routeParams.faqId);
     var self = this;
+    $scope.categoryOptions = CategoryOptions();
 
     $scope.faq = Faq.get({id: $routeParams.faqId}, function(faq) {
         self.original = faq;
@@ -36,13 +37,17 @@ function FaqCtrlEdit($scope, $location, $routeParams, Faq) {
 
 function FaqCtrlNew($scope, $location, Faq) {
     console.log('faq new');
+    $scope.categoryOptions = CategoryOptions();
     $scope.save = function() {
         console.log('save');
         Faq.save($scope.faq, function() {
             $location.path('/faq');
-            //$scope.apply();
         });
     };
+}
+
+function CategoryOptions() {
+    return [{"id": 1, "label": "opt1"}, {"id": 2, "label": "opt2"}];
 }
 
 //FaqCtrl.$inject = ['$scope', '$routeParams', 'Faq'];

@@ -1,18 +1,35 @@
 <form name="myForm">
-  <input type="hidden" name="id" ng-model="faq.id">
-  <div class="control-group" ng-class="{error: myForm.question.$invalid}">
-    <label>Question</label>
-    <input type="text" name="question" ng-model="faq.question" required>
-    <span ng-show="myForm.question.$error.required" class="help-inline"> Required</span>
-  </div>
-  <div class="control-group" ng-class="{error: myForm.answer.$invalid}">
-    <label>Answer</label>
-    <textarea name="answer" ng-model="faq.answer"></textarea>
-    <span ng-show="myForm.answer.$error.required" class="help-inline">Required</span>
-  </div>
-  <!-- fixme category -->
-  <br>
-  <a href="#/faq" class="btn">Cancel</a>
-  <button ng-click="save()" ng-disabled="isClean() || myForm.$invalid" class="btn btn-primary">Save</button>
-  <button ng-click="destroy()" ng-show="faq.id" class="btn btn-danger">Delete</button>
+    <input type="hidden" name="id" ng-model="faq.id">
+    <div class="control-group" ng-class="{error: myForm.question.$invalid}">
+        <label>Question</label>
+        <input type="text" name="question" ng-model="faq.question" required>
+        <span ng-show="myForm.question.$error.required" class="help-inline"> Required</span>
+    </div>
+    <div class="control-group" ng-class="{error: myForm.answer.$invalid}">
+        <label>Answer</label>
+        <textarea name="answer" ng-model="faq.answer"></textarea>
+        <span ng-show="myForm.answer.$error.required" class="help-inline">Required</span>
+    </div>
+    <div class="control-group" ng-class="{error: myForm.category.$invalid}">
+        <label>Category</label>
+        <!--        <select 
+                    ng-change="selectAction()"
+                    ng-model="faq.category"
+                    ng-options="value.id as value.label group by value.group for value in categoryOptions">
+                    <option>--</option>
+                </select>
+        -->
+        <div>
+            {{faq.category}}
+        </div>
+        <select 
+            name="category"
+            ng-model="faq.category" 
+            ng-options="i.id as i.label for i in categoryOptions">
+        </select>
+        <span ng-show="myForm.category.$error.required" class="help-inline">Required</span>
+        <br>
+        <a href="#/faq" class="btn">Cancel</a>
+        <button ng-click="save()" ng-disabled="isClean() || myForm.$invalid" class="btn btn-primary">Save</button>
+        <button ng-click="destroy()" ng-show="faq.id" class="btn btn-danger">Delete</button>
 </form>

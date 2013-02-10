@@ -1,7 +1,7 @@
 'use strict';
 
 //http://localhost:9000/faqs.json
-var ROOT_SERVICES_URL = 'http://localhost\\:9000';
+var ROOT_SERVICES_URL = 'http://emlair\\:9000/v1';
 
 angular.module('myApp.services', []).value('version', '0.2');
 
