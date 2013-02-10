@@ -56,4 +56,10 @@ td.action, td.category {
 .search-select {
     margin-top: 10px;
 }
-
+input[type="checkbox"] {
+    margin: 0px;
+}
+label.checkbox {
+    display: inline;
+    padding-left: 8px;
+}
