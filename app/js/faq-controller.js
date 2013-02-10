@@ -47,7 +47,7 @@ function FaqCtrlNew($scope, $location, Faq) {
 }
 
 function CategoryOptions() {
-    return [{"id": 1, "label": "opt1"}, {"id": 2, "label": "opt2"}];
+    return [{"label": "opt1"}, {"label": "opt2"}];
 }
 
 //FaqCtrl.$inject = ['$scope', '$routeParams', 'Faq'];

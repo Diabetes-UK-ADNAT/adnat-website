@@ -25,7 +25,7 @@
         <select 
             name="category"
             ng-model="faq.category" 
-            ng-options="i.id as i.label for i in categoryOptions">
+            ng-options="i.label as i.label for i in categoryOptions">
         </select>
         <span ng-show="myForm.category.$error.required" class="help-inline">Required</span>
         <br>
