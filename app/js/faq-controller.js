@@ -69,7 +69,7 @@ function FaqCtrlNew($scope, $location, Faq) {
 }
 
 function CategoryOptions() {
-    return ["opt1", "opt2"];
+    return ["Young People", "Health Professionals"];
 }
 
 //FaqCtrl.$inject = ['$scope', '$routeParams', 'Faq'];
