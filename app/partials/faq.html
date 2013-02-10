@@ -18,11 +18,11 @@
     <thead>
     <th>Question</th>
     <th>Answer</th>
-    <th>Category</th>
+    <th><a href="" ng-click="predicate = 'category'; reverse=!reverse">Category</a></th>
     <th>Action</th>
 </thead>
 <tbody>
-    <tr ng-repeat="faq in faqs | filter:search | filter:category |orderBy:'category'">
+    <tr ng-repeat="faq in faqs | filter:search | filter:category |orderBy:predicate:reverse">
         <td>{{faq.question}}</td>
         <td>{{faq.answer}}</td>
         <td class="category">{{faq.category}}</td>
