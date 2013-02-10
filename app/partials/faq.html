@@ -7,14 +7,21 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="faq in faqs | filter:search | orderBy:'category'">
-            <td>{{faq.uuid}}</td>
-            <td>{{faq.category}}</td>
-            <td>{{faq.question}}</td>
-            <td>{{faq.answer}}</td>
-            <td>
-                <a href="#/faq/edit/{{faq.uuid}}"><i class="icon-pencil"></i></a>
-            </td>
-        </tr>
-    </tbody>
+    <thead>
+    <th>UUID</th>
+    <th>Category</th>
+    <th>Question</th>
+    <th>Answer</th>
+    <th>Action</th>
+</thead>
+<tr ng-repeat="faq in faqs | filter:search | orderBy:'category'">
+    <td>{{faq.uuid}}</td>
+    <td>{{faq.category}}</td>
+    <td>{{faq.question}}</td>
+    <td>{{faq.answer}}</td>
+    <td>
+        <a href="#/faq/edit/{{faq.uuid}}"><i class="icon-pencil"></i></a>
+    </td>
+</tr>
+</tbody>
 </table>

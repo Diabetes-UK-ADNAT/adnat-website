@@ -33,3 +33,17 @@
 	margin-left: 80px;
 	margin-bottom: 120px;
 }
+
+
+thead, th {
+    padding: 8px;
+    background: lightgoldenrodyellow;
+    border: darkkhaki solid 1px;  
+}
+
+td {
+    padding: 8px;
+    border: darkkhaki solid 1px;  
+}
+
+

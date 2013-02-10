@@ -12,16 +12,6 @@
     </div>
     <div class="control-group" ng-class="{error: myForm.category.$invalid}">
         <label>Category</label>
-        <!--        <select 
-                    ng-change="selectAction()"
-                    ng-model="faq.category"
-                    ng-options="value.id as value.label group by value.group for value in categoryOptions">
-                    <option>--</option>
-                </select>
-        -->
-        <div>
-            {{faq.category}}
-        </div>
         <select 
             name="category"
             ng-model="faq.category" 
