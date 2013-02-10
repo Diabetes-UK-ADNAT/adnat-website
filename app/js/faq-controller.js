@@ -15,8 +15,7 @@ function FaqCtrlEdit($scope, $location, $routeParams, Faq) {
         self.original = faq;
         $scope.faq = new Faq(self.original);
     });
-
-
+    
     $scope.isClean = function() {
         return angular.equals(self.original, $scope.faq);
     };
