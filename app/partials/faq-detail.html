@@ -11,14 +11,12 @@
         <span ng-show="myForm.answer.$error.required" class="help-inline">Required</span>
     </div>
     <div class="control-group" ng-class="{error: myForm.category.$invalid}">
-        <label>Category</label>
-        <select 
-            name="category"
-            ng-model="faq.category" 
-            ng-options="i.label as i.label for i in categoryOptions"
-            required
-            >
-        </select>
+        <label>Categories</label>
+        <div ng-repeat="cat in categoryOptions">
+            <input type="checkbox" ng-model="categoryChoices[$index]"> {{cat}}
+        </div>
+        Chosen: {{categoryChoices}}
+        <!--<span ng-repeat="cat in faq.categories">{{cat}}<br></span>-->
         <span ng-show="myForm.category.$error.required" class="help-inline">Required</span>
         <br>
         <a href="#/faq" class="btn">Cancel</a>
