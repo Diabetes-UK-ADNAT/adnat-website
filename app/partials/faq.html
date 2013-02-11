@@ -19,24 +19,30 @@
 </div>
 
 <table>
+    <col class="column-faq-question">
+    <col class="column-faq-answer">
+    <col class="column-faq-category">
+    <col class="column-action">
     <thead>
-    <th>Question</th>
-    <th>Answer</th>
-    <!--sortable <th><a href="" ng-click="predicate = 'category'; reverse=!reverse">Category</a></th>-->
-    <th>Categories</th>
-    <th>Action</th>
-</thead>
-<tbody>
-    <!--sortable <tr ng-repeat="faq in faqs | filter:search | filter:category |orderBy:predicate:reverse">-->
-    <tr ng-repeat="faq in faqs | filter:search | filter:category ">
-        <td>{{faq.question}}</td>
-        <td>{{faq.answer}}</td>
-        <td class="category">
-            <span ng-repeat="cat in faq.categories">{{cat}}<br></span>
-        </td>
-        <td class="action">
-            <a href="#/faq/edit/{{faq.uuid}}"><i class="icon-pencil"></i></a>
-        </td>   
-    </tr>
-</tbody>
+        <tr>
+            <th>Question</th>
+            <th>Answer</th>
+            <!--sortable <th><a href="" ng-click="predicate = 'category'; reverse=!reverse">Category</a></th>-->
+            <th>Categories</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!--sortable <tr ng-repeat="faq in faqs | filter:search | filter:category |orderBy:predicate:reverse">-->
+        <tr ng-repeat="faq in faqs | filter:search | filter:category ">
+            <td>{{faq.question}}</td>
+            <td>{{faq.answer}}</td>
+            <td class="category">
+                <span ng-repeat="cat in faq.categories">{{cat}}<br></span>
+            </td>
+            <td class="action">
+                <a href="#/faq/edit/{{faq.uuid}}"><i class="icon-pencil"></i></a>
+            </td>   
+        </tr>
+    </tbody>
 </table>

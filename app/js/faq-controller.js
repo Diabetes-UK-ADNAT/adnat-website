@@ -27,9 +27,9 @@ function FaqCtrlEdit($scope, $location, $routeParams, Faq) {
 
     $scope.isClean = function() {
         return angular.equals(self.original, $scope.faq)
-            &&
-            angular.equals($scope.categoryChoices, $scope.categoryChoicesOriginal)
-            ;
+                &&
+                angular.equals($scope.categoryChoices, $scope.categoryChoicesOriginal)
+                ;
     };
 
     $scope.destroy = function() {

@@ -63,3 +63,17 @@ label.checkbox {
     display: inline;
     padding-left: 8px;
 }
+
+
+.column-faq-answer{
+    width: 60%;
+} 
+.column-faq-question{
+    width: 30%;
+} 
+.column-faq-category{
+    width: 100px;
+}
+.column-action {
+    width: 20px;
+}
