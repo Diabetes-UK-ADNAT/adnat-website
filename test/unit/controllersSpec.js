@@ -1,31 +1,24 @@
 'use strict';
+describe('FaqCtrl', function() {
+    var ctrl, myScope;
+    beforeEach(module('myApp.faq'));
 
-/* jasmine specs for controllers go here */
+    beforeEach(inject(function($controller, $rootScope) {
+        // set scope state in controller activity
+        myScope = $rootScope.$new();
+        
+        // mock myFaq service to avoid real service call in unit test
+        var myFaq = new Object(); 
+        myFaq.query = function() {return [1,2]};
+         
+        ctrl = $controller('FaqCtrl', {
+            $scope: myScope, Faq: myFaq
+        });
+    }));
 
-describe('MyCtrl1', function(){
-  var myCtrl1;
-
-  beforeEach(function(){
-    myCtrl1 = new MyCtrl1();
-  });
-
-
-  it('should ....', function() {
-    //spec body
-  });
-});
-
-
-describe('MyCtrl2', function(){
-  var myCtrl2;
-
-
-  beforeEach(function(){
-    myCtrl2 = new MyCtrl2();
-  });
-
-
-  it('should ....', function() {
-    //spec body
-  });
+    // check scope state resulting from  controller activity
+    it('FaqCtrl scope', function() {
+        expect(myScope.faqs.length).toBe(2);
+        expect(myScope.categoryOptions.length).toBe(2);
+    });
 });
