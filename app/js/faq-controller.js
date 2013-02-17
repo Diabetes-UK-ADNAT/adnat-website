@@ -3,7 +3,6 @@
 function FaqCtrl($scope, Faq) {
     $scope.faqs = Faq.query();
     $scope.categoryOptions = CategoryOptions();
-    throw { message: 'error message' };
 }
 
 function FaqCtrlEdit($scope, $location, $routeParams, Faq) {

@@ -10,21 +10,12 @@ angular.module('myApp.faq', ['ngResource']).factory('Faq', function($resource) {
    return $resource(ROOT_SERVICES_URL+'/faqs/:id.json', {} );
 });
 
-
-//angular.module('myApp.handler', ['ng']).provider({
-//    $exceptionHandler: function(){
-//        var handler = function(exception, cause) {
-//            alert(exception);
-//        };
-//
-//        this.$get = function() {
-//            return handler;
-//        };
-//    }
-//});
-
-//override exception handler (not working)
-
+//override exception handler
+angular.module('myApp.handler', ['ng']).factory('$exceptionHandler', function () {
+    return function (exception, cause) {
+        alert(exception.message); //fixme user messages?
+    };
+});
 
 
 
