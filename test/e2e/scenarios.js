@@ -14,11 +14,11 @@ describe('my app', function() {
 
     describe('home', function() {
         beforeEach(function() {
-            browser().navigateTo('#/home');
+            browser().navigateTo('#/page/1');
         });
 
         it('should render home when user navigates to /home', function() {
-            expect(browser().location().url()).toBe("/home");
+            expect(browser().location().url()).toBe("/page/1");
             expect(element('title').text()).toMatch('ADNAT');
             //pause();
             expect(element('#content').html()).toContain('');
