@@ -38,12 +38,19 @@ describe('my app', function() {
         });
         it('should allow search input', function() {
             expect(browser().location().url()).toBe("/faq");
-            input('search').enter('x');
+            input('search').enter('1');
             expect(element('body').text()).toMatch(".*Angular seed app.*");
             expect(element('body').text()).toContain("FAQs");
 
             //expect(binding('search')).toBe('x');
         });
+//        it('should filter the phone list as user types into the search box', function() {
+//            expect(repeater('.faqs td').count()).toBe(2);
+//
+//            input('query').enter('1');
+//            expect(repeater('.faqs td').count()).toBe(1);
+//        });
     });
 
 });
+
