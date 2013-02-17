@@ -1,6 +1,6 @@
 'use strict';
 
-function PageCtrl($scope, $routeParams) {
-    $scope.content = $routeParams.id;//=  Content.get({id: $routeParams.id});
+function MyPageCtrl($scope, $routeParams) {
+    $scope.contentx = $routeParams.id;//=  Content.get({id: $routeParams.id});
 }
-//HomeCtrl.$inject = ['scope'];
+//HomeCtrl.$inject = ['$scope', '$routeParams'];

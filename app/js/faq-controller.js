@@ -72,4 +72,4 @@ function CategoryOptions() {
     return ["Young People", "Health Professionals"];
 }
 
-//FaqCtrl.$inject = ['$scope', '$routeParams', 'Faq'];
+//FaqCtrl.$inject = ['$scope', '$location', '$routeParams', 'Faq'];
