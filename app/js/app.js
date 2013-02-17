@@ -16,8 +16,10 @@ angular.module('myApp', [
 //		$routeProvider.when('/hello', {templateUrl: 'partials/hello.html', controller: Hello});
 //		$routeProvider.when('/user', {templateUrl: 'partials/user.html', controller: User});
 //		$routeProvider.when('/group', {templateUrl: 'partials/group.html', controller: Group});
+		$routeProvider.when('/', {templateUrl: 'partials/home.html'});
+		$routeProvider.when('/home', {templateUrl: 'partials/home.html'});
 		$routeProvider.when('/faq', {templateUrl: 'partials/faq.html', controller: FaqCtrl});
 		$routeProvider.when('/faq/edit/:faqId', {templateUrl: 'partials/faq-detail.html', controller: FaqCtrlEdit});
 		$routeProvider.when('/faq/new', {templateUrl: 'partials/faq-detail.html', controller: FaqCtrlNew});
-		$routeProvider.otherwise({redirectTo: '/view1'});
+		$routeProvider.otherwise({redirectTo: '/'});
 	}]);
