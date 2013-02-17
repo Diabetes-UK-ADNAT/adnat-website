@@ -2,6 +2,7 @@
 
 //http://localhost:9000/faqs.json
 var ROOT_SERVICES_URL = 'http://emlair\\:9000/v1';
+var ROOT_SERVICES_URL_PLAIN = 'http://emlair:9000/v1';
 
 angular.module('myApp.services', []).value('version', '0.2');
 
