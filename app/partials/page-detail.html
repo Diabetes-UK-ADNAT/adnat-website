@@ -1,0 +1,22 @@
+<h1>Page</h1>
+<form name="myForm">
+    <input type="hidden" name="id" ng-model="content.id">
+    <div class="control-group" ng-class="{error: myForm.content.title.$invalid}">
+        <label>Title</label>
+        <input name="title" ng-model="content.title" required/>
+        <span ng-show="myForm.content.title.$error.required" class="help-inline"> Required</span>
+    </div>
+    <div class="control-group" ng-class="{error: myForm.content.value.$invalid}">
+        <label>Content</label>
+        <textarea name="value" ng-model="content.value" required></textarea>
+        <span ng-show="myForm.content.value.$error.required" class="help-inline"> Required</span>
+    </div>
+    <h2>Preview</h2>
+    <div name="preview">
+        <div ng-bind-html="content.title"></div>
+        <div ng-bind-html="content.value"></div>
+    </div>
+    <a href="#/" class="btn">Cancel</a>
+    <button ng-click="save()" ng-disabled="isClean() || myForm.$invalid" class="btn btn-primary">Save</button>
+    <button ng-click="destroy()" ng-show="content.uuid" class="btn btn-danger">Delete</button>
+</form>
