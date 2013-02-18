@@ -11,7 +11,7 @@ angular.module('myApp.faq', ['ngResource']).factory('Faq', function($resource) {
 });
 
 angular.module('myApp.content', ['ngResource']).factory('Content', function($resource) {
-   return $resource(ROOT_SERVICES_URL+'/content/:id.json', {} );
+   return $resource(ROOT_SERVICES_URL+'/contents/:id.json', {} );
 });
 
 //override exception handler

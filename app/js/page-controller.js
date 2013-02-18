@@ -1,7 +1,7 @@
 'use strict';
 
-function PageCtrl($scope, $routeParams) {
-    $scope.content = $routeParams.id;
+function PageFindCtrl($scope, $routeParams, Content) {
+     $scope.content = Content.get({id: $routeParams.id});
 }
 
 function PageCtrlEdit($scope, $location, $routeParams, Content) {
@@ -28,8 +28,10 @@ function PageCtrlEdit($scope, $location, $routeParams, Content) {
 }
 
 function PageCtrlNew($scope, $location, Content) {
+    $scope.content = new Content();
     $scope.save = function() {
         Content.save($scope.content, function() {
+            // location in header
             $location.path('/');
         });
     };

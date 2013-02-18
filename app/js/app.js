@@ -15,10 +15,13 @@ var myApp = angular.module('myApp', [
 
 myApp.config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/page/edit/:id', {templateUrl: 'partials/page-detail.html', controller: PageCtrlEdit});
-        $routeProvider.when('/page/:id', {templateUrl: 'partials/page.html', controller: PageCtrl});
+        $routeProvider.when('/page/view/:id', {templateUrl: 'partials/page.html', controller: PageFindCtrl});
+       $routeProvider.when('/page/new', {templateUrl: 'partials/page-detail.html', controller: PageCtrlNew});
+         //
         $routeProvider.when('/faq', {templateUrl: 'partials/faq.html', controller: FaqCtrl});
         $routeProvider.when('/faq/edit/:faqId', {templateUrl: 'partials/faq-detail.html', controller: FaqCtrlEdit});
         $routeProvider.when('/faq/new', {templateUrl: 'partials/faq-detail.html', controller: FaqCtrlNew});
-        $routeProvider.when('/about', {redirectTo: '/page/2'});
-        $routeProvider.otherwise({redirectTo: '/page/1'});
+        //
+        $routeProvider.when('/about', {redirectTo: '/page/view/5121823f3004e6347d119bb4'});
+        $routeProvider.otherwise({redirectTo: '/page/view/5121823f3004e6347d119bb4'});
     }]);
