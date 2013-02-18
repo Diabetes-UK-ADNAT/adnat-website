@@ -1,11 +1,37 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" ng-app="myApp">
     <head>
         <meta charset="utf-8">
         <title>ADNAT</title>
-        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!-- Le styles -->
+        <link href="lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+        <style type="text/css">
+            body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+        </style>
+
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+          <script src="lib/bootstrap/js/html5shiv.js"></script>
+        <![endif]-->
+
+        <!-- Fav and touch icons -->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="shortcut icon" href="../assets/ico/favicon.png">
+
+
+        <!--<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">-->
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" >
+        <!--<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" >-->
         <link rel="stylesheet" href="lib/angular-ui/angular-ui.css"/>
         <link rel="stylesheet" href="css/app.css"/>
         <!--[if lte IE 8]>
@@ -19,24 +45,56 @@
             <script src="angular-ui/angular-ui-ieshiv.js"></script>
         <![endif]-->
     </head>
+
     <body>
-        <ul class="menu">
-            <li><a href="#/">home</a></li>
-            <li><a href="#/about">about</a></li>
-            <li><a href="#/faq-list/Young People">faq list young people</a></li>
-            <li><a href="#/faq-list/Health Professionals">faq list health prof</a></li>
-            <li><a href="#/login">login</a></li>
-        </ul>
-        <ul class="menu">
-            <li><a href="#/person">admin/person</a></li>
-            <li><a href="#/faq">admin/faq</a></li>
-            <li><a href="#/page/edit/5121823f3004e6347d119bb4">admin/page/edit/5121823f3004e6347d119bb4</a></li>
-            <li><a href="#/page/new">admin/page/new</a></li>
-        </ul>
 
-        <div id="content" ng-view></div>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="brand" href="#/">ADNAT</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li class="active"><a href="#/">Home</a></li>
+                            <li><a href="#/about">About</a></li>
+                            <li><a href="#/contact">Contact</a></li>
+                            <li><a href="#/faq-list/Young People">yp</a></li>
+                            <li><a href="#/faq-list/Health Professionals">hp</a></li>
+                            <li><a href="#/person">p</a></li>
+                            <li><a href="#/faq">f</a></li>
+                            <li><a href="#/page/edit/5121823f3004e6347d119bb4">h</a></li>
+                            <li><a href="#/page/new">np</a></li>
+                            <li class="dropdown">  fixme js for dropdown.js 
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li class="divider"></li>
+                                    <li class="nav-header">Nav header</li>
+                                    <li><a href="#">One more separated link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <form class="navbar-form pull-right">
+                            <input class="span2" type="text" placeholder="Email">
+                            <input class="span2" type="password" placeholder="Password">
+                            <button type="submit" class="btn">Sign in</button>
+                        </form>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
 
-        <div id="version">Angular seed app: v<span app-version></span></div>
+        <div class="container">
+            <div ng-view></div>
+            <hr>
+            <footer>
+                <p>&copy; Company 2013 v<span app-version></p>
+            </footer>
+        </div> <!-- /container -->
 
         <!-- For angular-ui -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -71,6 +129,21 @@
         <!-- for using mocked data while testing -->
         <!--<script type="text/javascript" src="../test/lib/angular/angular-mocks.js"></script>-->
         <!--<script type="text/javascript" src="../test/e2e/mocks.js"></script>-->
+
+        <!--bootstrap--> 
+        <script src="lib/bootstrap/js/jquery.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-transition.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-alert.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-modal.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-dropdown.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-scrollspy.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-tab.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-tooltip.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-popover.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-button.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-collapse.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-carousel.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-typeahead.js"></script>
 
     </body>
 </html>
