@@ -11,7 +11,11 @@
         <input name="lastname" ng-model="person.name.lastName" required/>
         <span ng-show="myForm.lastname.$error.required" class="help-inline"> Required</span>
     </div>
-    <h2>Roles</h2>
+    <div class="control-group" ng-class="{error: myForm.dob.$invalid}">
+        <label>Date of Birth</label>
+        <input name="dob" ng-model="person.dob" required ui-date/>
+        <span ng-show="myForm.dob.$error.required" class="help-inline"> Required</span>
+    </div>   <h2>Roles</h2>
     <div class="control-group" ng-class="{error: myForm.roles.$invalid}">
         <label>Roles</label>
         <div ng-repeat="role in roles" required>

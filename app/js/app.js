@@ -10,7 +10,8 @@ var myApp = angular.module('myApp', [
     'myApp.handler',
     'myApp.person',
     'myApp.services',
-    'ui.bootstrap',
+    'ui', //angular-ui
+//    'ui.bootstrap',
     'ngSanitize'
 ]);
 

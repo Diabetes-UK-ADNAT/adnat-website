@@ -4,7 +4,19 @@
         <meta charset="utf-8">
         <title>ADNAT</title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="lib/angular-ui/angular-ui.css"/>
         <link rel="stylesheet" href="css/app.css"/>
+        <!--[if lte IE 8]>
+            <script>
+            // The ieshiv takes care of our ui.directives, bootstrap module directives and 
+            // AngularJS's ng-view, ng-include, ng-pluralize and ng-switch directives.
+            // However, IF you have custom directives (yours or someone else's) then
+            // enumerate the list of tags in window.myCustomTags
+            window.myCustomTags = [ 'appVersion' ]; // optional
+            </script>
+            <script src="angular-ui/angular-ui-ieshiv.js"></script>
+        <![endif]-->
     </head>
     <body>
         <ul class="menu">
@@ -25,6 +37,12 @@
 
         <div id="version">Angular seed app: v<span app-version></span></div>
 
+        <!-- For angular-ui -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+        <!--<script src="http://code.angularjs.org/1.0.1/angular-1.0.1.min.js"></script>-->
+        <!--<script src="http://angular-ui.github.com/angular-ui/build/angular-ui.js"></script>-->
+
         <!-- In production use:
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.js"></script>
@@ -32,7 +50,8 @@
         <script src="lib/angular/angular.js"></script>
         <script src="lib/angular/angular-resource.js"></script>
         <script src="lib/angular/angular-sanitize.min.js"></script>
-        <script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.1.0-SNAPSHOT.js"></script>
+        <script src="lib/angular-ui/angular-ui.js"></script>
+        <!--<script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.1.0-SNAPSHOT.js"></script>-->
         <script src="js/app.js"></script>
         <script src="js/services.js"></script>
         <script src="js/controllers.js"></script>
@@ -41,6 +60,7 @@
         <script src="js/page-controller.js"></script>
         <script src="js/filters.js"></script>
         <script src="js/directives.js"></script>
+        <script src="js/polyfills.js"></script>
         <!--<script src="js/group-controller.js"></script>-->
         <!--<script src="js/user-controller.js"></script>-->
 
