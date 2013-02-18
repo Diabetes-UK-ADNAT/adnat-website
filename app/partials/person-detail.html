@@ -1,17 +1,81 @@
 <form name="myForm">
     <input type="hidden" name="id" ng-model="person.id">
+    <h2>Name</h2>
     <div class="control-group" ng-class="{error: myForm.firstnames.$invalid}">
-        <label>Name</label>
-        <textarea name="firstnames" ng-model="person.name.firstNames" required></textarea>
+        <label>First Name</label>
+        <input name="firstnames" ng-model="person.name.firstNames" required/>
         <span ng-show="myForm.firstnames.$error.required" class="help-inline"> Required</span>
     </div>
+    <div class="control-group" ng-class="{error: myForm.lastname.$invalid}">
+        <label>Last Name</label>
+        <input name="lastname" ng-model="person.name.lastName" required/>
+        <span ng-show="myForm.lastname.$error.required" class="help-inline"> Required</span>
+    </div>
+    <h2>Roles</h2>
     <div class="control-group" ng-class="{error: myForm.roles.$invalid}">
         <label>Roles</label>
         <div ng-repeat="role in roles" required>
             <input id="{{cat}}"type="checkbox" ng-model="roleChoices[$index]"><label class="checkbox" for="{{role}}">{{role}}</label>
         </div>
     </div>
+
+    <h2>Contact Info</h2>
+    <div class="control-group" ng-class="{error: myForm.cell.$invalid}">
+        <label>Cell</label>
+        <input name="cell" ng-model="person.contactInfo.cell" required/>
+        <span ng-show="myForm.cell.$error.required" class="help-inline"> Required</span>
+    </div>
+    <div class="control-group" ng-class="{error: myForm.telephone.$invalid}">
+        <label>Telephone</label>
+        <input name="telephone" ng-model="person.contactInfo.telephone" required/>
+        <span ng-show="myForm.telephone.$error.required" class="help-inline"> Required</span>
+    </div>
+    <div class="control-group" ng-class="{error: myForm.email.$invalid}">
+        <label>Email</label>
+        <input name="email" ng-model="person.contactInfo.email" required/>
+        <span ng-show="myForm.email.$error.required" class="help-inline"> Required</span>
+    </div>
+    <div class="control-group" ng-class="{error: myForm.address.$invalid}">
+        <label>Address</label>
+        <textarea name="address" ng-model="person.contactInfo.address" required></textarea>
+        <span ng-show="myForm.address.$error.required" class="help-inline"> Required</span>
+    </div>
+
+
+    <h2>Account</h2>
+    <div class="control-group" ng-class="{error: myForm.username.$invalid}">
+        <label>User Name</label>
+        <input name="username" ng-model="person.account.username" required/>
+        <span ng-show="myForm.username.$error.required" class="help-inline"> Required</span>
+    </div>
+    <div class="control-group" ng-class="{error: myForm.password.$invalid}">
+        <label>Password</label>
+        <input name="password" ng-model="person.account.password" required/>
+        <span ng-show="myForm.password.$error.required" class="help-inline"> Required</span>
+    </div>
+    <div class="control-group" ng-class="{error: myForm.authProvider.$invalid}">
+        <label>Auth Provider</label>
+        <input name="authProvider" ng-model="person.account.authProvider" required/>
+        <span ng-show="myForm.authProvider.$error.required" class="help-inline"> Required</span>
+    </div>
+    <hr/>
+    <div class="control-group" ng-class="{error: myForm.agreedToTermsAndConditions.$invalid}">
+        <label>agreedToTermsAndConditions</label>
+        <input name="agreedToTermsAndConditions" ng-model="person.agreedToTermsAndConditions" required/>
+        <span ng-show="myForm.agreedToTermsAndConditions.$error.required" class="help-inline"> Required</span>
+    </div>
+    <div class="control-group" ng-class="{error: myForm.agreedToPrivacyPolicy.$invalid}">
+        <label>agreedToPrivacyPolicy</label>
+        <input name="agreedToPrivacyPolicy" ng-model="person.agreedToPrivacyPolicy" required/>
+        <span ng-show="myForm.agreedToPrivacyPolicy.$error.required" class="help-inline"> Required</span>
+    </div>
+
+    <hr/>
     <a href="#/person" class="btn">Cancel</a>
     <button ng-click="save()" ng-disabled="isClean() || myForm.$invalid" class="btn btn-primary">Save</button>
     <button ng-click="destroy()" ng-show="person.uuid" class="btn btn-danger">Delete</button>
 </form>
+
+<!--
+    public List<String> groups = new ArrayList<String>();
+-->

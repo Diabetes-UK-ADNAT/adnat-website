@@ -1,15 +1,15 @@
 <h1>Page</h1>
 <form name="myForm">
     <input type="hidden" name="id" ng-model="content.id">
-    <div class="control-group" ng-class="{error: myForm.content.title.$invalid}">
+    <div class="control-group" ng-class="{error: myForm.title.$invalid}">
         <label>Title</label>
         <input name="title" ng-model="content.title" required/>
-        <span ng-show="myForm.content.title.$error.required" class="help-inline"> Required</span>
+        <span ng-show="myForm.title.$error.required" class="help-inline"> Required</span>
     </div>
-    <div class="control-group" ng-class="{error: myForm.content.value.$invalid}">
+    <div class="control-group" ng-class="{error: myForm.value.$invalid}">
         <label>Content</label>
         <textarea name="value" ng-model="content.value" required></textarea>
-        <span ng-show="myForm.content.value.$error.required" class="help-inline"> Required</span>
+        <span ng-show="myForm.value.$error.required" class="help-inline"> Required</span>
     </div>
     <h2>Preview</h2>
     <div name="preview">
