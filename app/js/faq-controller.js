@@ -1,8 +1,10 @@
 'use strict';
 
-function FaqCtrl($scope, Faq) {
+function FaqCtrl($scope, $routeParams, Faq) {
     $scope.faqs = Faq.query();
     $scope.categoryOptions = CategoryOptions();
+    
+    $scope.category = $routeParams.category;
 }
 
 function FaqCtrlEdit($scope, $location, $routeParams, Faq) {

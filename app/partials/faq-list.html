@@ -1,0 +1,14 @@
+<h1>FAQs {{category}} </h1>
+
+<div>
+    <input type="text" 
+           ng-model="search" 
+           autofocus
+           class="search-query"
+           placeholder="Search">
+</div>
+
+<div id="faq-list"ng-repeat="faq in faqs | filter:search | filter:category ">
+    <h1>{{faq.question}}</h1>
+    <div>{{faq.answer}}</div>
+</div>

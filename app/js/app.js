@@ -18,6 +18,7 @@ myApp.config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/page/view/:id', {templateUrl: 'partials/page.html', controller: PageFindCtrl});
        $routeProvider.when('/page/new', {templateUrl: 'partials/page-detail.html', controller: PageCtrlNew});
          //
+        $routeProvider.when('/faq-list/:category', {templateUrl: 'partials/faq-list.html', controller: FaqCtrl});
         $routeProvider.when('/faq', {templateUrl: 'partials/faq.html', controller: FaqCtrl});
         $routeProvider.when('/faq/edit/:faqId', {templateUrl: 'partials/faq-detail.html', controller: FaqCtrlEdit});
         $routeProvider.when('/faq/new', {templateUrl: 'partials/faq-detail.html', controller: FaqCtrlNew});
