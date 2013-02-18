@@ -5,7 +5,8 @@
            ng-model="search" 
            autofocus
            class="search-query"
-           placeholder="Search">
+           placeholder="Search"
+           ui-reset>
 </div>
 
 <div id="faq-list"ng-repeat="faq in faqs | filter:search | filter:category ">
