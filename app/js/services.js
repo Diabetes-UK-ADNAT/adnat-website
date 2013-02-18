@@ -14,6 +14,10 @@ angular.module('myApp.content', ['ngResource']).factory('Content', function($res
    return $resource(ROOT_SERVICES_URL+'/contents/:id.json', {} );
 });
 
+angular.module('myApp.person', ['ngResource']).factory('Person', function($resource) {
+   return $resource(ROOT_SERVICES_URL+'/persons/:id.json', {} );
+});
+
 //override exception handler
 angular.module('myApp.handler', ['ng']).factory('$exceptionHandler', function () {
     return function (exception, cause) {

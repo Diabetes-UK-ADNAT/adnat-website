@@ -1,0 +1,43 @@
+<h1>Persons</h1>
+
+<div>
+    <input type="text" 
+           ng-model="search" 
+           autofocus
+           class="search-query"
+           placeholder="Search">
+    <span>Role</span>
+    <select 
+        name="role"
+        ng-model="role" 
+        ng-options="i as i for i in roles"
+        class="search-select"
+        >
+        <option></option>
+    </select>
+    <span><a href="#/person/new"><i class="icon-plus-sign"></i></a></span>
+</div>
+
+<table>
+    <col class="column-name">
+    <col class="column-role">
+    <col class="column-action">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="person in persons | filter:search | filter:role ">
+            <td>{{person.name.firstNames}} {{person.name.lastName}}</td>
+            <td class="role">
+                <span ng-repeat="role in person.roles">{{role}}<br></span>
+            </td>
+            <td class="action">
+                <a href="#/person/edit/{{person.uuid}}"><i class="icon-pencil"></i></a>
+            </td>   
+        </tr>
+    </tbody>
+</table>
