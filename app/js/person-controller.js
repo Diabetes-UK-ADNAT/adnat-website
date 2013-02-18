@@ -11,6 +11,9 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person) {
 
     $scope.roles = RoleOptions();
     $scope.person = Person.get({id: $routeParams.id}, function(person) {
+        person.dob = new Date(person.dob);
+        person.agreedToTermsAndConditions = new Date(person.agreedToTermsAndConditions);
+        person.agreedToPrivacyPolicy = new Date(person.agreedToPrivacyPolicy);
         self.original = person;
         $scope.roleChoices = [];
         angular.forEach($scope.roles, function(value, key) {

@@ -13,7 +13,7 @@
     </div>
     <div class="control-group" ng-class="{error: myForm.dob.$invalid}">
         <label>Date of Birth</label>
-        <input name="dob" ng-model="person.dob" required ui-date/>
+        <input ui-date="{ dateFormat: 'dd-mm-yy' }" name="dob" ng-model="person.dob" required/>
         <span ng-show="myForm.dob.$error.required" class="help-inline"> Required</span>
     </div>   <h2>Roles</h2>
     <div class="control-group" ng-class="{error: myForm.roles.$invalid}">
@@ -65,12 +65,12 @@
     <hr/>
     <div class="control-group" ng-class="{error: myForm.agreedToTermsAndConditions.$invalid}">
         <label>Agreed to Terms and Conditions</label>
-        <input name="agreedToTermsAndConditions" ng-model="person.agreedToTermsAndConditions" required/>
+        <input ui-date="{ dateFormat: 'dd-mm-yy' }" name="agreedToTermsAndConditions" ng-model="person.agreedToTermsAndConditions" required/>
         <span ng-show="myForm.agreedToTermsAndConditions.$error.required" class="help-inline"> Required</span>
     </div>
     <div class="control-group" ng-class="{error: myForm.agreedToPrivacyPolicy.$invalid}">
         <label>Agreed to Privacy Policy</label>
-        <input name="agreedToPrivacyPolicy" ng-model="person.agreedToPrivacyPolicy" required/>
+        <input ui-date="{ dateFormat: 'dd-mm-yy' }" name="agreedToPrivacyPolicy" ng-model="person.agreedToPrivacyPolicy" required/>
         <span ng-show="myForm.agreedToPrivacyPolicy.$error.required" class="help-inline"> Required</span>
     </div>
 
