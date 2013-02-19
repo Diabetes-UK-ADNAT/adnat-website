@@ -37,7 +37,7 @@
         <!--sortable <tr ng-repeat="faq in faqs | filter:search | filter:category |orderBy:predicate:reverse">-->
         <tr ng-repeat="faq in faqs | filter:search | filter:category ">
             <td>{{faq.question}}</td>
-            <td>{{faq.answer}}</td>
+            <td ng-bind-html-unsafe="faq.answer"></td>
             <td class="category">
                 <span ng-repeat="cat in faq.categories">{{cat}}<br></span>
             </td>

@@ -7,7 +7,7 @@
     </div>
     <div class="control-group" ng-class="{error: myForm.answer.$invalid}">
         <label>Answer</label>
-        <textarea name="answer" ng-model="faq.answer" required></textarea>
+        <textarea ui-tinymce name="answer" ng-model="faq.answer" required></textarea>
         <span ng-show="myForm.answer.$error.required" class="help-inline">Required</span>
     </div>
     <div class="control-group" ng-class="{error: myForm.categories.$invalid}">
@@ -15,6 +15,11 @@
         <div ng-repeat="cat in categoryOptions" required>
             <input id="{{cat}}"type="checkbox" ng-model="categoryChoices[$index]"><label class="checkbox" for="{{cat}}">{{cat}}</label>
         </div>
+    </div>
+    <div class="control-group" ng-class="{error: myForm.ordinal.$invalid}">
+        <label>Ordinal</label>
+        <input name="ordinal" ng-model="faq.ordinal" required/>
+        <span ng-show="myForm.ordinal.$error.required" class="help-inline">Required</span>
     </div>
     <a href="#/faq" class="btn">Cancel</a>
     <button ng-click="save()" ng-disabled="isClean() || myForm.$invalid" class="btn btn-primary">Save</button>

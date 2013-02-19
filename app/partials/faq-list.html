@@ -11,5 +11,5 @@
 
 <div id="faq-list"ng-repeat="faq in faqs | filter:search | filter:category ">
     <h1>{{faq.question}}</h1>
-    <div>{{faq.answer}}</div>
+    <div ng-bind-html-unsafe="faq.answer"></div>
 </div>
