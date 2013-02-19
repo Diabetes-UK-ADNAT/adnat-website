@@ -89,3 +89,53 @@ label.checkbox {
     background-repeat: no-repeat;
     background-position: -48px -96px;
 }
+
+.hero-unit, .topbar {
+    color: #555;
+    background-color: rgba(217, 252, 217, 0.63);
+}
+
+.hero-unit h1 {
+    margin: 10px 0;
+    line-height: 0;
+    color: rgb(119, 119, 119);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.topbar {
+    margin: 0px;
+}
+
+.navbar-inverse .navbar-inner {
+    background-image: none;
+    background-color: rgb(217, 252, 217);
+}
+
+footer {
+    background-color:rgb(217, 252, 217);
+    padding: 2em;
+    text-align: center;
+    margin-top: 50px;
+    border-top: 2px solid rgba(0, 0, 0, 0.3);
+    border-bottom: 5px solid rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    color: rgb(0, 0, 0);
+    display: block;
+    font-family: Arial, Sans, sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 10.173429489135742px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 20.346858978271484px;
+}
+
+h1, h2, th, thead {
+    color: rgb(119, 119, 119);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+

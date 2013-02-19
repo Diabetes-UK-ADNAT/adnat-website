@@ -33,7 +33,6 @@
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css">
         <!--<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" >-->
         <link rel="stylesheet" href="lib/angular-ui/angular-ui.css"/>
-        <link rel="stylesheet" href="css/app.css"/>
         <!--[if lte IE 8]>
             <script>
             // The ieshiv takes care of our ui.directives, bootstrap module directives and 
@@ -44,11 +43,12 @@
             </script>
             <script src="angular-ui/angular-ui-ieshiv.js"></script>
         <![endif]-->
+        <link rel="stylesheet" href="css/app.css"/>
     </head>
 
     <body>
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
                     <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -59,7 +59,7 @@
                     <a class="brand" href="#/">ADNAT</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
-                            <li class="active"><a href="#/">Home</a></li>
+                            <li><a href="#/">Home</a></li>
                             <li><a href="#/about">About</a></li>
                             <li><a href="#/contact">Contact</a></li>
                             <li class="dropdown"> 
@@ -95,12 +95,11 @@
 
         <div class="container">
             <div ng-view></div>
-            <hr>
-            <footer>
-                <p>&copy; Company 2013 v<span app-version></p>
-            </footer>
         </div> <!-- /container -->
-
+        
+        <footer>
+            <p>&copy; Company 2013 v<span app-version></p>
+        </footer>
         <!-- For angular-ui -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
