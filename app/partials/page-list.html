@@ -1,0 +1,32 @@
+<h1>Pages</h1>
+
+<div>
+    <input type="text" 
+           ng-model="search" 
+           autofocus
+           class="search-query"
+           placeholder="Search"
+           ui-reset>
+    <span><a href="#/page/new"><i class="icon-plus-sign"></i></a></span>
+</div>
+
+<table>
+    <col class="column-title">
+    <col class="column-action">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>UUID</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="page in pages | filter:search  ">
+            <td>{{page.title}}</td>
+            <td>{{page.uuid}}</td>
+            <td class="action">
+                <a href="#/page/edit/{{page.uuid}}"><i class="icon-pencil"></i></a>
+            </td>   
+        </tr>
+    </tbody>
+</table>

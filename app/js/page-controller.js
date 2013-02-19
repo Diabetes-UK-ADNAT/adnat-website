@@ -1,5 +1,7 @@
 'use strict';
-
+function PageCtrl($scope, $routeParams, Content) {
+     $scope.pages = Content.query();
+}
 function PageFindCtrl($scope, $routeParams, Content) {
      $scope.content = Content.get({id: $routeParams.id});
 }
@@ -17,12 +19,12 @@ function PageCtrlEdit($scope, $location, $routeParams, Content) {
 
     $scope.destroy = function() {
         Content.delete({id: $routeParams.id}, function() {
-            $location.path('/page/' + $routeParams.id);
+            $location.path('/page-list');
         });
     };
     $scope.save = function() {
         Content.save($scope.content, function() {
-            $location.path('/page/' + $routeParams.id);
+            $location.path('/page-list');
         });
     };
 }
@@ -32,7 +34,7 @@ function PageCtrlNew($scope, $location, Content) {
     $scope.save = function() {
         Content.save($scope.content, function() {
             // location in header
-            $location.path('/');
+            $location.path('/page-list');
         });
     };
 }
