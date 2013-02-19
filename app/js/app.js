@@ -17,8 +17,9 @@ var myApp = angular.module('myApp', [
 
 myApp.config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/page/edit/:id', {templateUrl: 'partials/page-detail.html', controller: PageCtrlEdit});
-        $routeProvider.when('/page/view/:id', {templateUrl: 'partials/page.html', controller: PageFindCtrl});
         $routeProvider.when('/page/new', {templateUrl: 'partials/page-detail.html', controller: PageCtrlNew});
+        $routeProvider.when('/page/view/:id', {templateUrl: 'partials/page.html', controller: PageFindCtrl});
+        $routeProvider.when('/page/hero/:id', {templateUrl: 'partials/page-hero-unit.html', controller: PageFindCtrl});
         //
         $routeProvider.when('/faq-list/:category', {templateUrl: 'partials/faq-list.html', controller: FaqCtrl});
         $routeProvider.when('/faq', {templateUrl: 'partials/faq.html', controller: FaqCtrl});
@@ -30,6 +31,7 @@ myApp.config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/person/new', {templateUrl: 'partials/person-detail.html', controller: PersonCtrlNew});
         //
         $routeProvider.when('/about', {redirectTo: '/page/view/5121823f3004e6347d119bb4'});
-        $routeProvider.otherwise({redirectTo: '/page/view/5121823f3004e6347d119bb4'});
+        $routeProvider.when('/contact', {redirectTo: '/page/view/5121823f3004e6347d119bb4'});
+        $routeProvider.otherwise({redirectTo: '/page/hero/5121823f3004e6347d119bb4'});
 
     }]);
