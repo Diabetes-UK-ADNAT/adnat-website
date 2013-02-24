@@ -1,8 +1,8 @@
 'use strict';
 
 //http://localhost:9000/faqs.json
-var ROOT_SERVICES_URL = 'http://emlair\\:9000/v1';
-var ROOT_SERVICES_URL_PLAIN = 'http://emlair:9000/v1';
+var ROOT_SERVICES_URL = 'https://api.myadnat.co.uk\\:4443/v1';
+var ROOT_SERVICES_URL_PLAIN = 'https://api.myadnat.co.uk:4443/v1';
 
 angular.module('myApp.services', []).value('version', '2.0');
 
