@@ -1,8 +1,12 @@
 'use strict';
 
 //http://localhost:9000/faqs.json
-var ROOT_SERVICES_URL = 'https://api.myadnat.co.uk\\:443/v1';
-var ROOT_SERVICES_URL_PLAIN = 'https://api.myadnat.co.uk:443/v1';
+var DEV_ROOT_SERVICES_URL = 'https://api.myadnat.co.uk\\:4443/v1';
+var DEV_ROOT_SERVICES_URL_PLAIN = 'https://api.myadnat.co.uk:4443/v1';
+var PROD_ROOT_SERVICES_URL = 'https://api.myadnat.co.uk\\:443/v1';
+var PROD_ROOT_SERVICES_URL_PLAIN = 'https://api.myadnat.co.uk:443/v1';
+var ROOT_SERVICES_URL = PROD_ROOT_SERVICES_URL;
+var ROOT_SERVICES_URL_PLAIN = PROD_ROOT_SERVICES_URL_PLAIN;
 
 angular.module('myApp.services', []).value('version', '2.0');
 
