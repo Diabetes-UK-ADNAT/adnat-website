@@ -84,7 +84,7 @@ label.checkbox {
     margin: 8px;
     line-height: 14px;
     vertical-align: text-top;
-    background-image: url("/app/lib/bootstrap/img/glyphicons-halflings.png");
+    background-image: url("../lib/bootstrap/img/glyphicons-halflings.png");
     background-position: 14px 14px;
     background-repeat: no-repeat;
     background-position: -48px -96px;

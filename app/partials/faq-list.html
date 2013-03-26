@@ -9,7 +9,7 @@
            ui-reset>
 </div>
 
-<div id="faq-list"ng-repeat="faq in faqs | filter:search | filter:category | orderBy:'ordinal'">
+<div id="faq-list"ng-repeat="faq in faqs | filter:search | filter:{categories:category} | orderBy:'ordinal'">
     <h1>{{faq.question}}</h1>
     <div ng-bind-html-unsafe="faq.answer"></div>
 </div>

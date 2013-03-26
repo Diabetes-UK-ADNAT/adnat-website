@@ -3,7 +3,6 @@
 function FaqCtrl($scope, $routeParams, Faq) {
     $scope.faqs = Faq.query();
     $scope.categoryOptions = CategoryOptions();
-    
     $scope.category = $routeParams.category;
 }
 
