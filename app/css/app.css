@@ -97,9 +97,9 @@ label.checkbox {
 
 .hero-unit h1 {
     margin: 10px 0;
-    line-height: 0;
     color: rgb(119, 119, 119);
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 0;
 }
 
 .topbar {
@@ -154,7 +154,7 @@ textarea {
 
 .hero-unit {
     padding: 70px;
-    margin-top: 32px;
+    xmargin-top: 32px;
 }
 .hero-unit li {
     font-size: 0.875em;
@@ -190,7 +190,10 @@ textarea {
 ul.nav  {
     padding-left: 20px;
 }
-
+img.patient {
+    float:left;
+    margin-right: 40px;
+}
 .navbar .nav.pull-right {
     float: right;
     margin-right: 30px;
@@ -200,6 +203,7 @@ ul.nav  {
 @media(max-width: 480px) {
     .hero-unit h1 {
         font-size: 24px;
+        line-height: 1;
     }
     .span6 h2 {
         font-size: 20px;
@@ -228,6 +232,11 @@ ul.nav  {
         padding-left: 8px;
         padding-right: 8px;
     }
+    img.patient {
+        float:none;
+        margin-right: 0px;
+    }
+
 }
 
 @media (max-width: 979px) {
@@ -237,5 +246,8 @@ ul.nav  {
     .navbar .brand {
         float: none;
         padding-left: 40px;
+    }
+    img {
+        float:none;
     }
 }
