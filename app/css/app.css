@@ -189,3 +189,9 @@ textarea {
 .content li, .container li, .span6 li {
     margin-bottom: 1em;
 }
+
+@media (max-width: 979px) {
+    .navbar-fixed-top, .navbar-fixed-bottom {
+        position: fixed;
+    }  
+}
