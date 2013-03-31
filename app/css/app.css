@@ -139,6 +139,53 @@ h1, h2, th, thead {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-input, textarea, .uneditable-input {
+input, .uneditable-input {
     width: 150px;
+}
+
+textarea {
+    width: 100%;
+    height: 600px;
+}
+
+.home-item {
+    min-height: 100px;
+}
+
+.hero-unit {
+    padding: 70px;
+    margin-top: 32px;
+}
+.hero-unit li {
+    font-size: 0.875em;
+    font-weight: normal;
+}
+.hero-unit p {
+    padding-bottom: 10px;
+}
+
+.hero-unit img {
+    margin-left: 0px; 
+    margin-right: 40px; 
+    float: left;
+}
+@media(max-width: 700px) {
+    .hero-unit {
+        margin-top: 20px;
+    }
+    .hero-unit img {
+        float: none;
+    }
+    .hero-unit h1 {
+        font-size: 30px;
+    }
+}
+
+@media(max-width: 480px) {
+    .hero-unit h1 {
+        font-size: 20px;
+    }
+}
+.content li, .container li, .span6 li {
+    margin-bottom: 1em;
 }

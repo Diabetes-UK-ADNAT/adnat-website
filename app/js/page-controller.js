@@ -1,9 +1,13 @@
 'use strict';
 function PageCtrl($scope, $routeParams, Content) {
-     $scope.pages = Content.query();
+    $scope.pages = Content.query();
 }
 function PageFindCtrl($scope, $routeParams, Content) {
-     $scope.content = Content.get({id: $routeParams.id});
+    var ids = $routeParams.id.split(',');
+    $scope.content = [];
+    ids.forEach(function(item) {
+        $scope.content.push(Content.get({id: item}));
+    });
 }
 
 function PageCtrlEdit($scope, $location, $routeParams, Content) {
