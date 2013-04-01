@@ -236,7 +236,6 @@ img.patient {
         float:none;
         margin-right: 0px;
     }
-
 }
 
 @media (max-width: 979px) {
@@ -249,5 +248,8 @@ img.patient {
     }
     img {
         float:none;
+    }
+    .span6 .home-item {
+        min-height: 150px;
     }
 }
