@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" manifest="manifest.appcache">
+    <head>
+        <meta charset="utf-8">
+        <title>ADNAT</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link href="css/all.css" rel="stylesheet">
+        <style type="text/css">
+            body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+        </style>
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+          <script src="lib/bootstrap/js/html5shiv.js"></script>
+        <![endif]-->
+        <!--[if lte IE 8]>
+            <script>
+            // The ieshiv takes care of our ui.directives, bootstrap module directives and 
+            // AngularJS's ng-view, ng-include, ng-pluralize and ng-switch directives.
+            // However, IF you have custom directives (yours or someone else's) then
+            // enumerate the list of tags in window.myCustomTags
+            window.myCustomTags = [ 'appVersion' ]; // optional
+            </script>
+            <script src="angular-ui/angular-ui-ieshiv.js"></script>
+        <![endif]-->
+        <link rel="shortcut icon" href="img/favicon.png">
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="brand" href="#/">ADNAT</a>
+                    <div class="nav-pills">
+                        <ul class="nav">
+                            <li><a href="#/">Home</a></li>
+                            <li class="dropdown"> 
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-header">About</li>
+                                    <li><a href="#/for-patients">For Patients</a></li>
+                                    <li><a href="#/for-clinicians">For Clinicians</a></li>
+                                    <li><a href="#/references">References</a></li>
+                                </ul>
+                            </li>                        
+                            <li class="dropdown"> 
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">FAQ <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-header">FAQs</li>
+                                    <li><a href="#/faq-list/Young People">Young People FAQ</a></li>
+                                    <li><a href="#/faq-list/Health Professionals">Health Professionals FAQ</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#/contact">Contact</a></li>
+                        </ul>
+                        <ul class="nav pull-right alert-info">
+                            <li><a href="#/"><i class="icon-user"></i> Sign In</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div ng-view></div>
+        </div> 
+
+        <footer>
+            <p>&copy; ADNAT 2011-2013 All Rights Reserved Worldwide. v<span app-version></p>
+        </footer>
+
+        <script src="js/all.js"></script>
+        <script src="lib/tiny_mce/tiny_mce.js"></script>
+        <script src="lib/tiny_mce/jquery.tinymce.js"></script>
+    </body>
+</html>
