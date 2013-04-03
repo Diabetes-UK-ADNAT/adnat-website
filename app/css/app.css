@@ -147,14 +147,17 @@ textarea {
     width: 100%;
     height: 600px;
 }
-
+textarea.question-edit {
+    width: 100%;
+    height: 100px;
+}
 .home-item {
     min-height: 100px;
 }
 
 .hero-unit {
     padding: 70px;
-    xmargin-top: 32px;
+    margin-top:20px;
 }
 .hero-unit li {
     font-size: 0.875em;
@@ -169,7 +172,74 @@ textarea {
     margin-right: 40px; 
     float: left;
 }
+
+ul.nav  {
+    padding-left: 20px;
+}
+
+img.patient {
+    float:left;
+    margin-right: 40px;
+}
+
+.navbar .nav.pull-right {
+    float: right;
+    margin-right: 30px;
+    height: 40px;
+    padding: 0px;
+}
+
+.content li, .container li, .span6 li {
+    margin-bottom: 1em;
+}
+
+@media (max-width: 979px) {
+    body {
+        padding-left: 0px;
+        padding-right:  0px;
+       	margin-top: 40px;
+    }
+    .navbar-fixed-top, .navbar-fixed-bottom {
+        position: fixed;
+        margin-bottom: 20px;
+    }  
+    .navbar .brand {
+        float: none;
+        padding-left: 40px;
+    }
+    img {
+        float:none;
+    }
+    .span6 .home-item {
+        min-height: 150px;
+    }
+}
+
+@media (max-width: 767px) {
+    body {
+        padding-left: 0px;
+        padding-right:  0px;
+       	margin-top: 40px;
+    }
+    .navbar-fixed-top, .navbar-fixed-bottom {
+        position: fixed;
+    }  
+    .container {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    img.patient {
+        float:none;
+        margin-right: 0px;
+    }
+}
+
 @media(max-width: 700px) {
+    body {
+        padding-left: 0px;
+        padding-right:  0px;
+       	margin-top: 40px;
+    }
     .hero-unit {
         margin-top: 20px;
     }
@@ -187,20 +257,11 @@ textarea {
         padding-bottom: 20px;
     }
 }
-ul.nav  {
-    padding-left: 20px;
-}
-img.patient {
-    float:left;
-    margin-right: 40px;
-}
-.navbar .nav.pull-right {
-    float: right;
-    margin-right: 30px;
-    height: 40px;
-    padding: 0px;
-}
+
 @media(max-width: 480px) {
+    body {
+        margin-top: 80px;
+    }
     .hero-unit h1 {
         font-size: 24px;
         line-height: 1;
@@ -214,42 +275,5 @@ img.patient {
         margin-left: 32px;
         height: 40px;
         padding: 0px;
-    }
-    body {
-        margin-top: 80px;
-    }
-}
-.content li, .container li, .span6 li {
-    margin-bottom: 1em;
-}
-
-@media (max-width: 767px) {
-    body {
-        padding-left: 0px;
-        padding-right:  0px;
-    }
-    .container {
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-    img.patient {
-        float:none;
-        margin-right: 0px;
-    }
-}
-
-@media (max-width: 979px) {
-    .navbar-fixed-top, .navbar-fixed-bottom {
-        position: fixed;
-    }  
-    .navbar .brand {
-        float: none;
-        padding-left: 40px;
-    }
-    img {
-        float:none;
-    }
-    .span6 .home-item {
-        min-height: 150px;
     }
 }

@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version Sun Mar 31 13:11:48 CDT 2013
+#version 2-Apr-13 K
 CACHE:
 #data
 https://api.myadnat.co.uk/v1/faqs.json
@@ -10,6 +10,7 @@ https://api.myadnat.co.uk/v1/contents/51576ffee4b09cf566e5dfd9.json
 https://api.myadnat.co.uk/v1/contents/5121823f3004e6347d119bb4.json
 https://api.myadnat.co.uk/v1/contents/512301e53004511159c6444c.json
 https://api.myadnat.co.uk/v1/contents/51217c703004e6347d119baf.json
+https://api.myadnat.co.uk/v1/contents/5122fdcd3004511159c6444a.json
 
 #images
 /img/1.jpg
@@ -17,55 +18,26 @@ https://api.myadnat.co.uk/v1/contents/51217c703004e6347d119baf.json
 /img/3.jpg
 
 #internal HTML documents
-https://myadnat.co.uk/
-https://myadnat.co.uk/partials/faq-detail.html		
-https://myadnat.co.uk/partials/page-hero-unit.html	
-https://myadnat.co.uk/partials/page-list.html		
-https://myadnat.co.uk/partials/person-detail.html
-https://myadnat.co.uk/partials/faq.html		
-https://myadnat.co.uk/partials/page.html		
-https://myadnat.co.uk/partials/person.html
+/
+/partials/faq-list.html
+/partials/faq-detail.html		
+/partials/page-list.html		
+/partials/page-hero-unit.html	
+/partials/person-detail.html
+/partials/faq.html		
+/partials/page.html		
+/partials/person.html
+
+#libs
+/lib/tiny_mce/tiny_mce.js
+/lib/tiny_mce/jquery.tinymce.js
 
 #style sheets
-https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css
-https://myadnat.co.uk/css/app.css
-https://myadnat.co.uk/lib/angular-ui/angular-ui.css
-https://myadnat.co.uk/lib/bootstrap/css/bootstrap.css
+/css/all.css
 
 #style sheet images
-https://myadnat.co.uk/lib/bootstrap/img/glyphicons-halflings-white.png
-https://myadnat.co.uk/lib/bootstrap/img/glyphicons-halflings.png
-
-#javascript files
-https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js
-https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js
-https://myadnat.co.uk/lib/angular/angular.js
-https://myadnat.co.uk/lib/angular/angular-resource.js
-https://myadnat.co.uk/lib/angular/angular-sanitize.min.js
-https://myadnat.co.uk/lib/angular-ui/angular-ui.js
-https://myadnat.co.uk/js/app.js
-https://myadnat.co.uk/js/services.js
-https://myadnat.co.uk/js/controllers.js
-https://myadnat.co.uk/js/faq-controller.js
-https://myadnat.co.uk/js/person-controller.js
-https://myadnat.co.uk/js/page-controller.js
-https://myadnat.co.uk/js/filters.js
-https://myadnat.co.uk/js/directives.js
-https://myadnat.co.uk/js/polyfills.js
-#https://myadnat.co.uk/lib/tiny_mce/jquery.tinymce.js
-#https://myadnat.co.uk/lib/tiny_mce/tiny_mce_src.js
-https://myadnat.co.uk/lib/bootstrap/js/bootstrap-transition.js
-https://myadnat.co.uk/lib/bootstrap/js/bootstrap-alert.js
-https://myadnat.co.uk/lib/bootstrap/js/bootstrap-modal.js
-https://myadnat.co.uk/lib/bootstrap/js/bootstrap-dropdown.js
-https://myadnat.co.uk/lib/bootstrap/js/bootstrap-scrollspy.js
-https://myadnat.co.uk/lib/bootstrap/js/bootstrap-tab.js
-https://myadnat.co.uk/lib/bootstrap/js/bootstrap-tooltip.js
-https://myadnat.co.uk/lib/bootstrap/js/bootstrap-popover.js
-https://myadnat.co.uk/lib/bootstrap/js/bootstrap-button.js
-https://myadnat.co.uk/lib/bootstrap/js/bootstrap-collapse.js
-https://myadnat.co.uk/lib/bootstrap/js/bootstrap-carousel.js
-https://myadnat.co.uk/lib/bootstrap/js/bootstrap-typeahead.js
+/lib/bootstrap/img/glyphicons-halflings.png
+/img/glyphicons-halflings.png
 
 NETWORK:
 *

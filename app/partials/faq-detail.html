@@ -2,7 +2,7 @@
     <input type="hidden" name="id" ng-model="faq.id">
     <div class="control-group" ng-class="{error: myForm.question.$invalid}">
         <label>Question</label>
-        <textarea name="question" ng-model="faq.question" required></textarea>
+        <textarea class="question-edit" name="question" ng-model="faq.question" required></textarea>
         <span ng-show="myForm.question.$error.required" class="help-inline"> Required</span>
     </div>
     <div class="control-group" ng-class="{error: myForm.answer.$invalid}">
