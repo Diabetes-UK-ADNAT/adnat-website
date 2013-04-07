@@ -9,6 +9,7 @@ var myApp = angular.module('myApp', [
     'myApp.filters',
     'myApp.handler',
     'myApp.person',
+    'myApp.assessment',
     'myApp.services',
     'ui', //angular-ui
 //    'ui.bootstrap',
@@ -16,6 +17,8 @@ var myApp = angular.module('myApp', [
 ]);
 
 myApp.config(['$routeProvider', function($routeProvider) {
+        $routeProvider.when('/assessment/view/:id', {templateUrl: 'partials/assessment-detail.html', controller: AssessmentCtrlDetail});
+        //
         $routeProvider.when('/page/edit/:id', {templateUrl: 'partials/page-detail.html', controller: PageCtrlEdit});
         $routeProvider.when('/page/new', {templateUrl: 'partials/page-detail.html', controller: PageCtrlNew});
         $routeProvider.when('/page/view/:id', {templateUrl: 'partials/page.html', controller: PageFindCtrl});

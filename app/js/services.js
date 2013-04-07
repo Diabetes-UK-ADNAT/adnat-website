@@ -5,8 +5,8 @@ var DEV_ROOT_SERVICES_URL = 'https://api.myadnat.co.uk\\:4443/v1';
 var DEV_ROOT_SERVICES_URL_PLAIN = 'https://api.myadnat.co.uk:4443/v1';
 var PROD_ROOT_SERVICES_URL = 'https://api.myadnat.co.uk\\:443/v1';
 var PROD_ROOT_SERVICES_URL_PLAIN = 'https://api.myadnat.co.uk:443/v1';
-var ROOT_SERVICES_URL = PROD_ROOT_SERVICES_URL;
-var ROOT_SERVICES_URL_PLAIN = PROD_ROOT_SERVICES_URL_PLAIN;
+var ROOT_SERVICES_URL = DEV_ROOT_SERVICES_URL;
+var ROOT_SERVICES_URL_PLAIN = DEV_ROOT_SERVICES_URL_PLAIN;
 
 angular.module('myApp.services', []).value('version', '2.0');
 
@@ -22,6 +22,9 @@ angular.module('myApp.person', ['ngResource']).factory('Person', function($resou
    return $resource(ROOT_SERVICES_URL+'/persons/:id', {} );
 });
 
+angular.module('myApp.assessment', ['ngResource']).factory('Assessment', function($resource) {
+   return $resource(ROOT_SERVICES_URL+'/assessments/:id', {} );
+});
 //override exception handler
 angular.module('myApp.handler', ['ng']).factory('$exceptionHandler', function () {
     return function (exception, cause) {

@@ -1,22 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp" manifest="manifest.appcache">
+<html lang="en" ng-app="myApp">
     <head>
         <meta charset="utf-8">
         <title>ADNAT</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link href="css/all.css" rel="stylesheet">
+
+        <!-- Le styles -->
+        <link href="lib/bootstrap/css/bootstrap.css" rel="stylesheet">
         <style type="text/css">
             body {
                 padding-top: 60px;
                 padding-bottom: 40px;
             }
         </style>
+
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
           <script src="lib/bootstrap/js/html5shiv.js"></script>
         <![endif]-->
+
+        <!-- Fav and touch icons
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+        -->
+        <link rel="shortcut icon" href="img/favicon.png">
+
+        <!--<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">-->
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css">
+        <!--<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" >-->
+        <link rel="stylesheet" href="lib/angular-ui/angular-ui.css"/>
         <!--[if lte IE 8]>
             <script>
             // The ieshiv takes care of our ui.directives, bootstrap module directives and 
@@ -25,9 +41,9 @@
             // enumerate the list of tags in window.myCustomTags
             window.myCustomTags = [ 'appVersion' ]; // optional
             </script>
-            <script src="angular-ui/angular-ui-ieshiv.min.js"></script>
+            <script src="angular-ui/angular-ui-ieshiv.js"></script>
         <![endif]-->
-        <link rel="shortcut icon" href="img/favicon.png">
+        <link rel="stylesheet" href="css/app.css"/>
     </head>
 
     <body>
@@ -74,8 +90,55 @@
             <p>&copy; ADNAT 2011-2013 All Rights Reserved Worldwide. v<span app-version></p>
         </footer>
 
-        <script src="js/all.js"></script>
-        <script src="lib/tiny_mce/tiny_mce.js"></script>
+        <!-- For angular-ui -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+
+        <!--<script src="https://code.angularjs.org/1.0.1/angular-1.0.1.min.js"></script>-->
+        <!--<script src="https://angular-ui.github.com/angular-ui/build/angular-ui.js"></script>-->
+
+        <!-- In production use:
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.js"></script>
+        -->
+        <script src="lib/angular/angular.js"></script>
+        <script src="lib/angular/angular-resource.js"></script>
+        <script src="lib/angular/angular-sanitize.min.js"></script>
+        <script src="lib/angular-ui/angular-ui.js"></script>
+        <!--<script src="https://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.1.0-SNAPSHOT.js"></script>-->
+        <script src="js/app.js"></script>
+        <script src="js/services.js"></script>
+        <script src="js/controllers.js"></script>
+        <script src="js/faq-controller.js"></script>
+        <script src="js/assessment-controller.js"></script>
+        <script src="js/person-controller.js"></script>
+        <script src="js/page-controller.js"></script>
+        <script src="js/filters.js"></script>
+        <script src="js/directives.js"></script>
+        <script src="js/polyfills.js"></script>
+
+        <!-- tinymce -->
         <script src="lib/tiny_mce/jquery.tinymce.js"></script>
+        <script src="lib/tiny_mce/tiny_mce.js"></script>
+
+        <!-- for using mocked data while testing -->
+        <!--<script type="text/javascript" src="../test/lib/angular/angular-mocks.js"></script>-->
+        <!--<script type="text/javascript" src="../test/e2e/mocks.js"></script>-->
+
+        <!--bootstrap--> 
+        <!--404 and not needed? <script src="lib/bootstrap/js/jquery.js"></script>-->
+        <script src="lib/bootstrap/js/bootstrap-transition.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-alert.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-modal.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-dropdown.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-scrollspy.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-tab.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-tooltip.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-popover.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-button.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-collapse.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-carousel.js"></script>
+        <script src="lib/bootstrap/js/bootstrap-typeahead.js"></script>
+
     </body>
 </html>

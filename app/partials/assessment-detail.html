@@ -1,0 +1,51 @@
+<h1>ADNAT Return</h1>
+
+<div>
+    <span>Category</span>
+    <select 
+        name="cat"
+        ng-model="cat" 
+        ng-options="i as i for i in categoryOptions"
+        class="search-select"
+        >
+        <option></option>
+    </select>
+    <input type="text" 
+           ng-model="search" 
+           autofocus
+           class="search-query"
+           placeholder="Search"
+           ui-reset>
+</div>
+<br>
+{{assessment.score.psych}}
+,
+{{assessment.score.psychColor}}
+<br>
+{{assessment.score.general}}
+,
+{{assessment.score.generalColor}}
+<br>
+{{assessment.updated}}
+
+<table>
+    <col class="column-assessment-question">
+    <col class="column-assessment-answer">
+    <col class="column-assessment-category">
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Question</th>
+            <th>Answer</th>
+            <!--sortable <th><a href="" ng-click="predicate = 'category'; reverse=!reverse">Category</a></th>-->
+        </tr>
+    </thead>
+    <tbody>
+        <!--<tr ng-repeat="response in assessment.responses | filter:search | filter:{response.category:category} |orderBy:response.q ">-->
+        <tr ng-repeat="response in assessment.responses | filter:search | filter:categoryFilter | orderBy:'q'">
+            <td>{{response.category}}</td>
+            <td>{{response.text}} ({{response.q}})</td>
+            <td><span ng-repeat="opt in response.optionsText">{{opt}}<br></span>{{response.other}}</td>
+        </tr>
+    </tbody>
+</table>
