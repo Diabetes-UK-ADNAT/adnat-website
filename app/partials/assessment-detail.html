@@ -1,5 +1,23 @@
 <h1>ADNAT Return</h1>
 
+<div class='row'>
+    <div class='span4'>
+        Patient info here
+        <br>
+        {{updated}}
+    </div>
+    <div class='span2'>
+        <img src='{{generalImage}}'>
+        <br>
+        General Score: {{assessment.score.general}}
+    </div>
+    <div class='span2'>
+        <img src='{{psychImage}}'>
+        <br>
+        Self Perception Score: {{assessment.score.psych}}
+    </div>
+</div>
+
 <div>
     <span>Category</span>
     <select 
@@ -17,16 +35,6 @@
            placeholder="Search"
            ui-reset>
 </div>
-<br>
-{{assessment.score.psych}}
-,
-{{assessment.score.psychColor}}
-<br>
-{{assessment.score.general}}
-,
-{{assessment.score.generalColor}}
-<br>
-{{assessment.updated}}
 
 <table>
     <col class="column-assessment-question">
@@ -37,12 +45,12 @@
             <th>Category</th>
             <th>Question</th>
             <th>Answer</th>
-            <!--sortable <th><a href="" ng-click="predicate = 'category'; reverse=!reverse">Category</a></th>-->
         </tr>
     </thead>
     <tbody>
-        <!--<tr ng-repeat="response in assessment.responses | filter:search | filter:{response.category:category} |orderBy:response.q ">-->
-        <tr ng-repeat="response in assessment.responses | filter:search | filter:categoryFilter | orderBy:'q'">
+        <tr ng-repeat="response in assessment.responses | filter:search | filter:categoryFilter | orderBy:'q'"
+            ng-class-odd="'odd'" ng-class-even="'even'"
+            >
             <td>{{response.category}}</td>
             <td>{{response.text}} ({{response.q}})</td>
             <td><span ng-repeat="opt in response.optionsText">{{opt}}<br></span>{{response.other}}</td>
