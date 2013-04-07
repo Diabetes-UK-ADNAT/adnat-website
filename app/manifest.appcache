@@ -1,16 +1,16 @@
 CACHE MANIFEST
 
-#version 3-Apr-13 A
+#version 6-Apr-13 B
 CACHE:
 #data
-https://api.myadnat.co.uk/v1/faqs.json
-https://api.myadnat.co.uk/v1/contents/5122ff963004511159c6444b.json
-https://api.myadnat.co.uk/v1/contents/51576fe7e4b09cf566e5dfd8.json
-https://api.myadnat.co.uk/v1/contents/51576ffee4b09cf566e5dfd9.json
-https://api.myadnat.co.uk/v1/contents/5121823f3004e6347d119bb4.json
-https://api.myadnat.co.uk/v1/contents/512301e53004511159c6444c.json
-https://api.myadnat.co.uk/v1/contents/51217c703004e6347d119baf.json
-https://api.myadnat.co.uk/v1/contents/5122fdcd3004511159c6444a.json
+https://api.myadnat.co.uk/v1/faqs
+https://api.myadnat.co.uk/v1/contents/5122ff963004511159c6444b
+https://api.myadnat.co.uk/v1/contents/51576fe7e4b09cf566e5dfd8
+https://api.myadnat.co.uk/v1/contents/51576ffee4b09cf566e5dfd9
+https://api.myadnat.co.uk/v1/contents/5121823f3004e6347d119bb4
+https://api.myadnat.co.uk/v1/contents/512301e53004511159c6444c
+https://api.myadnat.co.uk/v1/contents/51217c703004e6347d119baf
+https://api.myadnat.co.uk/v1/contents/5122fdcd3004511159c6444a
 
 #images
 /img/1.jpg
