@@ -48,11 +48,11 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="response in assessment.responses | filter:search | filter:categoryFilter | orderBy:'q'"
+        <tr ng-repeat="response in assessment.responses | filter:search | filter:categoryFilter | orderBy:'ordinal'"
             ng-class-odd="'odd'" ng-class-even="'even'"
             >
             <td>{{response.category}}</td>
-            <td>{{response.text}} ({{response.q}})</td>
+            <td>{{response.text}} ({{response.ordinal}},{{response.q}})</td>
             <td><span ng-repeat="opt in response.optionsText">{{opt}}<br></span>{{response.other}}</td>
         </tr>
     </tbody>
