@@ -617,6 +617,7 @@ var myApp = angular.module('myApp', [
     'myApp.filters',
     'myApp.handler',
     'myApp.person',
+    'myApp.assessment',
     'myApp.services',
     'ui', //angular-ui
 //    'ui.bootstrap',
@@ -624,6 +625,8 @@ var myApp = angular.module('myApp', [
 ]);
 
 myApp.config(['$routeProvider', function($routeProvider) {
+        $routeProvider.when('/assessment/view/:id', {templateUrl: 'partials/assessment-detail.html', controller: AssessmentCtrlDetail});
+        //
         $routeProvider.when('/page/edit/:id', {templateUrl: 'partials/page-detail.html', controller: PageCtrlEdit});
         $routeProvider.when('/page/new', {templateUrl: 'partials/page-detail.html', controller: PageCtrlNew});
         $routeProvider.when('/page/view/:id', {templateUrl: 'partials/page.html', controller: PageFindCtrl});
@@ -656,14 +659,13 @@ var DEV_ROOT_SERVICES_URL = 'https://api.myadnat.co.uk\\:4443/v1';
 var DEV_ROOT_SERVICES_URL_PLAIN = 'https://api.myadnat.co.uk:4443/v1';
 var PROD_ROOT_SERVICES_URL = 'https://api.myadnat.co.uk\\:443/v1';
 var PROD_ROOT_SERVICES_URL_PLAIN = 'https://api.myadnat.co.uk:443/v1';
-var ROOT_SERVICES_URL = PROD_ROOT_SERVICES_URL;
-var ROOT_SERVICES_URL_PLAIN = PROD_ROOT_SERVICES_URL_PLAIN;
+var ROOT_SERVICES_URL = DEV_ROOT_SERVICES_URL;
+var ROOT_SERVICES_URL_PLAIN = DEV_ROOT_SERVICES_URL_PLAIN;
 
 angular.module('myApp.services', []).value('version', '2.0');
 
 angular.module('myApp.faq', ['ngResource']).factory('Faq', function($resource) {
-   //return $resource(ROOT_SERVICES_URL+'/faqs/:id.json', {} );
-  return $resource(ROOT_SERVICES_URL+'/faqs/:id', {} );
+   return $resource(ROOT_SERVICES_URL+'/faqs/:id', {} );
 });
 
 angular.module('myApp.content', ['ngResource']).factory('Content', function($resource) {
@@ -674,6 +676,9 @@ angular.module('myApp.person', ['ngResource']).factory('Person', function($resou
    return $resource(ROOT_SERVICES_URL+'/persons/:id', {} );
 });
 
+angular.module('myApp.assessment', ['ngResource']).factory('Assessment', function($resource) {
+   return $resource(ROOT_SERVICES_URL+'/assessments/:id', {} );
+});
 //override exception handler
 angular.module('myApp.handler', ['ng']).factory('$exceptionHandler', function () {
     return function (exception, cause) {

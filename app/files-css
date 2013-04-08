@@ -1,3 +1,4 @@
+# comment lines are supported 
 app/lib/bootstrap/css/bootstrap.css
 app/css/jquery-ui.1.8.16.css
 app/lib/angular-ui/angular-ui.css
