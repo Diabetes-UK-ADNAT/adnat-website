@@ -78,6 +78,18 @@ label.checkbox {
     width: 20px;
 }
 
+
+
+.column-assessment-category{
+    width: 25%;
+}   
+.column-assessment-question{
+    width: 45%;
+} 
+.column-assessment-answer{
+    width: 30%;
+} 
+
 .ui-reset {
     width: 14px;
     height: 14px;

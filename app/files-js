@@ -9,6 +9,7 @@ app/js/app.js
 app/js/services.js
 app/js/controllers.js
 app/js/faq-controller.js
+app/js/assessment-controller.js
 app/js/person-controller.js
 app/js/page-controller.js
 app/js/filters.js
