@@ -1,11 +1,13 @@
 'use strict';
 
+
 function FaqCtrl($scope, $routeParams, Faq) {
     $scope.faqs = Faq.query();
     $scope.categoryOptions = CategoryOptions();
     $scope.category = $routeParams.category;
 }
 
+//FaqCtrlEdit.$inject = ['$scope', '$location', '$routeParams', 'Faq'];
 function FaqCtrlEdit($scope, $location, $routeParams, Faq) {
     var self = this;
 
@@ -73,4 +75,3 @@ function CategoryOptions() {
     return ["Young People", "Health Professionals"];
 }
 
-//FaqCtrl.$inject = ['$scope', '$location', '$routeParams', 'Faq'];
