@@ -1,33 +1,35 @@
 'use strict';
 
-//http://localhost:9000/faqs.json
-var DEV_ROOT_SERVICES_URL = 'https://api.myadnat.co.uk\\:4443/v1';
-var DEV_ROOT_SERVICES_URL_PLAIN = 'https://api.myadnat.co.uk:4443/v1';
-var PROD_ROOT_SERVICES_URL = 'https://api.myadnat.co.uk\\:443/v1';
-var PROD_ROOT_SERVICES_URL_PLAIN = 'https://api.myadnat.co.uk:443/v1';
-var ROOT_SERVICES_URL = DEV_ROOT_SERVICES_URL;
-var ROOT_SERVICES_URL_PLAIN = DEV_ROOT_SERVICES_URL_PLAIN;
+var ServiceUrls = {
+    'isDev': true,
+    'rootServicesUrl': function() {
+        return this.isDev ? 'https://api.myadnat.co.uk\\:4443/v1' : 'https://api.myadnat.co.uk\\:443/v1';
+    }
+    , 'rootServicesUrlPlain': function() {
+        return this.isDev ? 'https://api.myadnat.co.uk:4443/v1' : 'https://api.myadnat.co.uk:443/v1';
+    }
+};
 
 angular.module('myApp.services', []).value('version', '2.0');
 
 angular.module('myApp.faq', ['ngResource']).factory('Faq', function($resource) {
-   return $resource(ROOT_SERVICES_URL+'/faqs/:id', {} );
+    return $resource(ServiceUrls.rootServicesUrl() + '/faqs/:id', {});
 });
 
 angular.module('myApp.content', ['ngResource']).factory('Content', function($resource) {
-   return $resource(ROOT_SERVICES_URL+'/contents/:id', {} );
+    return $resource(ServiceUrls.rootServicesUrl() + '/contents/:id', {});
 });
 
 angular.module('myApp.person', ['ngResource']).factory('Person', function($resource) {
-   return $resource(ROOT_SERVICES_URL+'/persons/:id', {} );
+    return $resource(ServiceUrls.rootServicesUrl() + '/persons/:id', {});
 });
 
 angular.module('myApp.assessment', ['ngResource']).factory('Assessment', function($resource) {
-   return $resource(ROOT_SERVICES_URL+'/assessments/:id', {} );
+    return $resource(ServiceUrls.rootServicesUrl() + '/assessments/:id', {});
 });
-//override exception handler
-angular.module('myApp.handler', ['ng']).factory('$exceptionHandler', function () {
-    return function (exception, cause) {
+
+angular.module('myApp.handler', ['ng']).factory('$exceptionHandler', function() {
+    return function(exception, cause) {
         alert(exception.message); //fixme user messages?
     };
 });

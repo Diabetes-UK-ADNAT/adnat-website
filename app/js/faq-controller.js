@@ -3,7 +3,7 @@
 
 function FaqCtrl($scope, $routeParams, Faq) {
     $scope.faqs = Faq.query();
-    $scope.categoryOptions = CategoryOptions();
+    $scope.categoryOptions = FaqControllerHelper.categoryOptions();
     $scope.category = $routeParams.category;
 }
 
@@ -11,7 +11,7 @@ function FaqCtrl($scope, $routeParams, Faq) {
 function FaqCtrlEdit($scope, $location, $routeParams, Faq) {
     var self = this;
 
-    $scope.categoryOptions = CategoryOptions();
+    $scope.categoryOptions = FaqControllerHelper.categoryOptions();
     $scope.faq = Faq.get({id: $routeParams.faqId}, function(faq) {
         self.original = faq;
         $scope.categoryChoices = [];
@@ -55,7 +55,7 @@ function FaqCtrlEdit($scope, $location, $routeParams, Faq) {
 }
 
 function FaqCtrlNew($scope, $location, Faq) {
-    $scope.categoryOptions = CategoryOptions();
+    $scope.categoryOptions = FaqControllerHelper.categoryOptions();
     $scope.categoryChoices = [];
     $scope.save = function() {
         $scope.faq.categories = [];
@@ -71,7 +71,9 @@ function FaqCtrlNew($scope, $location, Faq) {
     };
 }
 
-function CategoryOptions() {
-    return ["Young People", "Health Professionals"];
-}
+var FaqControllerHelper = {
+    'categoryOptions': function() {
+        return ["Young People", "Health Professionals"];
+    }
+};
 
