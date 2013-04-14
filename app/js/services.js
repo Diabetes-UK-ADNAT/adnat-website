@@ -1,7 +1,7 @@
 'use strict';
 
 var ServiceUrls = {
-    'isDev': true,
+    'isDev': false,
     'rootServicesUrl': function() {
         return this.isDev ? 'https://api.myadnat.co.uk\\:4443/v1' : 'https://api.myadnat.co.uk\\:443/v1';
     }
