@@ -12,6 +12,6 @@ rsync -v -e "ssh -p 12222 -x -a -l ubu-install-jeos"     \
 --exclued '.swp' \
 -aruzitPL  \
 app/ \
-67.18.182.74:/var/www
+67.18.182.74:/var/www/adnat-www
 
 date
