@@ -1,10 +1,11 @@
 'use strict';
 
 
-function FaqCtrl($scope, $routeParams, Faq) {
+function FaqCtrl($scope, $routeParams, Faq, $cookies) {
     $scope.faqs = Faq.query();
     $scope.categoryOptions = FaqControllerHelper.categoryOptions();
     $scope.category = $routeParams.category;
+	console.log($cookies.aut);
 }
 
 //FaqCtrlEdit.$inject = ['$scope', '$location', '$routeParams', 'Faq'];

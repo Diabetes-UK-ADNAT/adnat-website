@@ -13,7 +13,8 @@ var myApp = angular.module('myApp', [
     'myApp.services',
     'ui', //angular-ui
 //    'ui.bootstrap',
-    'ngSanitize'
+    'ngSanitize',
+	'ngCookies'
 ]);
 
 myApp.config(['$routeProvider', function($routeProvider) {
