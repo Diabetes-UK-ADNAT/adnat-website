@@ -1,6 +1,9 @@
 'use strict';
 
-function PersonCtrl($scope, $routeParams, Person) {
+function PersonCtrl($scope, $routeParams, Person, $http, $cookies) {
+	// must encodeURI for FireFox or get an error alert
+	$http.defaults.headers.common['X-Auth-Token']=encodeURI($cookies.aut);
+	
     $scope.persons = Person.query();
     $scope.roles = RoleOptions();
     $scope.role = $routeParams.role;

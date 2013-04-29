@@ -1,23 +1,23 @@
 'use strict';
 
 var ServiceUrls = {
-    'isDev': true,
-    'rootServicesUrl': function() {
-        return this.isDev ? 'https://api.myadnat.co.uk\\:4443/v1' : 'https://api.myadnat.co.uk\\:443/v1';
-    }
-    , 'rootServicesUrlPlain': function() {
-        return this.isDev ? 'https://api.myadnat.co.uk:4443/v1' : 'https://api.myadnat.co.uk:443/v1';
-    }
+	'isDev': true,
+	'rootServicesUrl': function() {
+		return this.isDev ? 'https://api.myadnat.co.uk\\:4443/v1' : 'https://api.myadnat.co.uk\\:443/v1';
+	}
+	, 'rootServicesUrlPlain': function() {
+		return this.isDev ? 'https://api.myadnat.co.uk:4443/v1' : 'https://api.myadnat.co.uk:443/v1';
+	}
 };
 
 angular.module('myApp.services', []).value('version', '2.0');
 
 angular.module('myApp.faq', ['ngResource']).factory('Faq', function($resource) {
-    return $resource(ServiceUrls.rootServicesUrl() + '/faqs/:id', {});
+	return $resource(ServiceUrls.rootServicesUrl() + '/faqs/:id', {});
 });
 
 angular.module('myApp.content', ['ngResource']).factory('Content', function($resource) {
-    return $resource(ServiceUrls.rootServicesUrl() + '/contents/:id', {});
+	return $resource(ServiceUrls.rootServicesUrl() + '/contents/:id', {});
 });
 
 angular.module('myApp.person', ['ngResource']).factory('Person', function($resource) {
@@ -25,12 +25,12 @@ angular.module('myApp.person', ['ngResource']).factory('Person', function($resou
 });
 
 angular.module('myApp.assessment', ['ngResource']).factory('Assessment', function($resource) {
-    return $resource(ServiceUrls.rootServicesUrl() + '/assessments/:id', {});
+	return $resource(ServiceUrls.rootServicesUrl() + '/assessments/:id', {});
 });
 
 angular.module('myApp.handler', ['ng']).factory('$exceptionHandler', function() {
-    return function(exception, cause) {
-        alert(exception.message); //fixme user messages?
-    };
+	return function(exception, cause) {
+		alert(exception.message); //fixme user messages?
+	};
 });
 
