@@ -11,9 +11,9 @@ var myApp = angular.module('myApp', [
 	'myApp.assessment',
 	'myApp.services',
 	'ui', //angular-ui
-//    'ui.bootstrap',
 	'ngSanitize',
-	'ngCookies'
+	'ngCookies',
+	'http-auth-interceptor'
 ]);
 
 myApp.config(['$routeProvider', function($routeProvider) {
@@ -40,6 +40,24 @@ myApp.config(['$routeProvider', function($routeProvider) {
 		$routeProvider.when('/for-clinicians', {redirectTo: '/page/view/5122fdcd3004511159c6444a'});
 		$routeProvider.when('/contact', {redirectTo: '/page/view/5122ff963004511159c6444b'});
 		$routeProvider.when('/references', {redirectTo: '/page/view/512301e53004511159c6444c'});
-		//
 		$routeProvider.otherwise({redirectTo: '/page/hero/5121823f3004e6347d119bb4,51576ffee4b09cf566e5dfd9,51576fe7e4b09cf566e5dfd8'});
+		//
+
+
 	}]);
+		
+//	}]).run(function($cookies, $location) {
+//	alert($cookies.aut);
+//	if ($cookies.aut) {
+//		$location.path('/publicurl');
+//	}
+//});
+//
+//
+//	$scope.$watch(function() {
+//		return $location.path();
+//	}, function(newValue, oldValue) {
+//		if ($scope.loggedIn === false && newValue !== 'https://auth.myadnat.co.uk:4443/login') {
+//			$location.path('https://auth.myadnat.co.uk:4443/login');
+//		}
+//	});
