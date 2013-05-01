@@ -72,9 +72,15 @@
                             </li>
                             <li><a href="#/contact">Contact</a></li>
                         </ul>
-                        <ul class="nav pull-right alert-info">
+						<span ng-controller="MenuCtrl">
+                        <ul class="nav pull-right alert-info" ng-show="!isLoggedIn()">
                             <li><a href="https://auth.myadnat.co.uk:4443/login"><i class="icon-user"></i> Sign In</a></li>
                         </ul>
+                        <ul class="nav pull-right alert-info" ng-show="isLoggedIn()">
+                            <li><a href="#/person"><i class="icon-tasks"></i> Dashboard</a></li>
+                            <li><a href="https://auth.myadnat.co.uk:4443/logout"><i class="icon-user"></i> Sign Out</a></li>
+                        </ul>
+						</span>
                     </div>
                 </div>
             </div>

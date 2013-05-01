@@ -13,7 +13,8 @@ var myApp = angular.module('myApp', [
 	'ui', //angular-ui
 	'ngSanitize',
 	'ngCookies',
-	'http-auth-interceptor'
+	'http-auth-interceptor',
+	'myLoginCheck'
 ]);
 
 myApp.config(['$routeProvider', function($routeProvider) {
@@ -44,14 +45,13 @@ myApp.config(['$routeProvider', function($routeProvider) {
 		//
 
 
-	}]);
+//	}]);
 		
-//	}]).run(function($cookies, $location) {
-//	alert($cookies.aut);
-//	if ($cookies.aut) {
-//		$location.path('/publicurl');
-//	}
-//});
+	}]).run(function($location, $logincheck) {
+	if ($logincheck) {
+		$location.path('/person'); //fixme dashboard
+	}
+});
 //
 //
 //	$scope.$watch(function() {
