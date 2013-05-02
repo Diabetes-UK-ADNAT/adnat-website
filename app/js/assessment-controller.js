@@ -2,12 +2,12 @@
 
 function AssessmentCtrl($scope, $routeParams, Assessment) {
     $scope.assessments = Assessment.query();
-    $scope.categoryOptions = AssessmentControllerHelper.CategoryOptions();
+    $scope.categoryOptions = AssessmentControllerHelper.categoryOptions();
     $scope.category = $routeParams.category;
 }
 
 function AssessmentCtrlDetail($scope, $location, $routeParams, Assessment) {
-    $scope.categoryOptions = AssessmentControllerHelper.CategoryOptions();
+    $scope.categoryOptions = AssessmentControllerHelper.categoryOptions();
     $scope.categoryFilter = function(response) {
         return !$scope.cat || response.category.indexOf($scope.cat) === 0;
     };
