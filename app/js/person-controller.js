@@ -1,8 +1,7 @@
 'use strict';
 
 function PersonCtrl($scope, $routeParams, Person, $http, $cookies, $location) {
-	// make auth req directive
-	//if (typeof $cookies !== 'undefined' && typeof $cookies.aut !== 'undefined' && $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1 ) {
+	// make auth service ($cookies, $http)
 	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
 		window.location = 'https://auth.myadnat.co.uk:4443/login';
 		return;
@@ -11,10 +10,16 @@ function PersonCtrl($scope, $routeParams, Person, $http, $cookies, $location) {
 	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
 	// 
 	// +Role checks
-	$scope.persons = Person.query();
+	$scope.persons = Person.query(
+			function() {
+			},
+			function() {
+				toastr.error('Error finding people');
+			}
+	);
 	$scope.roles = RoleOptions();
 	$scope.role = $routeParams.role;
-	
+
 }
 
 function PersonCtrlEdit($scope, $location, $routeParams, Person) {
@@ -57,7 +62,6 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person) {
 					toastr.error('Error deleting ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
 				}
 		);
-		$location.path('/person');
 	};
 	$scope.save = function() {
 		$scope.person.roles.length = 0;
