@@ -11,7 +11,7 @@ var login = angular.module('myLoginCheck', []).
 			);
 });
 
-function MenuCtrl($scope, $cookies) {
+function MenuCtrl($scope, $cookies) { //fixme make a service for cross controller use?
 	$scope.isLoggedIn = function() {
 	return !(
 			typeof $cookies.aut === 'undefined'
@@ -21,4 +21,3 @@ function MenuCtrl($scope, $cookies) {
 			);
 	};
 }
-

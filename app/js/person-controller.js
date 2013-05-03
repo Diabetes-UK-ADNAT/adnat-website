@@ -3,24 +3,22 @@
 function PersonCtrl($scope, $routeParams, Person, $http, $cookies, $location) {
 	// make auth req directive
 	//if (typeof $cookies !== 'undefined' && typeof $cookies.aut !== 'undefined' && $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1 ) {
-	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1 ) {
-		window.location='https://auth.myadnat.co.uk:4443/login';
+	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
+		window.location = 'https://auth.myadnat.co.uk:4443/login';
 		return;
 	}
 	// must encodeURI for FireFox or get an error alert
 	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
 	// 
 	// +Role checks
-	
-
 	$scope.persons = Person.query();
 	$scope.roles = RoleOptions();
 	$scope.role = $routeParams.role;
+	
 }
 
 function PersonCtrlEdit($scope, $location, $routeParams, Person) {
 	var self = this;
-
 	$scope.roles = RoleOptions();
 	$scope.person = Person.get({id: $routeParams.id}, function(person) {
 		person.dob = new Date(person.dob);
@@ -49,9 +47,17 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person) {
 	};
 
 	$scope.destroy = function() {
-		Person.delete({id: $routeParams.id}, function() {
+		Person.delete(
+				{id: $routeParams.id},
+		function() {
+			toastr.info($scope.person.name.firstNames + ' ' + $scope.person.name.lastName + ' deleted');
 			$location.path('/person');
-		});
+		},
+				function() {
+					toastr.error('Error deleting ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
+				}
+		);
+		$location.path('/person');
 	};
 	$scope.save = function() {
 		$scope.person.roles.length = 0;
@@ -60,10 +66,16 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person) {
 				$scope.person.roles.push($scope.roles[key]);
 			}
 		});
-
-		Person.save($scope.person, function() {
-			$location.path('/person');
-		});
+		Person.save(
+				$scope.person,
+				function() {
+					toastr.info($scope.person.name.firstNames + ' ' + $scope.person.name.lastName + ' saved');
+					$location.path('/person');
+				},
+				function() {
+					toastr.error('Error saving ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
+				}
+		);
 	};
 }
 
@@ -77,10 +89,16 @@ function PersonCtrlNew($scope, $location, Person) {
 				$scope.person.roles.push($scope.roles[key]);
 			}
 		});
-
-		Person.save($scope.person, function() {
-			$location.path('/person');
-		});
+		Person.save(
+				$scope.person,
+				function() {
+					toastr.info($scope.person.name.firstNames + ' ' + $scope.person.name.lastName + ' saved');
+					$location.path('/person');
+				},
+				function() {
+					toastr.error('Error saving ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
+				}
+		);
 	};
 }
 

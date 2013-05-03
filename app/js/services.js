@@ -33,4 +33,3 @@ angular.module('myApp.handler', ['ng']).factory('$exceptionHandler', function() 
 		alert(exception.message); //fixme user messages?
 	};
 });
-

@@ -303,5 +303,51 @@ tr.even {
 
 
 [ng\:cloak], [ng-cloak], .ng-cloak {
-  display: none !important;
+	display: none !important;
+}
+
+
+.toast-message a,
+.toast-message label {
+	color: black;
+}
+.toast-message a:hover {
+	color: grey;
+	text-decoration: none;
+}
+#toast-container > div {
+	color: black;
+}
+.toast-success {
+	background-color: lightcyan;
+}
+.toast-error {
+	background-color: lightcoral;
+}
+.toast-info {
+	background-color: lightgoldenrodyellow;
+}
+.toast-warning {
+	background-color: lightsalmon;
+}
+.toast-top-center { 
+    top: 12px; 
+    left: 50%; 
+    margin-left: -150px; 
+	padding: 0px 0px 0px 10px;
+} 
+@media all and (max-width: 240px) { 
+    .toast-top-center { 
+        margin-left: -54px; 
+    } 
+} 
+@media all and (min-width: 241px) and (max-width: 320px) { 
+    .toast-top-center { 
+        margin-left: -64px; 
+    } 
+} 
+@media all and (min-width: 321px) and (max-width: 480px) { 
+    .toast-top-center { 
+        margin-left: -96px; 
+    } 
 }
