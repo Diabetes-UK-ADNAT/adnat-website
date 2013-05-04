@@ -1,9 +1,9 @@
 'use strict';
 
 function PersonCtrl($scope, $routeParams, Person, $http, $cookies, $location) {
-	// make auth service ($cookies, $http)
+	// FIXME make auth service ($cookies, $http)
 	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
-		window.location = 'https://auth.myadnat.co.uk:4443/login';
+		window.location = 'https://auth.myadnat.co.uk:4443/login'; //FIXME URL
 		return;
 	}
 	// must encodeURI for FireFox or get an error alert
@@ -14,7 +14,7 @@ function PersonCtrl($scope, $routeParams, Person, $http, $cookies, $location) {
 			function() {
 			},
 			function() {
-				toastr.error('Error finding people');
+				toastr.error('Error loading data');
 			}
 	);
 	$scope.roles = RoleOptions();
@@ -42,7 +42,10 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person) {
 		$scope.roleChoicesOriginal = [];
 		angular.copy($scope.roleChoices, $scope.roleChoicesOriginal);
 		$scope.person = new Person(self.original);
-	});
+	},
+			function() {
+				toastr.error('Error loading data');
+			});
 
 	$scope.isClean = function() {
 		return angular.equals(self.original, $scope.person)
@@ -55,11 +58,11 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person) {
 		Person.delete(
 				{id: $routeParams.id},
 		function() {
-			toastr.info($scope.person.name.firstNames + ' ' + $scope.person.name.lastName + ' deleted');
+			toastr.info($scope.person.name.firstNames + ' ' + $scope.person.name.lastName, 'Deleted Person');
 			$location.path('/person');
 		},
 				function() {
-					toastr.error('Error deleting ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
+					toastr.error($scope.person.name.firstNames + ' ' + $scope.person.name.lastName, 'Error Deleting');
 				}
 		);
 	};
@@ -73,11 +76,11 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person) {
 		Person.save(
 				$scope.person,
 				function() {
-					toastr.info($scope.person.name.firstNames + ' ' + $scope.person.name.lastName + ' saved');
+					toastr.info($scope.person.name.firstNames + ' ' + $scope.person.name.lastName, 'Saved Person');
 					$location.path('/person');
 				},
 				function() {
-					toastr.error('Error saving ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
+					toastr.error($scope.person.name.firstNames + ' ' + $scope.person.name.lastName, 'Error Saving Person');
 				}
 		);
 	};
@@ -96,11 +99,11 @@ function PersonCtrlNew($scope, $location, Person) {
 		Person.save(
 				$scope.person,
 				function() {
-					toastr.info($scope.person.name.firstNames + ' ' + $scope.person.name.lastName + ' saved');
+					toastr.info($scope.person.name.firstNames + ' ' + $scope.person.name.lastName, 'Saved Person');
 					$location.path('/person');
 				},
 				function() {
-					toastr.error('Error saving ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
+					toastr.error($scope.person.name.firstNames + ' ' + $scope.person.name.lastName, 'Error Saving Person');
 				}
 		);
 	};
