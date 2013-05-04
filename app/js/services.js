@@ -20,6 +20,10 @@ angular.module('myApp.content', ['ngResource']).factory('Content', function($res
 	return $resource(ServiceUrls.rootServicesUrl() + '/contents/:id', {});
 });
 
+angular.module('myApp.group', ['ngResource']).factory('Group', function($resource) {
+	return $resource(ServiceUrls.rootServicesUrl() + '/groups/:id', {});
+});
+
 angular.module('myApp.person', ['ngResource']).factory('Person', function($resource) {
     return $resource(ServiceUrls.rootServicesUrl() + '/persons/:id', {});
 });

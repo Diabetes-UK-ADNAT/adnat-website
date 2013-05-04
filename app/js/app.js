@@ -5,6 +5,7 @@ var myApp = angular.module('myApp', [
 	'myApp.content',
 	'myApp.directives',
 	'myApp.faq',
+	'myApp.group',
 	'myApp.filters',
 	'myApp.handler',
 	'myApp.person',
@@ -30,6 +31,10 @@ myApp.config(['$routeProvider', function($routeProvider) {
 		$routeProvider.when('/faq', {templateUrl: 'partials/faq.html', controller: FaqCtrl});
 		$routeProvider.when('/faq/edit/:faqId', {templateUrl: 'partials/faq-detail.html', controller: FaqCtrlEdit});
 		$routeProvider.when('/faq/new', {templateUrl: 'partials/faq-detail.html', controller: FaqCtrlNew});
+		//
+		$routeProvider.when('/group', {templateUrl: 'partials/group.html', controller: GroupCtrl});
+		$routeProvider.when('/group/edit/:groupId', {templateUrl: 'partials/group-detail.html', controller: GroupCtrlEdit});
+		$routeProvider.when('/group/new', {templateUrl: 'partials/group-detail.html', controller: GroupCtrlNew});
 		//
 		$routeProvider.when('/person', {templateUrl: 'partials/person.html', controller: PersonCtrl});
 		$routeProvider.when('/person/edit/:id', {templateUrl: 'partials/person-detail.html', controller: PersonCtrlEdit});

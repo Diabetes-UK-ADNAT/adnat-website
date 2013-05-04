@@ -1,0 +1,11 @@
+<form name="myForm">
+    <input type="hidden" name="id" ng-model="group.id">
+    <div class="control-group" ng-class="{error: myForm.question.$invalid}">
+        <label>Group Name</label>
+        <input class="question-edit" name="name" ng-model="group.name" required/>
+        <span ng-show="myForm.name.$error.required" class="help-inline"> Required</span>
+    </div>
+    <a href="#/group" class="btn">Cancel</a>
+    <button ng-click="save()" ng-disabled="isClean() || myForm.$invalid" class="btn btn-primary">Save</button>
+    <button ng-click="destroy()" ng-show="group.uuid" class="btn btn-danger">Delete</button>
+</form>

@@ -1,22 +1,31 @@
-<div ng-controller="Group">
+<h1>Groups</h1>
 
-	<form name="myForm">
+<div>
+    <input type="text" 
+           ng-model="search" 
+           autofocus
+           class="search-query"
+           placeholder="Search"
+           ui-reset>
 
-        <label>Parent Group:</label> <br/>
-		<select ng-model="contact.type">
-			<option ng-repeat="contact in form.contacts">contact.name</option>
-		</select>
-		<br/>
-
-        <label>Name:</label><br/>
-        <input type="text" ng-model="form.name" required/> <br/><br/>
-		<br/>
-
-		<button ng-click="cancel()" ng-disabled="isCancelDisabled()" class="btn">Cancel</button>
-		<button ng-click="save()" ng-disabled="isSaveDisabled()" class="btn btn-primary">Save</button>
-    </form>
-
-    <hr/>
-    Debug View:
-    <pre>form={{form}}</pre>
+    <span><a href="#/group/new"><i class="icon-plus-sign"></i></a></span>
 </div>
+
+<table class="table-hover">
+    <col class="column-group-name">
+	<col class="column-group-action">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="group in groups | filter:search | orderBy:'name' ">
+            <td>{{group.name}}</td>
+            <td class="action">
+                <a href="#/group/edit/{{group.uuid}}"><i class="icon-pencil"></i></a>
+            </td>   
+        </tr>
+    </tbody>
+</table>
