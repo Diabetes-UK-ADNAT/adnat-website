@@ -159,6 +159,10 @@ input, .uneditable-input {
 }
 
 textarea {
+    width: 80%;
+    height: 100px;
+}
+textarea.content-edit {
     width: 100%;
     height: 600px;
 }
