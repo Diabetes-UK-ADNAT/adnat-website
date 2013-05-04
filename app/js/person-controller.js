@@ -58,11 +58,11 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person) {
 		Person.delete(
 				{id: $routeParams.id},
 		function() {
-			toastr.info($scope.person.name.firstNames + ' ' + $scope.person.name.lastName, 'Deleted Person');
+			toastr.info('Deleted ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
 			$location.path('/person');
 		},
 				function() {
-					toastr.error($scope.person.name.firstNames + ' ' + $scope.person.name.lastName, 'Error Deleting');
+					toastr.error('Error deleting ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
 				}
 		);
 	};
@@ -76,11 +76,11 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person) {
 		Person.save(
 				$scope.person,
 				function() {
-					toastr.info($scope.person.name.firstNames + ' ' + $scope.person.name.lastName, 'Saved Person');
+					toastr.info('Saved ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
 					$location.path('/person');
 				},
 				function() {
-					toastr.error($scope.person.name.firstNames + ' ' + $scope.person.name.lastName, 'Error Saving Person');
+					toastr.error('Error saving ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
 				}
 		);
 	};
@@ -99,11 +99,11 @@ function PersonCtrlNew($scope, $location, Person) {
 		Person.save(
 				$scope.person,
 				function() {
-					toastr.info($scope.person.name.firstNames + ' ' + $scope.person.name.lastName, 'Saved Person');
+					toastr.info('Saved ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
 					$location.path('/person');
 				},
 				function() {
-					toastr.error($scope.person.name.firstNames + ' ' + $scope.person.name.lastName, 'Error Saving Person');
+					toastr.error('Error saving ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
 				}
 		);
 	};

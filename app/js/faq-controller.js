@@ -47,11 +47,11 @@ function FaqCtrlEdit($scope, $location, $routeParams, Faq) {
 
 	$scope.destroy = function() {
 		Faq.delete({id: $routeParams.faqId}, function() {
-			toastr.info($scope.faq.question,'Deleted FAQ');
+			toastr.info('Deleted ' + $scope.faq.question);
 			$location.path('/faq');
 		},
 				function() {
-					toastr.error($scope.faq.question, 'Error Deleting FAQ');
+					toastr.error('Error deleting ' + $scope.faq.question);
 				}
 		);
 	};
@@ -64,11 +64,11 @@ function FaqCtrlEdit($scope, $location, $routeParams, Faq) {
 		});
 
 		Faq.save($scope.faq, function() {
-					toastr.info($scope.faq.question, 'FAQ Saved');
+					toastr.info('Saved ' + $scope.faq.question);
 					$location.path('/faq');
 				},
 				function() {
-					toastr.error($scope.faq.question, 'Error Saving FAQ');
+					toastr.error('Error saving ' + $scope.faq.question);
 				});
 	};
 }
@@ -85,11 +85,11 @@ function FaqCtrlNew($scope, $location, Faq) {
 		});
 
 		Faq.save($scope.faq, function() {
-					toastr.info($scope.faq.question, 'FAQ Saved');
+					toastr.info('Saved ' + $scope.faq.question);
 					$location.path('/faq');
 				},
 				function() {
-					toastr.error($scope.faq.question, 'Error Saving FAQ');
+					toastr.error('Error saving ' + $scope.faq.question);
 				});
 	};
 }

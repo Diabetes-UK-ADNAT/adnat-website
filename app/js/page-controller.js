@@ -32,22 +32,22 @@ function PageCtrlEdit($scope, $location, $routeParams, Content) {
 	$scope.destroy = function() {
 		Content.delete({id: $routeParams.id},
 		function() {
-			toastr.info($scope.content.title, 'Deleted Content');
+			toastr.info('Deleted ' + $scope.content.title);
 			$location.path('/page-list');
 		},
 				function() {
-					toastr.error($scope.content.title, 'Error Deleting Content');
+					toastr.error('Error deleting ' + $scope.content.title);
 				}
 		);
 	};
 	$scope.save = function() {
 		Content.save($scope.content,
 				function() {
-					toastr.info($scope.content.title, 'Content Saved');
+					toastr.info('Saved ' + $scope.content.title);
 					$location.path('/page-list');
 				},
 				function() {
-					toastr.error($scope.content.title, 'Error Saving Content');
+					toastr.error('Error saving ' + $scope.content.title);
 				});
 	};
 }
@@ -57,11 +57,11 @@ function PageCtrlNew($scope, $location, Content) {
 	$scope.save = function() {
 		Content.save($scope.content,
 				function() {
-					toastr.info($scope.content.title, 'Content Saved');
+					toastr.info('Saved ' + $scope.content.title);
 					$location.path('/page-list');
 				},
 				function() {
-					toastr.error($scope.content.title, 'Error Saving Content');
+					toastr.error('Error saving ' + $scope.content.title);
 				});
 	};
 }
