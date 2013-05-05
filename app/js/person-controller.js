@@ -112,7 +112,7 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group) {
 	};
 }
 
-function PersonCtrlNew($scope, $location, Person) {
+function PersonCtrlNew($scope, $location, Person, Group) {
 	$scope.groups = Group.query(
 			function() {
 			},
