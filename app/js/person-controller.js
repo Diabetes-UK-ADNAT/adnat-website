@@ -22,7 +22,7 @@ function PersonCtrl($scope, $routeParams, Person, $http, $cookies, $location) {
 
 }
 
-function PersonCtrlEdit($scope, $location, $routeParams, Person) {
+function PersonCtrlEdit($scope, $location, $routeParams, Person, Group) {
 	var self = this;
 	$scope.roles = RoleOptions();
 	$scope.person = Person.get({id: $routeParams.id}, function(person) {
@@ -39,14 +39,17 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person) {
 			}
 		});
 
-if ($scope.person.group !== null ) {
-$scope.person.group.name += new Date(); //poc
-}
+		$scope.groups = Group.query(
+				function() {
+				},
+				function() {
+					toastr.error('Error loading data');
+				}
+		);
 
 		$scope.roleChoicesOriginal = [];
 		angular.copy($scope.roleChoices, $scope.roleChoicesOriginal);
 		$scope.person = new Person(self.original);
-
 
 
 	},
@@ -55,7 +58,7 @@ $scope.person.group.name += new Date(); //poc
 			});
 
 	$scope.itemList = ["one", "two", "three"]; //poc
-	$scope.addItem=  function() {
+	$scope.addItem = function() {
 		$scope.itemList.push("another item " + new Date());
 	};
 	$scope.removeItem = function() {
@@ -110,6 +113,13 @@ $scope.person.group.name += new Date(); //poc
 }
 
 function PersonCtrlNew($scope, $location, Person) {
+	$scope.groups = Group.query(
+			function() {
+			},
+			function() {
+				toastr.error('Error loading data');
+			}
+	);
 	$scope.roles = RoleOptions();
 	$scope.roleChoices = [];
 	$scope.save = function() {
