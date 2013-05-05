@@ -38,6 +38,7 @@ myApp.config(['$routeProvider', function($routeProvider) {
 		//
 		$routeProvider.when('/person', {templateUrl: 'partials/person.html', controller: PersonCtrl});
 		$routeProvider.when('/person/edit/:id', {templateUrl: 'partials/person-detail.html', controller: PersonCtrlEdit});
+		$routeProvider.when('/person/new/:roles', {templateUrl: 'partials/person-detail.html', controller: PersonCtrlNew});
 		$routeProvider.when('/person/new', {templateUrl: 'partials/person-detail.html', controller: PersonCtrlNew});
 		//
 		$routeProvider.when('/about', {redirectTo: '/page/view/5121823f3004e6347d119bb4'});

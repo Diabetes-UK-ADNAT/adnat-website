@@ -1,9 +1,9 @@
 'use strict';
 
 function PersonCtrl($scope, $routeParams, Person, $http, $cookies, $location) {
-	// FIXME make auth service ($cookies, $http)
+	// FIXME make auth service to guard no public functions ($cookies, $http)
 	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
-		window.location = 'https://auth.myadnat.co.uk:4443/login'; //FIXME URL
+		window.location = 'https://auth.myadnat.co.uk:4443/login'; //FIXME URL class
 		return;
 	}
 	// must encodeURI for FireFox or get an error alert
@@ -46,6 +46,7 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group) {
 					toastr.error('Error loading data');
 				}
 		);
+
 
 		$scope.roleChoicesOriginal = [];
 		angular.copy($scope.roleChoices, $scope.roleChoicesOriginal);
@@ -112,7 +113,7 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group) {
 	};
 }
 
-function PersonCtrlNew($scope, $location, Person, Group) {
+function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
 	$scope.groups = Group.query(
 			function() {
 			},
@@ -120,8 +121,23 @@ function PersonCtrlNew($scope, $location, Person, Group) {
 				toastr.error('Error loading data');
 			}
 	);
-	$scope.roles = RoleOptions();
+
+	// take passed in roles or default to all available
+	//fixme validate passedin existin in RoleOptions();
 	$scope.roleChoices = [];
+	if ($routeParams.roles) {
+		$scope.roles = $routeParams.roles.split(',');
+		if ($scope.roles.length === 0) {
+			$scope.roles = RoleOptions();
+		}
+		angular.forEach($scope.roles, function(value, key) {
+			$scope.roleChoices[key] = true;
+		});
+	} else {
+		$scope.roles = RoleOptions();
+	}
+
+
 	$scope.save = function() {
 		$scope.person.roles = [];
 		angular.forEach($scope.roleChoices, function(value, key) {
@@ -143,7 +159,7 @@ function PersonCtrlNew($scope, $location, Person, Group) {
 }
 
 function RoleOptions() {
-	return ["Patient", "Clinician", "Admin"];
+	return ["Patient", "Clinician", "Site Admin", "	Admin"];
 }
 
 //PersonCtrl.$inject = ['$scope', '$location', '$routeParams', 'Person'];
