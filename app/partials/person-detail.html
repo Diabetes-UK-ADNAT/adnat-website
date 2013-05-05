@@ -85,12 +85,12 @@
                 <span ng-show="myForm.agreedToPrivacyPolicy.$error.required" class="help-inline"> Required</span>
             </div>
         </div>
-        <div class="span3">
+        <div class="span3" ng-hide="disableRoleEdit">
             <h2>Roles</h2>
             <div class="control-group" ng-class="{error: myForm.roles.$invalid}">
                 <label>Roles</label>
                 <div ng-repeat="role in roles" required>
-                    <input id="{{cat}}"type="checkbox" ng-model="roleChoices[$index]"><label class="checkbox" for="{{role}}">{{role}}</label>
+                    <input id="{{cat}}"type="checkbox" ng-disabled="disableRoleEdit" ng-model="roleChoices[$index]"><label class="checkbox" for="{{role}}">{{role}}</label>
                 </div>
             </div>  
         </div>

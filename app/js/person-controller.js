@@ -25,6 +25,7 @@ function PersonCtrl($scope, $routeParams, Person, $http, $cookies, $location) {
 function PersonCtrlEdit($scope, $location, $routeParams, Person, Group) {
 	var self = this;
 	$scope.roles = RoleOptions();
+	$scope.disableRoleEdit = false;
 	$scope.person = Person.get({id: $routeParams.id}, function(person) {
 		person.dob = new Date(person.dob);
 		person.agreedToTermsAndConditions = new Date(person.agreedToTermsAndConditions);
@@ -126,17 +127,15 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
 	//fixme validate passedin existin in RoleOptions();
 	$scope.roleChoices = [];
 	if ($routeParams.roles) {
+		$scope.disableRoleEdit = true;
 		$scope.roles = $routeParams.roles.split(',');
-		if ($scope.roles.length === 0) {
-			$scope.roles = RoleOptions();
-		}
 		angular.forEach($scope.roles, function(value, key) {
 			$scope.roleChoices[key] = true;
 		});
 	} else {
+		$scope.disableRoleEdit = false;
 		$scope.roles = RoleOptions();
 	}
-
 
 	$scope.save = function() {
 		$scope.person.roles = [];
