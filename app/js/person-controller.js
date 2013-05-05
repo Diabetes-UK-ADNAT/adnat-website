@@ -159,7 +159,7 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
 }
 
 function RoleOptions() {
-	return ["Patient", "Clinician", "Site Admin", "	Admin"];
+	return ["Patient", "Clinician", "Site Admin", "Admin"];
 }
 
 //PersonCtrl.$inject = ['$scope', '$location', '$routeParams', 'Person'];
