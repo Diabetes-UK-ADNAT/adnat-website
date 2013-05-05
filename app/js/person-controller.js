@@ -39,13 +39,29 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person) {
 			}
 		});
 
+if ($scope.person.group !== null ) {
+$scope.person.group.name += new Date(); //poc
+}
+
 		$scope.roleChoicesOriginal = [];
 		angular.copy($scope.roleChoices, $scope.roleChoicesOriginal);
 		$scope.person = new Person(self.original);
+
+
+
 	},
 			function() {
 				toastr.error('Error loading data');
 			});
+
+	$scope.itemList = ["one", "two", "three"]; //poc
+	$scope.addItem=  function() {
+		$scope.itemList.push("another item " + new Date());
+	};
+	$scope.removeItem = function() {
+		//$scope.itemList.push("another item " + new Date());
+	};
+
 
 	$scope.isClean = function() {
 		return angular.equals(self.original, $scope.person)
@@ -67,6 +83,13 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person) {
 		);
 	};
 	$scope.save = function() {
+		angular.forEach($scope.itemList, function(value, key) { //poc
+			if (value) {
+				console.log(key);
+				console.log(value);
+			}
+		});
+
 		$scope.person.roles.length = 0;
 		angular.forEach($scope.roleChoices, function(value, key) {
 			if (value) {

@@ -3,7 +3,7 @@
     <input type="hidden" name="id" ng-model="content.id">
     <div class="control-group" ng-class="{error: myForm.title.$invalid}">
         <label>Title</label>
-        <input name="title" ng-model="content.title" required/>
+        <input name="title" ng-model="content.title" required autofocus/>
         <span ng-show="myForm.title.$error.required" class="help-inline"> Required</span>
     </div>
     <div class="control-group" ng-class="{error: myForm.value.$invalid}">

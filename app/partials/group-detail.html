@@ -4,7 +4,7 @@
     <input type="hidden" name="id" ng-model="group.id">
     <div class="control-group" ng-class="{error: myForm.question.$invalid}">
         <label>Group Name</label>
-        <input class="question-edit" name="name" ng-model="group.name" required/>
+        <input class="question-edit" name="name" ng-model="group.name" required autofocus/>
         <span ng-show="myForm.name.$error.required" class="help-inline"> Required</span>
     </div>
     <a href="#/group" class="btn">Cancel</a>

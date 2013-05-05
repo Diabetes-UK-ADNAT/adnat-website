@@ -49,11 +49,11 @@
         </div>
         <div class="span3">
             <h2>Account</h2>
-            <div class="control-group" ng-class="{error: myForm.username.$invalid}">
+<!--            <div class="control-group" ng-class="{error: myForm.username.$invalid}">
                 <label>User Name</label>
                 <input name="username" ng-model="person.account.username" required/>
                 <span ng-show="myForm.username.$error.required" class="help-inline"> Required</span>
-            </div>
+            </div>-->
             <!--    <div class="control-group" ng-class="{error: myForm.password.$invalid}">
                     <label>Password</label>
                     <input type="password" name="password" ng-model="person.account.password" required/>
@@ -85,6 +85,16 @@
             </div>  
         </div>
     </div>
+
+<!-- 
+search lookup, add to scope, if not found create and add to scope via modal 
+remove from scope w/ (-) (trash?) icon next to itme
+replace collection in document on save
+-->
+<div ng-repeat="item in itemList" required>
+	<div>{{item}}</div>
+</div>
+<button ng-click="addItem()" class="btn btn-primary">Add Item</button>
 
 
     <a href="#/person" class="btn">Cancel</a>
