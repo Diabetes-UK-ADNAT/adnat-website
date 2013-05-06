@@ -11,7 +11,7 @@ var myApp = angular.module('myApp', [
 	'myApp.person',
 	'myApp.assessment',
 	'myApp.services',
-	'ui.bootstrap', //angular-ui
+	//'ui.bootstrap', //angular-ui
 	//'ui', //angular-ui
 	'ngSanitize',
 	'ngCookies',
