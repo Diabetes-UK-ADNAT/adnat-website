@@ -24,6 +24,8 @@ function PersonCtrl($scope, $routeParams, Person, $http, $cookies, $location) {
 
 function PersonCtrlEdit($scope, $location, $routeParams, Person, Group) {
 	var self = this;
+	$scope.passwordConfirmation = null;
+	$scope.password = null;
 	$scope.roles = RoleOptions();
 	$scope.disableRoleEdit = false;
 	$scope.person = Person.get({id: $routeParams.id}, function(person) {
@@ -42,6 +44,7 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group) {
 
 		$scope.groups = Group.query(
 				function() {
+					//init select? $scope.myForm.group = $scope.person.group.name;
 				},
 				function() {
 					toastr.error('Error loading data');
@@ -72,6 +75,12 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group) {
 		return angular.equals(self.original, $scope.person)
 				&&
 				angular.equals($scope.roleChoices, $scope.roleChoicesOriginal)
+				&&
+				angular.equals($scope.passwordConfirmation, $scope.password)
+				&&
+				$scope.passwordConfirmation === null
+				&&
+				$scope.password === null
 				;
 	};
 
@@ -112,6 +121,11 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group) {
 				}
 		);
 	};
+
+	$scope.passwordInvalid = function() {
+		return $scope.passwordConfirmation !== $scope.password;
+	};
+
 }
 
 function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
@@ -154,6 +168,11 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
 					toastr.error('Error saving ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
 				}
 		);
+	};
+
+	//$scope.passwordRequired = true;
+	$scope.passwordInvalid = function() {
+		return $scope.passwordConfirmation !== $scope.password;
 	};
 }
 

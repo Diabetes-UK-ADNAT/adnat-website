@@ -355,3 +355,7 @@ tr.even {
         margin-left: -96px; 
     } 
 }
+
+select {
+	width: 150px;
+}
