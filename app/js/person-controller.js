@@ -22,8 +22,18 @@ function PersonCtrl($scope, $routeParams, Person, $http, $cookies, $location) {
 
 }
 
-function PersonCtrlEdit($scope, $location, $routeParams, Person, Group) {
+function PersonCtrlEdit($scope, $location, $routeParams, Person, Group) {//, $http, limitToFilter) {
 	var self = this;
+
+//  $scope.cities = function(cityName) {
+//    return $http.jsonp("http://gd.geobytes.com/AutoCompleteCity?callback=JSON_CALLBACK &filter=US&q="+cityName).then(function(response){
+//      return limitToFilter(response.data, 15);
+//    });
+//  };
+	$scope.selected = undefined;
+	$scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+
+
 	$scope.passwordConfirmation = null;
 	$scope.password = null;
 	$scope.roles = RoleOptions();
@@ -41,7 +51,6 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group) {
 				$scope.roleChoices[key] = false;
 			}
 		});
-
 		$scope.groups = Group.query(
 				function() {
 					//init select? $scope.myForm.group = $scope.person.group.name;
@@ -50,27 +59,20 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group) {
 					toastr.error('Error loading data');
 				}
 		);
-
-
 		$scope.roleChoicesOriginal = [];
 		angular.copy($scope.roleChoices, $scope.roleChoicesOriginal);
 		$scope.person = new Person(self.original);
-
-
 	},
 			function() {
 				toastr.error('Error loading data');
 			});
-
 	$scope.itemList = ["one", "two", "three"]; //poc
 	$scope.addItem = function() {
 		$scope.itemList.push("another item " + new Date());
 	};
 	$scope.removeItem = function() {
-		//$scope.itemList.push("another item " + new Date());
+//$scope.itemList.push("another item " + new Date());
 	};
-
-
 	$scope.isClean = function() {
 		return angular.equals(self.original, $scope.person)
 				&&
@@ -83,7 +85,6 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group) {
 				$scope.password === null
 				;
 	};
-
 	$scope.destroy = function() {
 		Person.delete(
 				{id: $routeParams.id},
@@ -103,7 +104,6 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group) {
 				console.log(value);
 			}
 		});
-
 		$scope.person.roles.length = 0;
 		angular.forEach($scope.roleChoices, function(value, key) {
 			if (value) {
@@ -121,11 +121,9 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group) {
 				}
 		);
 	};
-
 	$scope.passwordInvalid = function() {
 		return $scope.passwordConfirmation !== $scope.password;
 	};
-
 }
 
 function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
@@ -136,7 +134,6 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
 				toastr.error('Error loading data');
 			}
 	);
-
 	// take passed in roles or default to all available
 	//fixme validate passedin existin in RoleOptions();
 	$scope.roleChoices = [];
@@ -169,7 +166,6 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
 				}
 		);
 	};
-
 	//$scope.passwordRequired = true;
 	$scope.passwordInvalid = function() {
 		return $scope.passwordConfirmation !== $scope.password;

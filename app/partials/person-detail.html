@@ -2,6 +2,15 @@
 
 <form name="myForm">
     <input type="hidden" name="id" ng-model="person.id">
+
+<!--	<div class='container-fluid'>
+        <pre>Model: {{result | json}}</pre>
+        <input type="text" ng-model="result" typeahead="suggestion for suggestion in cities($viewValue)">
+    </div>-->
+<div class='container-fluid' ">
+    <pre>Modelx: {{selected| json}}</pre>
+    <input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue">
+</div>
     <div class="row">
         <div class="span3">
             <h2>Site</h2>
