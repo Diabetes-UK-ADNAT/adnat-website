@@ -3,16 +3,8 @@
 <form name="myForm">
     <input type="hidden" name="id" ng-model="person.id">
 
-	<div class='container-fluid'>
-        <pre>Model: {{result | json}}</pre>
-        <input type="text" ng-model="result" typeahead="suggestion for suggestion in cities($viewValue)">
-    </div>
-	<div class='container-fluid' ">
-		<pre>Modelx: {{selected| json}}</pre>
-		<input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue">
-	</div>
 
-	
+
     <div class="row">
         <div class="span3">
             <h2>Site</h2>
@@ -98,15 +90,30 @@
         </div>
     </div>
 
+	<h2>Care Team</h2>
+	<div>
+        <!--<pre>Model: {{result | json}}</pre>-->
+        <input type="text" ng-model="result" typeahead="suggestion for suggestion in cities($viewValue)" ui-reset>
+		<button ng-click="addItem1()" class="btn btn-primary" ng-disabled=!result>Add to Care Team</button>
+		    <span><a onclick="AddItem1()"><i class="icon-plus-sign"></i></a></span>
+
+    </div>
+<!--	<div class='container-fluid' ">
+		<pre>Modelx: {{selected| json}}</pre>
+		<input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue" ui-reset>
+		<br>
+		<button ng-click="addItem()" class="btn btn-primary">Add Item</button>
+		<button ng-click="removeItem()" class="btn btn-primary">Remove Item</button>
+	</div>-->
+	<div ng-repeat="item in itemList" required>
+		<div>{{item}} <span><a onclick="RemoveItem(0)"><i class="icon-minus-sign"></i></a></span> </div>
+	</div>
+
 	<!-- 
 	search lookup, add to scope, if not found create and add to scope via modal 
 	remove from scope w/ (-) (trash?) icon next to itme
 	replace collection in document on save
 	-->
-	<div ng-repeat="item in itemList" required>
-		<div>{{item}}</div>
-	</div>
-	<button ng-click="addItem()" class="btn btn-primary">Add Item</button>
 
 
     <a href="#/person" class="btn">Cancel</a>

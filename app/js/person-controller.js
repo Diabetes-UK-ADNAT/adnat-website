@@ -66,12 +66,17 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 			function() {
 				toastr.error('Error loading data');
 			});
-	$scope.itemList = ["one", "two", "three"]; //poc
+	$scope.itemList = [];
 	$scope.addItem = function() {
-		$scope.itemList.push("another item " + new Date());
+		$scope.itemList.push($scope.selected);
+		$scope.selected = null;
+	};
+	$scope.addItem1 = function() {
+		$scope.itemList.push($scope.result);
+		$scope.result = null;
 	};
 	$scope.removeItem = function() {
-//$scope.itemList.push("another item " + new Date());
+		$scope.itemList.slice(1,2);
 	};
 	$scope.isClean = function() {
 		return angular.equals(self.original, $scope.person)
