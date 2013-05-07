@@ -199,6 +199,32 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
 	$scope.passwordInvalid = function() {
 		return $scope.passwordConfirmation !== $scope.password;
 	};
+	$scope.careTeamPersons = {
+		allowClear: true,
+		blurOnChange: true,
+		openOnEnter: false,
+		ajax: {
+			url: "https://api.myadnat.co.uk:4443/v1/faqs",
+			dataType: 'json',
+			data: function(term, page) {
+				return {
+					"q": term
+				};
+			},
+			results: function(data, page) {
+				return {results: data};
+			}
+		},
+		id: function(item) {
+			return item.uuid;
+		}, 
+		formatResult: function(data) {
+			return data.question;
+		},
+		formatSelection: function(data) {
+			return data.question;
+		}
+	}
 	$scope.careTeam = [];
 	$scope.addToCareTeam = function() {
 		$scope.careTeam.push($scope.careTeamSearchItem);
