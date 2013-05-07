@@ -3,19 +3,18 @@
 <form name="myForm">
     <input type="hidden" name="id" ng-model="person.id">
 
-
-
     <div class="row">
         <div class="span3">
             <h2>Site</h2>
 			{{person.group.name}}<br>
-			<!--			<select 
-							name="group"
-							ng-model="person.group" 
-							ng-options="g.name for g in groups"
-							>
-						</select>		-->
-
+			<!--	standard angular select
+				<select 
+					name="group"
+					ng-model="person.group" 
+					ng-options="g.name for g in groups"
+					>
+				</select>		
+			-->
 
 			<select 
 				ui-select2
@@ -25,10 +24,6 @@
 				style="width:150px"
 				>
 			</select>		
-			<!--			<select ui-select2 ng-model="person.group" data-placeholder="-- Select One --">
-							<option></option>
-							<option ng-repeat="item in groups" value="{{item.uuid}}">{{item.name}}</option>
-						</select>-->
 
             <h2>Name</h2>
             <div class="control-group" ng-class="{error: myForm.firstnames.$invalid}">
