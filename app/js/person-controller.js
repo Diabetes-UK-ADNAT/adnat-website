@@ -25,26 +25,6 @@ function PersonCtrl($scope, $routeParams, Person, $http, $cookies, $location) {
 function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, limitToFilter) {
 	var self = this;
 
-	// select2 lookup
-	$scope.cities = function(cityName) {
-		return $http.jsonp("http://gd.geobytes.com/AutoCompleteCity?callback=JSON_CALLBACK &filter=US&q=" + cityName).then(function(response) {
-			return limitToFilter(response.data, 15);
-		});
-	};
-
-	// typeahead lookup
-	$scope.selected = undefined;
-	$scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
-
-	$scope.items =
-			[
-				{"id": 1, "text": "First"},
-				{"id": 2, "text": "Second", "color": "red"},
-				{"id": 3, "text": "Third", "color": "orange"}
-			];
-
-
-
 	$scope.passwordConfirmation = null;
 	$scope.password = null;
 	$scope.roles = RoleOptions();
@@ -79,6 +59,20 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 			});
 
 
+// care team list builder
+	// select2 lookup
+	$scope.cities = function(cityName) {
+		return $http.jsonp("http://gd.geobytes.com/AutoCompleteCity?callback=JSON_CALLBACK &filter=US&q=" + cityName).then(function(response) {
+			return limitToFilter(response.data, 15);
+		});
+	};
+	$scope.careTeamPersons = Person.query(
+			function() {
+			},
+			function() {
+				toastr.error('Error loading data');
+			}
+	);
 	$scope.careTeam = [];
 	$scope.addToCareTeam = function() {
 		$scope.careTeam.push($scope.careTeamSearchItem);
@@ -186,7 +180,7 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
 	$scope.passwordInvalid = function() {
 		return $scope.passwordConfirmation !== $scope.password;
 	};
-	
+
 	$scope.careTeam = [];
 	$scope.addToCareTeam = function() {
 		$scope.careTeam.push($scope.careTeamSearchItem);
