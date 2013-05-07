@@ -14,6 +14,7 @@ var myApp = angular.module('myApp', [
 	'ui.reset',
 	'ui.tinymce',
 	'ui.date',
+	'ui.select2',
 	'ngSanitize',
 	'ngCookies',
 	'http-auth-interceptor',
