@@ -60,19 +60,50 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 
 
 // care team list builder
-	// select2 lookup
-	$scope.cities = function(cityName) {
-		return $http.jsonp("http://gd.geobytes.com/AutoCompleteCity?callback=JSON_CALLBACK &filter=US&q=" + cityName).then(function(response) {
-			return limitToFilter(response.data, 15);
-		});
-	};
-	$scope.careTeamPersons = Person.query(
-			function() {
+//   // Built-in support for ajax
+	$scope.careTeamPersons = {
+		allowClear: true,
+		blurOnChange: true,
+		openOnEnter: false,
+		ajax: {
+			//url: "https://api.myadnat.co.uk:4443/v1/persons",
+			url: "https://api.myadnat.co.uk:4443/v1/faqs",
+			dataType: 'json',
+			data: function(term, page) {
+				return {
+					// query params go here
+					"q": term
+				};
 			},
-			function() {
-				toastr.error('Error loading data');
+			results: function(data, page) {
+				// parse the results into the format expected by Select2.
+				// since we are using custom formatting functions we do not need to alter remote JSON data
+				console.log(data);
+				return {results: data};
+				//return {results: data, text: 'question', id: 'uuid'};
 			}
-	);
+		}
+		, formatResult: function(data) {
+			return "<div class='select2-user-result'>" + data.question + "</div>";
+		}
+//		,
+//		formatSelection: function(data) {
+//			return data;
+//		}
+	}
+//	// select2 lookup
+//	$scope.careTeamPersons = function(cityName) {
+//		return $http.jsonp("https://gd.geobytes.com/AutoCompleteCity?callback=JSON_CALLBACK &filter=US&q=" + cityName).then(function(response) {
+//			return limitToFilter(response.data, 15);
+//		});
+//	};
+//	$scope.careTeamPersons = Person.query(
+//			function() {
+//			},
+//			function() {
+//				toastr.error('Error loading data');
+//			}
+//	);
 	$scope.careTeam = [];
 	$scope.addToCareTeam = function() {
 		$scope.careTeam.push($scope.careTeamSearchItem);
