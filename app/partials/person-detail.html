@@ -94,54 +94,55 @@
                 <span ng-show="myForm.agreedToPrivacyPolicy.$error.required" class="help-inline"> Required</span>
             </div>
         </div>
-        <div class="span3" ng-hide="disableRoleEdit">
-            <h2>Roles</h2>
-            <div class="control-group" ng-class="{error: myForm.roles.$invalid}">
-                <label>Roles</label>
-                <div ng-repeat="role in roles" required>
-                    <input id="{{role}}"type="checkbox" ng-disabled="disableRoleEdit" ng-model="roleChoices[$index]"><label class="checkbox" for="{{role}}">{{role}}</label>
-                </div>
-            </div>  
+        <div class="span3" >
+			<span ng-hide="disableRoleEdit">
+				<h2>Roles</h2>
+				<div class="control-group" ng-class="{error: myForm.roles.$invalid}">
+					<label>Roles</label>
+					<div ng-repeat="role in roles" required>
+						<input id="{{role}}"type="checkbox" ng-disabled="disableRoleEdit" ng-model="roleChoices[$index]"><label class="checkbox" for="{{role}}">{{role}}</label>
+					</div>
+				</div>  
+			</span>
+
+			<h2>Care Team</h2>
+			<div>
+				<!--<input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue" ui-reset>-->
+				<!--<input type="text" ng-model="careTeamSearchItem" typeahead="suggestion for suggestion in cities($viewValue)" ui-reset>-->
+				<select 
+					ui-select2
+					name="careTeamSearchItem"
+					ng-model="careTeamSearchItem" 
+					ng-options="g.name for g in groups"
+					style="width:150px"
+					>
+					<option></option>
+				</select>	
+				<button ng-click="addToCareTeam()" class="btn btn-primary" ng-disabled=!careTeamSearchItem>Add to Care Team</button>
+
+			</div>
+
+			<table class="table-hover" ng-show="careTeam.length &gt; 0">
+				<col class="column-name">
+				<col class="column-action">
+				<thead>
+					<tr>
+						<th>Care Team Member</th>
+						<th>Remove</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in careTeam" required>
+						<td>{{item.name}}</td>
+						<td class="action">
+							<span ng-click="removeFromCareTeam($index)"> <i class="icon-trash"></i></span>
+						</td>   
+					</tr>
+				</tbody>
+			</table>
+
         </div>
     </div>
-
-	<h2>Care Team</h2>
-	<div>
-		<!--<input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue" ui-reset>-->
-        <!--<input type="text" ng-model="careTeamSearchItem" typeahead="suggestion for suggestion in cities($viewValue)" ui-reset>-->
-		<select 
-			ui-select2
-			name="careTeamSearchItem"
-			ng-model="careTeamSearchItem" 
-			ng-options="g.name for g in groups"
-			style="width:150px"
-			>
-			<option></option>
-		</select>	
-		<button ng-click="addToCareTeam()" class="btn btn-primary" ng-disabled=!careTeamSearchItem>Add to Care Team</button>
-
-    </div>
-
-	<table class="table-hover" ng-show="careTeam.length &gt; 0">
-		<col class="column-name">
-		<col class="column-action">
-		<thead>
-			<tr>
-				<th>Care Team Member</th>
-				<th>Remove</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="item in careTeam" required>
-				<td>{{item.name}}</td>
-				<td class="action">
-					<span ng-click="removeFromCareTeam($index)"> <i class="icon-trash"></i></span>
-				</td>   
-			</tr>
-		</tbody>
-	</table>
-
-
 
 	<!-- 
 	search lookup, add to scope, if not found create and add to scope via modal 

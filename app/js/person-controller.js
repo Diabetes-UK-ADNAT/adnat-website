@@ -38,9 +38,9 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 
 	$scope.items =
 			[
-				{ "id": 1, "text": "First" },
-				{ "id": 2, "text": "Second", "color": "red" },
-				{ "id": 3, "text": "Third", "color": "orange" }
+				{"id": 1, "text": "First"},
+				{"id": 2, "text": "Second", "color": "red"},
+				{"id": 3, "text": "Third", "color": "orange"}
 			];
 
 
@@ -186,6 +186,16 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
 	$scope.passwordInvalid = function() {
 		return $scope.passwordConfirmation !== $scope.password;
 	};
+	
+	$scope.careTeam = [];
+	$scope.addToCareTeam = function() {
+		$scope.careTeam.push($scope.careTeamSearchItem);
+		$scope.careTeamSearchItem = null;
+	};
+	$scope.removeFromCareTeam = function(i) {
+		$scope.careTeam.splice(i, 1);
+	};
+
 }
 
 function RoleOptions() {
