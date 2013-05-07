@@ -55,36 +55,28 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 				toastr.error('Error loading data');
 			});
 // care team list builder
-//   // Built-in support for ajax
 	$scope.careTeamPersons = {
 		allowClear: true,
 		blurOnChange: true,
 		openOnEnter: false,
 		ajax: {
-//url: "https://api.myadnat.co.uk:4443/v1/persons",
 			url: "https://api.myadnat.co.uk:4443/v1/faqs",
 			dataType: 'json',
 			data: function(term, page) {
 				return {
-// query params go here
 					"q": term
 				};
 			},
 			results: function(data, page) {
-// parse the results into the format expected by Select2.
-// since we are using custom formatting functions we do not need to alter remote JSON data
-				console.log(data);
 				return {results: data};
-				//return {results: data, text: 'question', id: 'uuid'};
 			}
 		},
 		id: function(item) {
 			return item.uuid;
-		},
+		}, 
 		formatResult: function(data) {
-			return "<div class='select2-user-result'>" + data.question + "</div>";
-		}
-		,
+			return data.question;
+		},
 		formatSelection: function(data) {
 			return data.question;
 		}
