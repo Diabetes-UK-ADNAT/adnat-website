@@ -9,12 +9,27 @@
         <div class="span3">
             <h2>Site</h2>
 			{{person.group.name}}<br>
+			<!--			<select 
+							name="group"
+							ng-model="person.group" 
+							ng-options="g.name for g in groups"
+							>
+						</select>		-->
+
+
 			<select 
+				ui-select2
 				name="group"
 				ng-model="person.group" 
 				ng-options="g.name for g in groups"
+				style="width:150px"
 				>
 			</select>		
+			<!--			<select ui-select2 ng-model="person.group" data-placeholder="-- Select One --">
+							<option></option>
+							<option ng-repeat="item in groups" value="{{item.uuid}}">{{item.name}}</option>
+						</select>-->
+
             <h2>Name</h2>
             <div class="control-group" ng-class="{error: myForm.firstnames.$invalid}">
                 <label>First Name</label>
@@ -93,31 +108,40 @@
 	<h2>Care Team</h2>
 	<div>
 		<!--<input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue" ui-reset>-->
-
-
-
-<!--		<input id="searchbox" 
-			   ui-select2="autoCompleteSearch" 
-			   ng-model="cities" 
-			   style="width:150px;" 
-			   class="searchbox"/>-->
-
-	  <p>Use a regular <code>&lt;select&gt;</code> tag and <code>ng-repeat</code></p>
-  <pre>Selected: {{version1model|json}}</pre>
-  <select ui-select2 ng-model="version1model" data-placeholder="-- Select One --" style="width:200px">
-    <option></option>
-    <option ng-repeat="item in items" value="{{item.id}}">{{item.text}}</option>
-  </select>
-	
-        <input type="text" ng-model="careTeamSearchItem" typeahead="suggestion for suggestion in cities($viewValue)" ui-reset>
+        <!--<input type="text" ng-model="careTeamSearchItem" typeahead="suggestion for suggestion in cities($viewValue)" ui-reset>-->
+		<select 
+			ui-select2
+			name="careTeamSearchItem"
+			ng-model="careTeamSearchItem" 
+			ng-options="g.name for g in groups"
+			style="width:150px"
+			>
+			<option></option>
+		</select>	
 		<button ng-click="addToCareTeam()" class="btn btn-primary" ng-disabled=!careTeamSearchItem>Add to Care Team</button>
 
     </div>
-	<div ng-repeat="item in careTeam" required>
-		<div>{{item}} <span>
-		<button ng-click="removeFromCareTeam($index)" class="btn btn-primary">Remove Item</button>
-			</span> </div>
-	</div>
+
+	<table class="table-hover" ng-show="careTeam.length &gt; 0">
+		<col class="column-name">
+		<col class="column-action">
+		<thead>
+			<tr>
+				<th>Care Team Member</th>
+				<th>Remove</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in careTeam" required>
+				<td>{{item.name}}</td>
+				<td class="action">
+					<span ng-click="removeFromCareTeam($index)"> <i class="icon-trash"></i></span>
+				</td>   
+			</tr>
+		</tbody>
+	</table>
+
+
 
 	<!-- 
 	search lookup, add to scope, if not found create and add to scope via modal 
