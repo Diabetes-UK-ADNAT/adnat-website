@@ -25,11 +25,14 @@ function PersonCtrl($scope, $routeParams, Person, $http, $cookies, $location) {
 function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, limitToFilter) {
 	var self = this;
 
+	// select2 lookup
 	$scope.cities = function(cityName) {
 		return $http.jsonp("http://gd.geobytes.com/AutoCompleteCity?callback=JSON_CALLBACK &filter=US&q=" + cityName).then(function(response) {
 			return limitToFilter(response.data, 15);
 		});
 	};
+
+	// typeahead lookup
 	$scope.selected = undefined;
 	$scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
 
@@ -66,18 +69,18 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 			function() {
 				toastr.error('Error loading data');
 			});
-	$scope.itemList = [];
-	$scope.addItem = function() {
-		$scope.itemList.push($scope.selected);
-		$scope.selected = null;
+
+
+	$scope.careTeam = [];
+	$scope.addToCareTeam = function() {
+		$scope.careTeam.push($scope.careTeamSearchItem);
+		$scope.careTeamSearchItem = null;
 	};
-	$scope.addItem1 = function() {
-		$scope.itemList.push($scope.result);
-		$scope.result = null;
+	$scope.removeFromCareTeam = function(i) {
+		$scope.careTeam.splice(i,1);
 	};
-	$scope.removeItem = function() {
-		$scope.itemList.slice(1,2);
-	};
+
+
 	$scope.isClean = function() {
 		return angular.equals(self.original, $scope.person)
 				&&
@@ -103,7 +106,7 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 		);
 	};
 	$scope.save = function() {
-		angular.forEach($scope.itemList, function(value, key) { //poc
+		angular.forEach($scope.careTeam, function(value, key) { //poc
 			if (value) {
 				console.log(key);
 				console.log(value);

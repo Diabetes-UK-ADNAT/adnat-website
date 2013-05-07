@@ -92,21 +92,15 @@
 
 	<h2>Care Team</h2>
 	<div>
-        <!--<pre>Model: {{result | json}}</pre>-->
-        <input type="text" ng-model="result" typeahead="suggestion for suggestion in cities($viewValue)" ui-reset>
-		<button ng-click="addItem1()" class="btn btn-primary" ng-disabled=!result>Add to Care Team</button>
-		    <span><a onclick="AddItem1()"><i class="icon-plus-sign"></i></a></span>
+		<!--<input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue" ui-reset>-->
+        <input type="text" ng-model="careTeamSearchItem" typeahead="suggestion for suggestion in cities($viewValue)" ui-reset>
+		<button ng-click="addToCareTeam()" class="btn btn-primary" ng-disabled=!careTeamSearchItem>Add to Care Team</button>
 
     </div>
-<!--	<div class='container-fluid' ">
-		<pre>Modelx: {{selected| json}}</pre>
-		<input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue" ui-reset>
-		<br>
-		<button ng-click="addItem()" class="btn btn-primary">Add Item</button>
-		<button ng-click="removeItem()" class="btn btn-primary">Remove Item</button>
-	</div>-->
-	<div ng-repeat="item in itemList" required>
-		<div>{{item}} <span><a onclick="RemoveItem(0)"><i class="icon-minus-sign"></i></a></span> </div>
+	<div ng-repeat="item in careTeam" required>
+		<div>{{item}} <span>
+		<button ng-click="removeFromCareTeam($index)" class="btn btn-primary">Remove Item</button>
+			</span> </div>
 	</div>
 
 	<!-- 
