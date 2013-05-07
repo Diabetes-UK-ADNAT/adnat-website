@@ -1,5 +1,4 @@
 'use strict';
-
 function PersonCtrl($scope, $routeParams, Person, $http, $cookies, $location) {
 	// FIXME make auth service to guard no public functions ($cookies, $http)
 	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
@@ -19,12 +18,10 @@ function PersonCtrl($scope, $routeParams, Person, $http, $cookies, $location) {
 	);
 	$scope.roles = RoleOptions();
 	$scope.role = $routeParams.role;
-
 }
 
 function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, limitToFilter) {
 	var self = this;
-
 	$scope.passwordConfirmation = null;
 	$scope.password = null;
 	$scope.roles = RoleOptions();
@@ -57,8 +54,6 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 			function() {
 				toastr.error('Error loading data');
 			});
-
-
 // care team list builder
 //   // Built-in support for ajax
 	$scope.careTeamPersons = {
@@ -66,30 +61,33 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 		blurOnChange: true,
 		openOnEnter: false,
 		ajax: {
-			//url: "https://api.myadnat.co.uk:4443/v1/persons",
+//url: "https://api.myadnat.co.uk:4443/v1/persons",
 			url: "https://api.myadnat.co.uk:4443/v1/faqs",
 			dataType: 'json',
 			data: function(term, page) {
 				return {
-					// query params go here
+// query params go here
 					"q": term
 				};
 			},
 			results: function(data, page) {
-				// parse the results into the format expected by Select2.
-				// since we are using custom formatting functions we do not need to alter remote JSON data
+// parse the results into the format expected by Select2.
+// since we are using custom formatting functions we do not need to alter remote JSON data
 				console.log(data);
 				return {results: data};
 				//return {results: data, text: 'question', id: 'uuid'};
 			}
-		}
-		, formatResult: function(data) {
+		},
+		id: function(item) {
+			return item.uuid;
+		},
+		formatResult: function(data) {
 			return "<div class='select2-user-result'>" + data.question + "</div>";
 		}
-//		,
-//		formatSelection: function(data) {
-//			return data;
-//		}
+		,
+		formatSelection: function(data) {
+			return data.question;
+		}
 	}
 //	// select2 lookup
 //	$scope.careTeamPersons = function(cityName) {
@@ -112,8 +110,6 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 	$scope.removeFromCareTeam = function(i) {
 		$scope.careTeam.splice(i, 1);
 	};
-
-
 	$scope.isClean = function() {
 		return angular.equals(self.original, $scope.person)
 				&&
@@ -211,7 +207,6 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
 	$scope.passwordInvalid = function() {
 		return $scope.passwordConfirmation !== $scope.password;
 	};
-
 	$scope.careTeam = [];
 	$scope.addToCareTeam = function() {
 		$scope.careTeam.push($scope.careTeamSearchItem);
@@ -220,7 +215,6 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
 	$scope.removeFromCareTeam = function(i) {
 		$scope.careTeam.splice(i, 1);
 	};
-
 }
 
 function RoleOptions() {
