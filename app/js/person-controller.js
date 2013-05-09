@@ -20,8 +20,10 @@ function PersonCtrl($scope, $routeParams, Person, $http, $cookies, $location) {
 	$scope.role = $routeParams.role;
 }
 
-function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, limitToFilter) {
-	var self = this;
+
+
+
+function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, limitToFilter, $cookies) {
 	$scope.passwordConfirmation = null;
 	$scope.password = null;
 	$scope.roles = RoleOptions();
@@ -59,9 +61,18 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 		allowClear: true,
 		blurOnChange: true,
 		openOnEnter: false,
+		minimumInputLength: 2,
 		ajax: {
-			url: "https://api.myadnat.co.uk:4443/v1/faqs",
+			url: "https://api.myadnat.co.uk:4443/v1/persons",
 			dataType: 'json',
+			transport: function(queryParams) {
+				$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+				var result = $http.get(queryParams.url, queryParams.data).success(queryParams.success);
+				result.abort = function() {
+					return null;
+				};
+				return result;
+			},
 			data: function(term, page) {
 				return {
 					"q": term
@@ -73,14 +84,14 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 		},
 		id: function(item) {
 			return item.uuid;
-		}, 
+		},
 		formatResult: function(data) {
-			return data.question;
+			return data.uuid;//data.name.firstNames + ' ' + data.name.lastName;
 		},
 		formatSelection: function(data) {
-			return data.question;
+			return data.uuid;//data.name.firstNames + ' ' + data.name.lastName;
 		}
-	}
+	};
 //	// select2 lookup
 //	$scope.careTeamPersons = function(cityName) {
 //		return $http.jsonp("https://gd.geobytes.com/AutoCompleteCity?callback=JSON_CALLBACK &filter=US&q=" + cityName).then(function(response) {
@@ -204,7 +215,7 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
 		blurOnChange: true,
 		openOnEnter: false,
 		ajax: {
-			url: "https://api.myadnat.co.uk:4443/v1/faqs",
+			url: "https://api.myadnat.co.uk:4443/v1/persons",
 			dataType: 'json',
 			data: function(term, page) {
 				return {
@@ -217,14 +228,14 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
 		},
 		id: function(item) {
 			return item.uuid;
-		}, 
+		},
 		formatResult: function(data) {
-			return data.question;
+			return data.name.lastName;
 		},
 		formatSelection: function(data) {
-			return data.question;
+			return data.name.lastName;
 		}
-	}
+	};
 	$scope.careTeam = [];
 	$scope.addToCareTeam = function() {
 		$scope.careTeam.push($scope.careTeamSearchItem);
