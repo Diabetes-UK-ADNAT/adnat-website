@@ -86,25 +86,12 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 			return item.uuid;
 		},
 		formatResult: function(data) {
-			return data.uuid;//data.name.firstNames + ' ' + data.name.lastName;
+			return data.name.firstNames + ' ' + data.name.lastName;
 		},
 		formatSelection: function(data) {
-			return data.uuid;//data.name.firstNames + ' ' + data.name.lastName;
+			return data.name.firstNames + ' ' + data.name.lastName;
 		}
 	};
-//	// select2 lookup
-//	$scope.careTeamPersons = function(cityName) {
-//		return $http.jsonp("https://gd.geobytes.com/AutoCompleteCity?callback=JSON_CALLBACK &filter=US&q=" + cityName).then(function(response) {
-//			return limitToFilter(response.data, 15);
-//		});
-//	};
-//	$scope.careTeamPersons = Person.query(
-//			function() {
-//			},
-//			function() {
-//				toastr.error('Error loading data');
-//			}
-//	);
 	$scope.careTeam = [];
 	$scope.addToCareTeam = function() {
 		$scope.careTeam.push($scope.careTeamSearchItem);

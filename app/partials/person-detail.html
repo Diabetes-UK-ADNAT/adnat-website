@@ -119,7 +119,7 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="item in careTeam" required>
-						<td>{{item.uuid}} {{item.name.lastName}}</td>
+						<td>{{item.name.firstNames}} {{item.name.lastName}}</td>
 						<td class="action">
 							<span ng-click="removeFromCareTeam($index)"> <i class="icon-trash"></i></span>
 						</td>   
