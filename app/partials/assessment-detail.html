@@ -22,10 +22,11 @@
 <div>
     <span>Category</span>
     <select 
+		ui-select2
         name="cat"
         ng-model="cat" 
         ng-options="i as i for i in categoryOptions"
-        class="search-select"
+		style="width:350px"
         >
         <option></option>
     </select>
