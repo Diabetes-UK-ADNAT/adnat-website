@@ -9,10 +9,11 @@
            ui-reset>
     <span>Role</span>
     <select 
+		ui-select2
         name="role"
         ng-model="role" 
         ng-options="i as i for i in roles"
-        class="search-select"
+		style="width:250px"
         >
         <option></option>
     </select>

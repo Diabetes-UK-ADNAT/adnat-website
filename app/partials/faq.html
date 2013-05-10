@@ -3,10 +3,11 @@
 <div>
     <span>Category</span>
     <select 
+		ui-select2
         name="category"
         ng-model="category" 
         ng-options="i as i for i in categoryOptions"
-        class="search-select"
+		style="width:350px"
         >
         <option></option>
     </select>
