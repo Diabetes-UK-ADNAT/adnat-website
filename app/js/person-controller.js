@@ -136,6 +136,12 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 				$scope.person.roles.push($scope.roles[key]);
 			}
 		});
+		$scope.person.careTeam.length = 0;
+		angular.forEach($scope.careTeam, function(value, key) {
+			if (value) {
+				$scope.person.careTeam.push($scope.careTeam[key]);
+			}
+		});
 		Person.save(
 				$scope.person,
 				function() {
