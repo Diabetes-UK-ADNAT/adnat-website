@@ -67,6 +67,7 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 			dataType: 'json',
 			transport: function(queryParams) {
 				$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+				queryParams.data.params = {"qName":queryParams.data.q, "qRole":'practitioner'};
 				var result = $http.get(queryParams.url, queryParams.data).success(queryParams.success);
 				result.abort = function() {
 					return null;
@@ -74,9 +75,7 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 				return result;
 			},
 			data: function(term, page) {
-				return {
-					"q": term
-				};
+				return {"q": term};
 			},
 			results: function(data, page) {
 				return {results: data};
