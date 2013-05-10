@@ -51,6 +51,7 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 		);
 		$scope.roleChoicesOriginal = [];
 		angular.copy($scope.roleChoices, $scope.roleChoicesOriginal);
+		$scope.careTeam = $scope.person.careTeam; 
 		$scope.person = new Person(self.original);
 	},
 			function() {
@@ -67,7 +68,7 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 			dataType: 'json',
 			transport: function(queryParams) {
 				$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
-				queryParams.data.params = {"qName":queryParams.data.q, "qRole":'Practitioner'};
+				queryParams.data.params = {"qName": queryParams.data.q, "qRole": 'Practitioner'};
 				var result = $http.get(queryParams.url, queryParams.data).success(queryParams.success);
 				result.abort = function() {
 					return null;
@@ -91,7 +92,6 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 			return data.name.firstNames + ' ' + data.name.lastName;
 		}
 	};
-	$scope.careTeam = [];
 	$scope.addToCareTeam = function() {
 		$scope.careTeam.push($scope.careTeamSearchItem);
 		$scope.careTeamSearchItem = null;
