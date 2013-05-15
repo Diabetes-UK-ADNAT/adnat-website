@@ -105,6 +105,7 @@ label.checkbox {
 .hero-unit, .topbar {
     color: #555;
     background-color: rgba(217, 252, 217, 0.3);
+	border: 1px lightgray solid;
 }
 
 .hero-unit h1 {
