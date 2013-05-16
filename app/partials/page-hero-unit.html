@@ -1,18 +1,22 @@
-<div class="hero-unit" >
-    <h1 ng-bind-html="content[0].title"></h1>
-    <p  ng-bind-html-unsafe="content[0].value"></p>
+<div class="row">
+	<div class="hero-unit span7" >
+		<h1 ng-bind-html="content[0].title"></h1>
+		<p  ng-bind-html-unsafe="content[0].value"></p>
+	</div>
 </div>
 
 <div class="row">
-    <div class="span6">
-        <h2 ng-bind-html="content[1].title"></h2>
-        <p class="home-item" ng-bind-html-unsafe="content[1].value"></p>
-        <a class="btn btn-primary btn-large" href="#/for-patients">For patients &raquo;</a>
-    </div>
-    <div class="span6">
-        <h2 ng-bind-html="content[2].title"></h2>
-        <p class="home-item"ng-bind-html-unsafe="content[2].value"></p>
-        <a class="btn btn-primary btn-large" href="#/for-clinicians">For clinicians &raquo;</a>
-    </div>
+	<div class="span1"></div>
+	<div class="span3">
+		<h2 ng-bind-html="content[1].title"></h2>
+		<p class="home-item" ng-bind-html-unsafe="content[1].value"></p>
+		<a class="btn btn-primary btn-large" href="#/for-patients">For patients &raquo;</a>
+	</div>
+	<div class="span1"></div>
+	<div class="span3">
+		<h2 ng-bind-html="content[2].title"></h2>
+		<p class="home-item"ng-bind-html-unsafe="content[2].value"></p>
+		<a class="btn btn-primary btn-large" href="#/for-clinicians">For clinicians &raquo;</a>
+	</div>
+	<div class="span1"></div>
 </div>
-
