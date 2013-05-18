@@ -7,6 +7,7 @@ function PersonCtrl($scope, $routeParams, Person, $http, $cookies, $location) {
 	}
 	// must encodeURI for FireFox or get an error alert
 	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
 	// 
 	// +Role checks
 	$scope.persons = Person.query(

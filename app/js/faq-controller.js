@@ -1,7 +1,8 @@
 'use strict';
 
 
-function FaqCtrl($scope, $routeParams, Faq, $cookies) {
+function FaqCtrl($scope, $routeParams, Faq, $cookies, $http) {
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
 	$scope.faqs = Faq.query(
 			function() {
 			},
@@ -64,9 +65,9 @@ function FaqCtrlEdit($scope, $location, $routeParams, Faq) {
 		});
 
 		Faq.save($scope.faq, function() {
-					toastr.info('Saved ' + $scope.faq.question);
-					$location.path('/faq');
-				},
+			toastr.info('Saved ' + $scope.faq.question);
+			$location.path('/faq');
+		},
 				function() {
 					toastr.error('Error saving ' + $scope.faq.question);
 				});
@@ -85,9 +86,9 @@ function FaqCtrlNew($scope, $location, Faq) {
 		});
 
 		Faq.save($scope.faq, function() {
-					toastr.info('Saved ' + $scope.faq.question);
-					$location.path('/faq');
-				},
+			toastr.info('Saved ' + $scope.faq.question);
+			$location.path('/faq');
+		},
 				function() {
 					toastr.error('Error saving ' + $scope.faq.question);
 				});
