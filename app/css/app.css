@@ -188,6 +188,12 @@ textarea.question-edit {
 .home-item {
     min-height: 160px;
 }
+h1.home-item {
+	font-size: 30px;
+	font-weight: bold;
+    min-height: 60px;
+	line-height: 1.3em;
+}
 
 .hero-unit img {
 	width: 579px;
