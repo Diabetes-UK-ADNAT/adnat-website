@@ -58,7 +58,7 @@ myApp.config(['$routeProvider', function($routeProvider) {
 
 	}]).run(function($location, $logincheck) {
 	if ($logincheck) {
-		$location.path('/person'); //fixme dashboard
+		$location.path('/person'); //fixme dashboard //fixme bookmarks
 	}
 });
 //
