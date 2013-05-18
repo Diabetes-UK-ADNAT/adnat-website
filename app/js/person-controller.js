@@ -29,9 +29,9 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 	$scope.roles = RoleOptions();
 	$scope.disableRoleEdit = false;
 	$scope.person = Person.get({id: $routeParams.id}, function(person) {
-		person.dob = new Date(person.dob);
-		person.agreedToTermsAndConditions = new Date(person.agreedToTermsAndConditions);
-		person.agreedToPrivacyPolicy = new Date(person.agreedToPrivacyPolicy);
+		person.agreedToInformationSheet = new Date(person.agreedToInformationSheet);
+		person.agreedToConsent = new Date(person.agreedToConsent);
+		person.agreedToAssent = new Date(person.agreedToAssent);
 		self.original = person;
 		$scope.roleChoices = [];
 		angular.forEach($scope.roles, function(value, key) {
@@ -41,7 +41,7 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 				$scope.roleChoices[key] = false;
 			}
 		});
-		$scope.groups = Group.query(
+		$scope.sites = Group.query(
 				function() {
 					//init select? $scope.myForm.group = $scope.person.group.name;
 				},
@@ -159,7 +159,7 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 }
 
 function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
-	$scope.groups = Group.query(
+	$scope.sites = Group.query(
 			function() {
 			},
 			function() {

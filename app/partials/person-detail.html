@@ -1,75 +1,27 @@
-<h1>Person</h1>
+<h1>Profile</h1>
 
 <form name="myForm">
     <input type="hidden" name="id" ng-model="person.id">
 
     <div class="row">
         <div class="span3">
-            <h2>Site</h2>
-			{{person.group.name}}<br>
-			<!--	standard angular select
-				<select 
-					name="group"
-					ng-model="person.group" 
-					ng-options="g.name for g in groups"
-					>
-				</select>		
-			-->
-
-			<select 
-				ui-select2
-				name="group"
-				ng-model="person.group" 
-				ng-options="g.name for g in groups"
-				style="width:150px"
-				>
-			</select>		
-
-            <h2>Name</h2>
-            <div class="control-group" ng-class="{error: myForm.firstnames.$invalid}">
-                <label>First Name</label>
-                <input name="firstnames" ng-model="person.name.firstNames" required/>
-                <span ng-show="myForm.firstnames.$error.required" class="help-inline"> Required</span>
-            </div>
-            <div class="control-group" ng-class="{error: myForm.lastname.$invalid}">
-                <label>Last Name</label>
-                <input name="lastname" ng-model="person.name.lastName" required/>
-                <span ng-show="myForm.lastname.$error.required" class="help-inline"> Required</span>
-            </div>
-            <div class="control-group" ng-class="{error: myForm.dob.$invalid}">
-                <label>Date of Birth</label>
-                <input ui-date="{ dateFormat: 'dd-mm-yy' }" name="dob" ng-model="person.dob" required/>
-                <span ng-show="myForm.dob.$error.required" class="help-inline"> Required</span>
-            </div>   
-
-        </div>
-
-        <div class="span3">
-            <h2>Contact Info</h2>
-            <div class="control-group" ng-class="{error: myForm.cell.$invalid}">
-                <label>Mobile Phone</label>
-                <input name="cell" ng-model="person.contactInfo.cell" required/>
-                <span ng-show="myForm.cell.$error.required" class="help-inline"> Required</span>
-            </div>
-            <div class="control-group" ng-class="{error: myForm.telephone.$invalid}">
-                <label>Telephone</label>
-                <input name="telephone" ng-model="person.contactInfo.telephone" required/>
-                <span ng-show="myForm.telephone.$error.required" class="help-inline"> Required</span>
-            </div>
-
-            <div class="control-group" ng-class="{error: myForm.address.$invalid}">
-                <label>Address</label>
-                <textarea name="address" ng-model="person.contactInfo.address" required></textarea>
-                <span ng-show="myForm.address.$error.required" class="help-inline"> Required</span>
-            </div>
-        </div>
-        <div class="span3">
-            <h2>Account</h2>
+			<h2>Name</h2>
+			<div class="control-group" ng-class="{error: myForm.firstnames.$invalid}">
+				<label>First Name</label>
+				<input name="firstnames" ng-model="person.name.firstNames" required/>
+				<span ng-show="myForm.firstnames.$error.required" class="help-inline"> Required</span>
+			</div>
+			<div class="control-group" ng-class="{error: myForm.lastname.$invalid}">
+				<label>Last Name</label>
+				<input name="lastname" ng-model="person.name.lastName" required/>
+				<span ng-show="myForm.lastname.$error.required" class="help-inline"> Required</span>
+			</div>
+			<h2>Account</h2>
 			<div class="control-group" ng-class="{error: myForm.email.$invalid}">
-                <label>Email</label>
-                <input type="email" name="email" ng-model="person.contactInfo.email" required/>
-                <span ng-show="myForm.email.$error.required" class="help-inline"> Required</span>
-            </div>
+				<label>Email</label>
+				<input type="email" name="email" ng-model="person.contactInfo.email" required/>
+				<span ng-show="myForm.email.$error.required" class="help-inline"> Required</span>
+			</div>
 			<div class="control-group" ng-class="{error: passwordInvalid()}">
 				<label>Password</label>
 				<input type="password" name="password" ng-model="password"  ui-reset/>
@@ -78,26 +30,47 @@
 				<label>Password Confirmation</label>
 				<input type="password" name="passwordConfirmation" ng-model="passwordConfirmation"  ui-reset/>
 			</div>
-            <div class="control-group" ng-class="{error: myForm.agreedToTermsAndConditions.$invalid}">
-                <label>Agreed to Terms and Conditions</label>
-                <input ui-date="{ dateFormat: 'dd-mm-yy' }" name="agreedToTermsAndConditions" ng-model="person.agreedToTermsAndConditions" required/>
-                <span ng-show="myForm.agreedToTermsAndConditions.$error.required" class="help-inline"> Required</span>
+			<span ng-hide="disableRoleEdit">
+				<div class="control-group" ng-class="{error: myForm.roles.$invalid}">
+					<label>Roles</label>
+					<div ng-repeat="role in roles" required>
+						<input id="{{role}}"type="checkbox" ng-disabled="disableRoleEdit" ng-model="roleChoices[$index]"><label class="checkbox" for="{{role}}">{{role}}</label>
+					</div>
+				</div>  
+			</span>
+            <h2>Consent</h2>
+            <div class="control-group" ng-class="{error: myForm.agreedToInformationSheet.$invalid}">
+                <label>Read and Understood Information Sheet</label>
+                <input ui-date="{ dateFormat: 'dd-mm-yy' }" name="agreedToInformationSheet" ng-model="person.agreedToInformationSheet" required/>
+                <span ng-show="myForm.agreedToInformationSheet.$error.required" class="help-inline"> Required</span>
             </div>
-            <div class="control-group" ng-class="{error: myForm.agreedToPrivacyPolicy.$invalid}">
-                <label>Agreed to Privacy Policy</label>
-                <input ui-date="{ dateFormat: 'dd-mm-yy' }" name="agreedToPrivacyPolicy" ng-model="person.agreedToPrivacyPolicy" required/>
-                <span ng-show="myForm.agreedToPrivacyPolicy.$error.required" class="help-inline"> Required</span>
+            <div class="control-group" ng-class="{error: myForm.agreedToConsent.$invalid}">
+                <label>Signed Consent Form</label>
+                <input ui-date="{ dateFormat: 'dd-mm-yy' }" name="agreedToConsent" ng-model="person.agreedToConsent" required/>
+                <span ng-show="myForm.agreedToConsent.$error.required" class="help-inline"> Required</span>
+            </div>
+            <div class="control-group" ng-class="{error: myForm.agreedToAssent.$invalid}">
+                <label>Signed Assent Form</label>
+                <input ui-date="{ dateFormat: 'dd-mm-yy' }" name="agreedToAssent" ng-model="person.agreedToAssent" required/>
+                <span ng-show="myForm.agreedToAssent.$error.required" class="help-inline"> Required</span>
             </div>
         </div>
-    </div>
-    <div class="row">
         <div class="span6" >
-
+            <h2>Site</h2>
+			{{person.site.name}}<br>
+			<select 
+				ui-select2
+				name="site"
+				ng-model="person.site" 
+				ng-options="g.name for g in sites"
+				style="width:150px"
+				>
+			</select>		
 			<h2>Care Team</h2>
 			<div>
 				<!--<input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue" ui-reset>-->
 				<!--<input type="text" ng-model="careTeamSearchItem" typeahead="suggestion for suggestion in cities($viewValue)" ui-reset>-->
-					<!--ng-options="i.name.firstNames + ' ' +  i.name.lastName for i in careTeamPersons"-->
+				<!--ng-options="i.name.firstNames + ' ' +  i.name.lastName for i in careTeamPersons"-->
 				<input 
 					ui-select2="careTeamPersons"
 					name="careTeamPersons"
@@ -107,7 +80,6 @@
 				<button ng-click="addToCareTeam()" class="btn btn-primary" ng-disabled=!careTeamSearchItem>Add to Care Team</button>
 
 			</div>
-
 			<table class="table-hover" ng-show="careTeam.length &gt; 0" style="width:85%">
 				<col class="column-name">
 				<col class="column-action">
@@ -126,27 +98,8 @@
 					</tr>
 				</tbody>
 			</table>
-
-        </div>
-        <div class="span3" >
-			<span ng-hide="disableRoleEdit">
-				<h2>Roles</h2>
-				<div class="control-group" ng-class="{error: myForm.roles.$invalid}">
-					<label>Roles</label>
-					<div ng-repeat="role in roles" required>
-						<input id="{{role}}"type="checkbox" ng-disabled="disableRoleEdit" ng-model="roleChoices[$index]"><label class="checkbox" for="{{role}}">{{role}}</label>
-					</div>
-				</div>  
-			</span>
         </div>
     </div>
-
-	<!-- 
-	search lookup, add to scope, if not found create and add to scope via modal 
-	remove from scope w/ (-) (trash?) icon next to itme
-	replace collection in document on save
-	-->
-
 	<br/>
 	<a href="#/person" class="btn">Cancel</a>
 	<button ng-click="save()" ng-disabled="isClean() || myForm.$invalid" class="btn btn-primary">Save</button>
