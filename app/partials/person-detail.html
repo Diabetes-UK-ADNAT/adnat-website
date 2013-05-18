@@ -2,9 +2,8 @@
 
 <form name="myForm">
     <input type="hidden" name="id" ng-model="person.id">
-
     <div class="row">
-        <div class="span3">
+        <div class="span12">
 			<h2>Name</h2>
 			<div class="control-group" ng-class="{error: myForm.firstnames.$invalid}">
 				<label>First Name</label>
@@ -54,8 +53,6 @@
                 <input ui-date="{ dateFormat: 'dd-mm-yy' }" name="agreedToAssent" ng-model="person.agreedToAssent" required/>
                 <span ng-show="myForm.agreedToAssent.$error.required" class="help-inline"> Required</span>
             </div>
-        </div>
-        <div class="span6" >
             <h2>Site</h2>
 			{{person.site.name}}<br>
 			<select 
