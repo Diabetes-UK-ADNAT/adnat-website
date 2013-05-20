@@ -44,6 +44,8 @@ myApp.config(['$routeProvider', function($routeProvider) {
 		$routeProvider.when('/person/new/:roles', {templateUrl: 'partials/person-detail.html', controller: PersonCtrlNew});
 		$routeProvider.when('/person/new', {templateUrl: 'partials/person-detail.html', controller: PersonCtrlNew});
 		//
+		$routeProvider.when('/dashboard', {templateUrl: 'partials/dashboard.html', controller: DashboardCtrl});
+		//
 		$routeProvider.when('/about', {redirectTo: '/page/view/5121823f3004e6347d119bb4'});
 		$routeProvider.when('/contact', {redirectTo: '/page/view/5121823f3004e6347d119bb4'});
 		$routeProvider.when('/for-patients', {redirectTo: '/page/view/51217c703004e6347d119baf'});
@@ -57,8 +59,9 @@ myApp.config(['$routeProvider', function($routeProvider) {
 //	}]);
 
 	}]).run(function($location, $logincheck) {
+	//fixme if not a deep link, then do this (bookmarks, email urls)
 	if ($logincheck) {
-		$location.path('/person'); //fixme dashboard //fixme bookmarks
+		$location.path('/dashboard');
 	}
 });
 //
