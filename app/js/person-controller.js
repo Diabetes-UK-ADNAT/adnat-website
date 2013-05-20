@@ -30,9 +30,9 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 	$scope.roles = RoleOptions();
 	$scope.disableRoleEdit = false;
 	$scope.person = Person.get({id: $routeParams.id}, function(person) {
-		person.agreedToInformationSheet = new Date(person.agreedToInformationSheet);
-		person.agreedToConsent = new Date(person.agreedToConsent);
-		person.agreedToAssent = new Date(person.agreedToAssent);
+		person.agreedToInformationSheet = person.agreedToInformationSheet === null ? null : new Date(person.agreedToInformationSheet);
+		person.agreedToConsent = person.agreedToConsent === null ? null :new Date(person.agreedToConsent);
+		person.agreedToAssent = person.agreedToAssent === null ? null :new Date(person.agreedToAssent);
 		self.original = person;
 		$scope.roleChoices = [];
 		angular.forEach($scope.roles, function(value, key) {

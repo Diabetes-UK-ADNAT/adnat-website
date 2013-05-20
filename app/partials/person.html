@@ -33,7 +33,7 @@
     </thead>
     <tbody>
         <tr ng-repeat="person in persons | filter:search | filter:role ">
-            <td>{{person.name.firstNames}} {{person.name.lastName}}</td>
+            <td>{{person.name}}</td>
             <td class="role">
                 <span ng-repeat="role in person.roles"><span ng-show="$index &gt; 0">, </span>{{role}}</span>
             </td>

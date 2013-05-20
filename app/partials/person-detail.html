@@ -6,14 +6,9 @@
         <div class="span12">
 			<h2>Name</h2>
 			<div class="control-group" ng-class="{error: myForm.firstnames.$invalid}">
-				<label>First Name</label>
-				<input name="firstnames" ng-model="person.name.firstNames" required/>
-				<span ng-show="myForm.firstnames.$error.required" class="help-inline"> Required</span>
-			</div>
-			<div class="control-group" ng-class="{error: myForm.lastname.$invalid}">
-				<label>Last Name</label>
-				<input name="lastname" ng-model="person.name.lastName" required/>
-				<span ng-show="myForm.lastname.$error.required" class="help-inline"> Required</span>
+				<label>Name</label>
+				<input name="name" ng-model="person.name" required/>
+				<span ng-show="myForm.name.$error.required" class="help-inline"> Required</span>
 			</div>
 			<h2>Account</h2>
 			<div class="control-group" ng-class="{error: myForm.email.$invalid}">
