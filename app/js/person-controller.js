@@ -87,10 +87,10 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 			return item.uuid;
 		},
 		formatResult: function(data) {
-			return data.name.firstNames + ' ' + data.name.lastName;
+			return data.name;
 		},
 		formatSelection: function(data) {
-			return data.name.firstNames + ' ' + data.name.lastName;
+			return data.name;
 		}
 	};
 	$scope.addToCareTeam = function() {
@@ -116,11 +116,11 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 		Person.delete(
 				{id: $routeParams.id},
 		function() {
-			toastr.info('Deleted ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
+			toastr.info('Deleted ' + $scope.person.name);
 			$location.path('/dashboard');
 		},
 				function() {
-					toastr.error('Error deleting ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
+					toastr.error('Error deleting ' + $scope.person.name);
 				}
 		);
 	};
@@ -146,11 +146,11 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 		Person.save(
 				$scope.person,
 				function() {
-					toastr.info('Saved ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
+					toastr.info('Saved ' + $scope.person.name);
 					$location.path('/dashboard');
 				},
 				function() {
-					toastr.error('Error saving ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
+					toastr.error('Error saving ' + $scope.person.name);
 				}
 		);
 	};
@@ -191,11 +191,11 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
 		Person.save(
 				$scope.person,
 				function() {
-					toastr.info('Saved ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
+					toastr.info('Saved ' + $scope.person.name);
 					$location.path('/dashboard');
 				},
 				function() {
-					toastr.error('Error saving ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
+					toastr.error('Error saving ' + $scope.person.name);
 				}
 		);
 	};
@@ -223,10 +223,10 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
 			return item.uuid;
 		},
 		formatResult: function(data) {
-			return data.name.lastName;
+			return data.name;
 		},
 		formatSelection: function(data) {
-			return data.name.lastName;
+			return data.name;
 		}
 	};
 	$scope.careTeam = [];
