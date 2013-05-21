@@ -13,7 +13,7 @@
 			<h2>Account</h2>
 			<div class="control-group" ng-class="{error: myForm.email.$invalid}">
 				<label>Email</label>
-				<input type="email" name="email" ng-model="person.contactInfo.email" required/>
+				<input type="email" name="email" ng-model="person.email" required/>
 				<span ng-show="myForm.email.$error.required" class="help-inline"> Required</span>
 			</div>
 			<div class="control-group" ng-class="{error: passwordInvalid()}">
@@ -93,7 +93,7 @@
         </div>
     </div>
 	<br/>
-	<a href="#/person" class="btn">Cancel</a>
+	<a href="#/dashboard" class="btn">Cancel</a>
 	<button ng-click="save()" ng-disabled="isClean() || myForm.$invalid" class="btn btn-primary">Save</button>
 	<button ng-click="destroy()" ng-show="person.uuid" class="btn btn-danger">Delete</button>
 </form>

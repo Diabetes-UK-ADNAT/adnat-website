@@ -117,7 +117,7 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 				{id: $routeParams.id},
 		function() {
 			toastr.info('Deleted ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
-			$location.path('/person');
+			$location.path('/dashboard');
 		},
 				function() {
 					toastr.error('Error deleting ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
@@ -147,7 +147,7 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 				$scope.person,
 				function() {
 					toastr.info('Saved ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
-					$location.path('/person');
+					$location.path('/dashboard');
 				},
 				function() {
 					toastr.error('Error saving ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
@@ -192,7 +192,7 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
 				$scope.person,
 				function() {
 					toastr.info('Saved ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);
-					$location.path('/person');
+					$location.path('/dashboard');
 				},
 				function() {
 					toastr.error('Error saving ' + $scope.person.name.firstNames + ' ' + $scope.person.name.lastName);

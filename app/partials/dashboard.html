@@ -11,10 +11,12 @@
 
 <table class="table-hover">
     <col class="column-name">
-    <col class="column-action">
+    <col class="column-email">
+    <col class="column-date">
     <thead>
         <tr>
             <th>Name</th>
+            <th>Email</th>
             <th><a href="" ng-click="predicate = 'activity.lastAssessmentPosted'; reverse=!reverse">Last Assessment Posted</a></th>
             <!--<th>Action</th>-->
         </tr>
@@ -22,6 +24,7 @@
     <tbody>
         <tr ng-repeat="person in persons | filter:search | orderBy:predicate:reverse">
             <td><a href="#/person/edit/{{person.uuid}}">{{person.name}}</a></td>
+            <td>{{person.email}}</td>
             <td>
 				<a href="#/assessment/view/{{person.activity.lastAssessmentUuid}}">{{person.activity.lastAssessmentPosted}}</a>
             </td>
@@ -56,11 +59,13 @@
 
 <table class="table-hover">
     <col class="column-name">
+    <col class="column-email">
     <col class="column-role">
     <col class="column-action">
     <thead>
         <tr>
             <th>Name</th>
+            <th>Email</th>
             <th>Role</th>
             <th>Action</th>
         </tr>
@@ -68,6 +73,7 @@
     <tbody>
         <tr ng-repeat="person in persons | filter:search | filter:role ">
             <td>{{person.name}}</td>
+			<td>{{person.email}}</td>
             <td class="role">
                 <span ng-repeat="role in person.roles"><span ng-show="$index &gt; 0">, </span>{{role}}</span>
             </td>
