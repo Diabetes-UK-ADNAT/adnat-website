@@ -182,6 +182,9 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
 		$scope.disableRoleEdit = false;
 		$scope.roles = RoleOptions();
 	}
+	// FIXME roles obj mgmt
+	// roles containts Patient?
+	// roles containts Practitioner?
 
 	$scope.save = function() {
 		$scope.person.roles = [];
