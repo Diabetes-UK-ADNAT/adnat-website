@@ -17,6 +17,8 @@ function PersonCtrl($scope, $routeParams, Person, $http, $cookies, $location) {
 				toastr.error('Error loading data');
 			}
 	);
+
+
 	$scope.roles = RoleOptions();
 	$scope.role = $routeParams.role;
 }
@@ -31,8 +33,8 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 	$scope.disableRoleEdit = false;
 	$scope.person = Person.get({id: $routeParams.id}, function(person) {
 		person.agreedToInformationSheet = person.agreedToInformationSheet === null ? null : new Date(person.agreedToInformationSheet);
-		person.agreedToConsent = person.agreedToConsent === null ? null :new Date(person.agreedToConsent);
-		person.agreedToAssent = person.agreedToAssent === null ? null :new Date(person.agreedToAssent);
+		person.agreedToConsent = person.agreedToConsent === null ? null : new Date(person.agreedToConsent);
+		person.agreedToAssent = person.agreedToAssent === null ? null : new Date(person.agreedToAssent);
 		self.original = person;
 		$scope.roleChoices = [];
 		angular.forEach($scope.roles, function(value, key) {
@@ -52,7 +54,7 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 		);
 		$scope.roleChoicesOriginal = [];
 		angular.copy($scope.roleChoices, $scope.roleChoicesOriginal);
-		$scope.careTeam = $scope.person.careTeam; 
+		$scope.careTeam = $scope.person.careTeam;
 		$scope.person = new Person(self.original);
 	},
 			function() {

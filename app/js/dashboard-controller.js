@@ -9,14 +9,31 @@ function DashboardCtrl($scope, $routeParams, Person, $http, $cookies, $location)
 	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
 	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
 	// 
-	// +Role checks
-	$scope.persons = Person.query(
-			function() {
-			},
-			function() {
-				toastr.error('Error loading data');
-			}
-	);
+//	// +Role checks
+//	$scope.persons = Person.query(
+//			function() {
+//			},
+//			function() {
+//				toastr.error('Error loading data');
+//			}
+//	);
+
+	$http.get('https://api.myadnat.co.uk:4443/v1/persons', {
+		params: {qRole: 'Patient'}
+	}).then(function(response) {
+		$scope.patients = response.data;
+	}, function(error) {
+		//do things with error
+//		return "IT MESSED UP, YO";
+	});
+	$http.get('https://api.myadnat.co.uk:4443/v1/persons', {
+		params: {qRole: 'Practitioner'}
+	}).then(function(response) {
+		$scope.practitioners = response.data;
+	}, function(error) {
+		//do things with error
+//		return "IT MESSED UP, YO";
+	});
 	$scope.roles = RoleOptions();
 	$scope.role = $routeParams.role;
 }
