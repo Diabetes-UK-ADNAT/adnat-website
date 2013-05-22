@@ -76,8 +76,9 @@
 </div>
 
 
-<div ng-show="false">
+<div ng-show="true">
 	<h1>Admin Dashboard</h1>
+	<h2>Patients</h2>
 	<div>
 		<input type="text" 
 			   ng-model="search" 
@@ -95,7 +96,7 @@
 			>
 			<option></option>
 		</select>
-		<span><a href="#/person/new/Patient"><i class="icon-plus-sign"></i></a></span>
+		<span><a href="#/person/new/"><i class="icon-plus-sign"></i></a></span>
 	</div>
 
 	<table class="table-hover">
@@ -126,9 +127,15 @@
 	</table>
 
 	<div>
-		<h1>Admin Links</h1>
+		<h2>Admin Tasks</h2>
 		<div>
-			<a href="#/group">Manage Groups</a>
+			<a href="#/group">Manage Sites</a>
+		</div>
+		<div>
+			<a href="#/faq">Manage FAQs</a>
+		</div>
+		<div>
+			<a href="#/page-list">Manage Web Site Pages</a>
 		</div>
 	</div>
 </div>

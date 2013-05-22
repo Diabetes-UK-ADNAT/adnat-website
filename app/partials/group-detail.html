@@ -1,9 +1,9 @@
-<h1>Group</h1>
+<h1>Site</h1>
 
 <form name="myForm">
     <input type="hidden" name="id" ng-model="group.id">
     <div class="control-group" ng-class="{error: myForm.question.$invalid}">
-        <label>Group Name</label>
+        <label>Site Name</label>
         <input class="question-edit" name="name" ng-model="group.name" required autofocus/>
         <span ng-show="myForm.name.$error.required" class="help-inline"> Required</span>
     </div>
