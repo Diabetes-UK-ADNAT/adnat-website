@@ -90,17 +90,7 @@ label.checkbox {
     width: 30%;
 } 
 
-.ui-reset {
-    width: 14px;
-    height: 14px;
-    margin: 8px;
-    line-height: 14px;
-    vertical-align: text-top;
-    background-image: url("../lib/bootstrap/img/glyphicons-halflings.png");
-    background-position: 14px 14px;
-    background-repeat: no-repeat;
-    background-position: -48px -96px;
-}
+
 
 .hero-unit, .topbar {
     color: #555;
@@ -409,3 +399,34 @@ a:hover {
 select {
 	width: 150px;
 }
+.ui-reset {
+    width: 14px;
+    height: 14px;
+    margin: 8px;
+    line-height: 14px;
+    vertical-align: text-top;
+    background-image: url("../lib/bootstrap/img/glyphicons-halflings.png");
+    background-position: 14px 14px;
+    background-repeat: no-repeat;
+    background-position: -48px -96px;
+}
+
+/*.ui-resetwrap {
+    display: inline-block;
+    position: relative;
+}
+
+.ui-reset {
+    display: none;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    height: 100%;
+    background-image: url("../lib/bootstrap/img/glyphicons-halflings.png");
+}
+
+.ui-resetwrap:hover .ui-reset {
+    display: block;
+}*/
