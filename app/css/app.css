@@ -232,6 +232,16 @@ tr.even {
 body {
 	margin-top: 30px;
 }
+
+a {
+	text-decoration: none;
+    color: rgb(119, 119, 119);
+}
+a:hover {
+	text-decoration: none;
+    color:#0044cc; 
+}
+
 @media (max-width: 1224px) {
 	.hero-unit img {
 		width: 522px;
