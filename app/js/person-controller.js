@@ -145,6 +145,7 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 				$scope.person.careTeam.push($scope.careTeam[key]);
 			}
 		});
+		$scope.person.password = $scope.password;
 		Person.save(
 				$scope.person,
 				function() {
@@ -162,6 +163,8 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 }
 
 function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
+	$scope.passwordConfirmation = null;
+	$scope.password = null;
 	$scope.sites = Group.query(
 			function() {
 			},
@@ -193,6 +196,7 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
 				$scope.person.roles.push($scope.roles[key]);
 			}
 		});
+		$scope.person.password = $scope.password;
 		Person.save(
 				$scope.person,
 				function() {
