@@ -4,12 +4,12 @@
     <input type="hidden" name="id" ng-model="person.id">
     <div class="row">
         <div class="span12">
-			<h2>Name</h2>
+<!--			<h2>Name</h2>
 			<div class="control-group" ng-class="{error: myForm.firstnames.$invalid}">
 				<label>Name</label>
 				<input name="name" ng-model="person.name" required/>
 				<span ng-show="myForm.name.$error.required" class="help-inline"> Required</span>
-			</div>
+			</div>-->
 			<h2>Account</h2>
 			<div class="control-group" ng-class="{error: myForm.email.$invalid}">
 				<label>Email</label>
@@ -24,14 +24,14 @@
 				<label>Password Confirmation</label>
 				<input type="password" name="passwordConfirmation" ng-model="passwordConfirmation"  ui-reset/>
 			</div>
-			<span ng-hide="disableRoleEdit">
+<!--			<span ng-hide="disableRoleEdit">
 				<div class="control-group" ng-class="{error: myForm.roles.$invalid}">
 					<label>Roles</label>
 					<div ng-repeat="role in roles" required>
 						<input id="{{role}}"type="checkbox" ng-disabled="disableRoleEdit" ng-model="roleChoices[$index]"><label class="checkbox" for="{{role}}">{{role}}</label>
 					</div>
 				</div>  
-			</span>
+			</span>-->
             <h2>Consent</h2>
             <div class="control-group" ng-class="{error: myForm.agreedToInformationSheet.$invalid}">
                 <label>Read and Understood Information Sheet</label>
@@ -55,7 +55,7 @@
 				name="site"
 				ng-model="person.site" 
 				ng-options="g.name for g in sites"
-				style="width:150px"
+				style="width:400px"
 				>
 			</select>		
 			<h2>Care Team</h2>

@@ -162,7 +162,7 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 	};
 }
 
-function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
+function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $cookies) {
 	$scope.passwordConfirmation = null;
 	$scope.password = null;
 	$scope.sites = Group.query(
@@ -216,13 +216,21 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group) {
 		allowClear: true,
 		blurOnChange: true,
 		openOnEnter: false,
+		minimumInputLength: 2,
 		ajax: {
 			url: "https://api.myadnat.co.uk:4443/v1/persons",
 			dataType: 'json',
-			data: function(term, page) {
-				return {
-					"q": term
+			transport: function(queryParams) {
+				$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+				queryParams.data.params = {"qName": queryParams.data.q, "qRole": 'Practitioner'};
+				var result = $http.get(queryParams.url, queryParams.data).success(queryParams.success);
+				result.abort = function() {
+					return null;
 				};
+				return result;
+			},
+			data: function(term, page) {
+				return {"q": term};
 			},
 			results: function(data, page) {
 				return {results: data};

@@ -22,6 +22,9 @@ function DashboardCtrl($scope, $routeParams, Person, $http, $cookies, $location)
 		params: {qRole: 'Patient'}
 	}).then(function(response) {
 		$scope.patients = response.data;
+		angular.forEach($scope.patients, function(value, key) {
+			$scope.patients[key].activity.lastAssessmentPosted = $scope.patients[key].activity.lastAssessmentPosted === null ? null : new Date($scope.patients[key].activity.lastAssessmentPosted);
+		});
 	}, function(error) {
 		//do things with error
 //		return "IT MESSED UP, YO";
@@ -36,6 +39,7 @@ function DashboardCtrl($scope, $routeParams, Person, $http, $cookies, $location)
 	});
 	$scope.roles = RoleOptions();
 	$scope.role = $routeParams.role;
+
 }
 
 
