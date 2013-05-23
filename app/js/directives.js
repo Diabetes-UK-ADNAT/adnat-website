@@ -19,4 +19,34 @@ angular.module('myApp.directives', [])
 ////		}
 ////	}
 //});
-  
+
+
+//var app = angular.module('myApp.selectcontacts', []);
+//
+//app.directive('selectcontacts', function() {
+//  var linkFunc = function(scope, element, attr, ngModel) {
+//        sel = element.select2();    
+//
+//        ngModel.$render = function() {
+//          if (ngModel.$viewValue !== null) {
+//            sel.val(ngModel.$viewValue);
+//            setTimeout(function(){
+//              sel.trigger('change');
+//            },0);
+//              
+//          }
+//          else
+//          {
+//            sel.val(undefined).trigger('change');
+//          }
+//        };
+//
+//      };
+//      
+//  return {
+//      restrict:'A',
+//      require: '?ngModel',
+//      link: linkFunc
+//    };
+//});
+

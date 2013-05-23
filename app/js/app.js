@@ -4,6 +4,7 @@
 var myApp = angular.module('myApp', [
 	'myApp.content',
 	'myApp.directives',
+//	'myApp.selectcontacts',
 	'myApp.faq',
 	'myApp.group',
 	'myApp.filters',

@@ -46,12 +46,26 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 		});
 		$scope.sites = Group.query(
 				function() {
-					//init select? $scope.myForm.group = $scope.person.group.name;
 				},
 				function() {
 					toastr.error('Error loading data');
 				}
 		);
+
+//		$scope.contacts = [
+//			{
+//				"title": "David",
+//				"data": "whatever"
+//			},
+//			{
+//				"title": "Alexander",
+//				"data": "something"
+//			}
+//		];
+//
+//		$scope.modelObj = $scope.contacts[1];
+
+
 		$scope.roleChoicesOriginal = [];
 		angular.copy($scope.roleChoices, $scope.roleChoicesOriginal);
 		$scope.careTeam = $scope.person.careTeam;
@@ -98,6 +112,20 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 	$scope.addToCareTeam = function() {
 		$scope.careTeam.push($scope.careTeamSearchItem);
 		$scope.careTeamSearchItem = null;
+	};
+	$scope.canAddToCareTeam = function() {
+		var hasMember = false;
+		angular.forEach($scope.careTeam, function(value, key) {
+			if ($scope.careTeamSearchItem !== null) {
+				if ($scope.careTeamSearchItem.uuid.indexOf(value.uuid) > -1) {
+					console.log($scope.careTeamSearchItem.uuid);
+					console.log(value.uuid);
+					hasMember = true;
+				}
+			}
+		});
+console.log(hasMember);
+		return !$scope.careTeamSearchItem || hasMember && $scope.careTeamSearchItem;
 	};
 	$scope.removeFromCareTeam = function(i) {
 		$scope.careTeam.splice(i, 1);
