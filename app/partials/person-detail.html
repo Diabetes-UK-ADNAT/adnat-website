@@ -1,15 +1,17 @@
 <h1>Profile</h1>
 
-<form name="myForm">
+<form name="myForm"  novalidate>
     <input type="hidden" name="id" ng-model="person.id">
     <div class="row">
         <div class="span12">
-			<!--			<h2>Name</h2>
-						<div class="control-group" ng-class="{error: myForm.firstnames.$invalid}">
-							<label>Name</label>
-							<input name="name" ng-model="person.name" required/>
-							<span ng-show="myForm.name.$error.required" class="help-inline"> Required</span>
-						</div>-->
+			<div ng-show="!hasRoleSelected('Patient')">
+				<h2>Name</h2>
+				<div class="control-group" ng-class="{error: myform.firstnames.$invalid}">
+					<label>name</label>
+					<input name="name" ng-model="person.name" />
+					<span ng-show="myform.name.$error.required" class="help-inline"> Required</span>
+				</div>
+			</div>
 			<h2>Account</h2>
 			<div class="control-group" ng-class="{error: myForm.email.$invalid}">
 				<label>Email</label>
@@ -24,32 +26,33 @@
 				<label>Password Confirmation</label>
 				<input type="password" name="passwordConfirmation" ng-model="passwordConfirmation"  ui-reset/>
 			</div>
-			<!--			<span ng-hide="disableRoleEdit">
-							<div class="control-group" ng-class="{error: myForm.roles.$invalid}">
-								<label>Roles</label>
-								<div ng-repeat="role in roles" required>
-									<input id="{{role}}"type="checkbox" ng-disabled="disableRoleEdit" ng-model="roleChoices[$index]"><label class="checkbox" for="{{role}}">{{role}}</label>
-								</div>
-							</div>  
-						</span>-->
-            <h2>Consent</h2>
-            <div class="control-group" ng-class="{error: myForm.agreedToInformationSheet.$invalid}">
-                <label>Read and Understood Information Sheet</label>
-                <input ui-date="{ dateFormat: 'dd-mm-yy' }" name="agreedToInformationSheet" ng-model="person.agreedToInformationSheet" required/>
-                <span ng-show="myForm.agreedToInformationSheet.$error.required" class="help-inline"> Required</span>
-            </div>
-            <div class="control-group" ng-class="{error: myForm.agreedToConsent.$invalid}">
-                <label>Signed Consent Form</label>
-                <input ui-date="{ dateFormat: 'dd-mm-yy' }" name="agreedToConsent" ng-model="person.agreedToConsent" required/>
-                <span ng-show="myForm.agreedToConsent.$error.required" class="help-inline"> Required</span>
-            </div>
-            <div class="control-group" ng-class="{error: myForm.agreedToAssent.$invalid}">
-                <label>Signed Assent Form</label>
-                <input ui-date="{ dateFormat: 'dd-mm-yy' }" name="agreedToAssent" ng-model="person.agreedToAssent" required/>
-                <span ng-show="myForm.agreedToAssent.$error.required" class="help-inline"> Required</span>
-            </div>
+			<span ng-show="hasRoleSelected('Admin')">
+				<div class="control-group" ng-class="{error: myForm.roles.$invalid}">
+					<label>Roles</label>
+					<div ng-repeat="role in roles">
+						<input id="{{role}}"type="checkbox" ng-disabled="disableRoleEdit" ng-model="roleChoices[$index]"><label class="checkbox" for="{{role}}">{{role}}</label>
+					</div>
+				</div>  
+			</span>
+			<div ng-show="hasRoleSelected('Patient')">
+				<h2>Consent</h2>
+				<div class="control-group" ng-class="{error: myForm.agreedToInformationSheet.$invalid}">
+					<label>Read and Understood Information Sheet</label>
+					<input ui-date="{ dateFormat: 'dd-mm-yy' }" name="agreedToInformationSheet" ng-model="person.agreedToInformationSheet"/> 
+					<span ng-show="myForm.agreedToInformationSheet.$error.required" class="help-inline"> Required</span>
+				</div>
+				<div class="control-group" ng-class="{error: myForm.agreedToConsent.$invalid}">
+					<label>Signed Consent Form</label>
+					<input ui-date="{ dateFormat: 'dd-mm-yy' }" name="agreedToConsent" ng-model="person.agreedToConsent"/>
+					<span ng-show="myForm.agreedToConsent.$error.required" class="help-inline"> Required</span>
+				</div>
+				<div class="control-group" ng-class="{error: myForm.agreedToAssent.$invalid}">
+					<label>Signed Assent Form</label>
+					<input ui-date="{ dateFormat: 'dd-mm-yy' }" name="agreedToAssent" ng-model="person.agreedToAssent" />
+					<span ng-show="myForm.agreedToAssent.$error.required" class="help-inline"> Required</span>
+				</div>
+			</div>
             <h2>Site</h2>
-			{{person.site.name}}<br>
 			<select 
 				ui-select2
 				name="site"
@@ -58,57 +61,65 @@
 				style="width:400px"
 				>
 			</select>		
-<!--			<select                                                                      
-				selectcontacts
-				data-placeholder="Select Contact"
-				ng-model="modelObj"
-				ng-options="contact.title for contact in contacts"
-				class="selectcontacts"
-				style="width:200px"
-				>                                                                            
-				<option></option>                                                          
-			</select> -->
+			<br>
+			Selected site: {{person.site.name}}
+			<!--			<select                                                                      
+							selectcontacts
+							data-placeholder="Select Contact"
+							ng-model="modelObj"
+							ng-options="contact.title for contact in contacts"
+							class="selectcontacts"
+							style="width:200px"
+							>                                                                            
+							<option></option>                                                          
+						</select> -->
 			{{modelObj}}
-			<h2>Care Team</h2>
-			<div>
-				<!--<input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue" ui-reset>-->
-				<!--<input type="text" ng-model="careTeamSearchItem" typeahead="suggestion for suggestion in cities($viewValue)" ui-reset>-->
-				<!--ng-options="i.name.firstNames + ' ' +  i.name.lastName for i in careTeamPersons"-->
-				<input 
-					ui-select2="careTeamPersons"
-					name="careTeamPersons"
-					ng-model="careTeamSearchItem" 
-					style="width:60%"
-					/>
-				<button ng-click="addToCareTeam()" class="btn btn-primary" ng-disabled="canAddToCareTeam()">Add to Care Team</button>
+			<div ng-show="hasRoleSelected('Patient')">
+				<h2>Care Team</h2>
+				<div>
+					<!--<input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue" ui-reset>-->
+					<!--<input type="text" ng-model="careTeamSearchItem" typeahead="suggestion for suggestion in cities($viewValue)" ui-reset>-->
+					<!--ng-options="i.name.firstNames + ' ' +  i.name.lastName for i in careTeamPersons"-->
+					<input 
+						ui-select2="careTeamPersons"
+						name="careTeamPersons"
+						ng-model="careTeamSearchItem" 
+						style="width:60%"
+						/>
+					<button ng-click="addToCareTeam()" class="btn btn-primary" ng-disabled="canAddToCareTeam()">Add to Care Team</button>
 
+				</div>
+				<table class="table-hover" ng-show="careTeam.length &gt; 0" style="width:85%">
+					<col class="column-name">
+					<col class="column-email">
+					<col class="column-action">
+					<thead>
+						<tr>
+							<th>Care Team Member</th>
+							<th>Email</th>
+							<th>Remove</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in careTeam">
+							<td>{{item.name}}</td>
+							<td>{{item.email}}</td>
+							<td class="action">
+								<span ng-click="removeFromCareTeam($index)"> <i class="icon-trash"></i></span>
+							</td>   
+						</tr>
+					</tbody>
+				</table>
 			</div>
-			<table class="table-hover" ng-show="careTeam.length &gt; 0" style="width:85%">
-				<col class="column-name">
-				<col class="column-email">
-				<col class="column-action">
-				<thead>
-					<tr>
-						<th>Care Team Member</th>
-						<th>Email</th>
-						<th>Remove</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="item in careTeam" required>
-						<td>{{item.name}}</td>
-						<td>{{item.email}}</td>
-						<td class="action">
-							<span ng-click="removeFromCareTeam($index)"> <i class="icon-trash"></i></span>
-						</td>   
-					</tr>
-				</tbody>
-			</table>
         </div>
     </div>
 	<br/>
+	isClean {{isClean()}}
+
+	<br>
+	invalid {{myForm.$invalid}} {{isValid()}}
 	<a href="#/dashboard" class="btn">Cancel</a>
-	<button ng-click="save()" ng-disabled="isClean() || myForm.$invalid" class="btn btn-primary">Save</button>
+	<button ng-click="save()" ng-disabled="isClean() || myForm.$invalid || !isValid()" class="btn btn-primary">Save</button>
 	<button ng-click="destroy()" ng-show="person.uuid" class="btn btn-danger">Delete</button>
 </form>
 

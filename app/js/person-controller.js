@@ -27,6 +27,7 @@ function PersonCtrl($scope, $routeParams, Person, $http, $cookies, $location) {
 
 
 function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, limitToFilter, $cookies) {
+	$scope.roleChoices = [];
 	$scope.passwordConfirmation = null;
 	$scope.password = null;
 	$scope.roles = RoleOptions();
@@ -36,7 +37,6 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 		person.agreedToConsent = person.agreedToConsent === null ? null : new Date(person.agreedToConsent);
 		person.agreedToAssent = person.agreedToAssent === null ? null : new Date(person.agreedToAssent);
 		self.original = person;
-		$scope.roleChoices = [];
 		angular.forEach($scope.roles, function(value, key) {
 			if (person.roles.indexOf(value) > -1) {
 				$scope.roleChoices[key] = true;
@@ -75,6 +75,16 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 				toastr.error('Error loading data');
 			});
 // care team list builder
+	$scope.hasRoleSelected = function(role) {
+		// must use flag because returning from foreach just does continue on loop. 
+		var found = false;
+		angular.forEach($scope.person.roles, function(value, key) {
+			if (value === role) {
+				found = true;
+			}
+		});
+		return found;
+	};
 	$scope.careTeamPersons = {
 		allowClear: true,
 		blurOnChange: true,
@@ -124,7 +134,6 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 				}
 			}
 		});
-console.log(hasMember);
 		return !$scope.careTeamSearchItem || hasMember && $scope.careTeamSearchItem;
 	};
 	$scope.removeFromCareTeam = function(i) {
@@ -191,6 +200,13 @@ console.log(hasMember);
 }
 
 function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $cookies) {
+	$scope.person = {};
+	$scope.person.agreedToInformationSheet = null;
+	$scope.person.agreedToConsent = null;
+	$scope.person.agreedToAssent = null;
+
+	$scope.roleChoices = [];
+	$scope.careTeam = [];
 	$scope.passwordConfirmation = null;
 	$scope.password = null;
 	$scope.sites = Group.query(
@@ -203,42 +219,27 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $c
 	// take passed in roles or default to all available
 	//fixme validate passedin existin in RoleOptions();
 	$scope.roleChoices = [];
+	//$scope.person.roles = [];
 	if ($routeParams.roles) {
 		$scope.disableRoleEdit = true;
 		$scope.roles = $routeParams.roles.split(',');
 		angular.forEach($scope.roles, function(value, key) {
 			$scope.roleChoices[key] = true;
+			//$scope.person.roles.push(value);
 		});
 	} else {
 		$scope.disableRoleEdit = false;
 		$scope.roles = RoleOptions();
 	}
-	// FIXME roles obj mgmt
-	// roles containts Patient?
-	// roles containts Practitioner?
-
-	$scope.save = function() {
-		$scope.person.roles = [];
-		angular.forEach($scope.roleChoices, function(value, key) {
-			if (value) {
-				$scope.person.roles.push($scope.roles[key]);
+	$scope.hasRoleSelected = function(role) {
+		// must use flag because returning from foreach just does continue on loop. 
+		var found = false;
+		angular.forEach($scope.roles, function(value, key) {
+			if (value === role) {
+				found = true;
 			}
 		});
-		$scope.person.password = $scope.password;
-		Person.save(
-				$scope.person,
-				function() {
-					toastr.info('Saved ' + $scope.person.name);
-					$location.path('/dashboard');
-				},
-				function() {
-					toastr.error('Error saving ' + $scope.person.name);
-				}
-		);
-	};
-	//$scope.passwordRequired = true;
-	$scope.passwordInvalid = function() {
-		return $scope.passwordConfirmation !== $scope.password;
+		return found;
 	};
 	$scope.careTeamPersons = {
 		allowClear: true,
@@ -274,13 +275,71 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $c
 			return data.name;
 		}
 	};
-	$scope.careTeam = [];
 	$scope.addToCareTeam = function() {
 		$scope.careTeam.push($scope.careTeamSearchItem);
 		$scope.careTeamSearchItem = null;
 	};
+	$scope.canAddToCareTeam = function() {
+		var hasMember = false;
+		angular.forEach($scope.careTeam, function(value, key) {
+			if ($scope.careTeamSearchItem !== null) {
+				if ($scope.careTeamSearchItem.uuid.indexOf(value.uuid) > -1) {
+					console.log($scope.careTeamSearchItem.uuid);
+					console.log(value.uuid);
+					hasMember = true;
+				}
+			}
+		});
+		return !$scope.careTeamSearchItem || hasMember && $scope.careTeamSearchItem;
+	};
 	$scope.removeFromCareTeam = function(i) {
 		$scope.careTeam.splice(i, 1);
+	};
+	$scope.isClean = function() {
+		return angular.equals($scope.passwordConfirmation, $scope.password)
+				&&
+				$scope.passwordConfirmation === null
+				&&
+				$scope.password === null
+				;
+	};
+	$scope.isValid = function() {
+		if ($scope.hasRoleSelected('Patient')) {
+			if ($scope.careTeam.length > 0
+					&& $scope.person.agreedToInformationSheet !== null
+					&& $scope.person.agreedToConsent !== null
+					&& $scope.person.agreedToAssent !== null
+					) {
+				// valid
+			} else {
+				return false;
+			}
+		}
+		return true;
+	};
+	$scope.save = function() {
+		$scope.person.roles = [];
+		angular.forEach($scope.roleChoices, function(value, key) {
+			if (value) {
+				$scope.person.roles.push($scope.roles[key]);
+			}
+		});
+		$scope.person.password = $scope.password;
+
+		Person.save(
+				$scope.person,
+				function() {
+					toastr.info('Saved ' + $scope.person.name);
+					$location.path('/dashboard');
+				},
+				function() {
+					toastr.error('Error saving ' + $scope.person.name);
+				}
+		);
+	};
+	//$scope.passwordRequired = true;
+	$scope.passwordInvalid = function() {
+		return $scope.passwordConfirmation !== $scope.password;
 	};
 }
 
