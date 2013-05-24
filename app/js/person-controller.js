@@ -157,11 +157,11 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 		Person.delete(
 				{id: $routeParams.id},
 		function() {
-			toastr.info('Deleted ' + $scope.person.name);
+			toastr.info('Deleted ' + $scope.person.email);
 			$location.path('/dashboard');
 		},
 				function() {
-					toastr.error('Error deleting ' + $scope.person.name);
+					toastr.error('Error deleting ' + $scope.person.email);
 				}
 		);
 	};
@@ -205,11 +205,11 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 		Person.save(
 				$scope.person,
 				function() {
-					toastr.info('Saved ' + $scope.person.name);
+					toastr.info('Saved ' + $scope.person.email);
 					$location.path('/dashboard');
 				},
 				function() {
-					toastr.error('Error saving ' + $scope.person.name);
+					toastr.error('Error saving ' + $scope.person.email);
 				}
 		);
 	};
@@ -353,11 +353,11 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $c
 		Person.save(
 				$scope.person,
 				function() {
-					toastr.info('Saved ' + $scope.person.name);
+					toastr.info('Saved ' + $scope.person.email);
 					$location.path('/dashboard');
 				},
 				function() {
-					toastr.error('Error saving ' + $scope.person.name);
+					toastr.error('Error saving ' + $scope.person.email);
 				}
 		);
 	};

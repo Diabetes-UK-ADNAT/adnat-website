@@ -22,7 +22,7 @@ function MenuCtrl($scope, $cookies) { //fixme make a service for cross controlle
 			);
 	};
 
-	var isDev = true;
+	var isDev = false;
 	$scope.urlLogin = isDev ? 'https://auth.myadnat.co.uk:4443/login' : 'https://auth.myadnat.co.uk/login';
 	$scope.urlLogout = isDev ? 'https://auth.myadnat.co.uk:4443/logout' : 'https://auth.myadnat.co.uk/logout'; 
 	$scope.urlProfile = isDev ? 'https://auth.myadnat.co.uk:4443/profile' : 'https://auth.myadnat.co.uk/profile'; 
