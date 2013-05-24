@@ -163,6 +163,23 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 				}
 		);
 	};
+	$scope.isValid = function() {
+		if ($scope.hasRoleSelected('Patient')) {
+			if ($scope.careTeam.length > 0
+					&& $scope.person.agreedToInformationSheet !== null
+					&& $scope.person.agreedToConsent !== null
+					&& $scope.person.agreedToAssent !== null
+					) {
+				// valid
+			} else {
+				return false;
+			}
+		}
+		if ($scope.person.site === null) {
+			return false;
+		}
+		return true;
+	};
 	$scope.save = function() {
 		angular.forEach($scope.careTeam, function(value, key) { //poc
 			if (value) {
@@ -204,6 +221,7 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $c
 	$scope.person.agreedToInformationSheet = null;
 	$scope.person.agreedToConsent = null;
 	$scope.person.agreedToAssent = null;
+	$scope.person.site = null;
 
 	$scope.roleChoices = [];
 	$scope.careTeam = [];
@@ -314,6 +332,9 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $c
 			} else {
 				return false;
 			}
+		}
+		if ($scope.person.site === null) {
+			return false;
 		}
 		return true;
 	};
