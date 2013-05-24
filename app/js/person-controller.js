@@ -2,7 +2,8 @@
 function PersonCtrl($scope, $routeParams, Person, $http, $cookies, $location) {
 	// FIXME make auth service to guard no public functions ($cookies, $http)
 	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
-		window.location = 'https://auth.myadnat.co.uk:4443/login'; //FIXME URL class
+		//window.location = 'https://auth.myadnat.co.uk:4443/login'; //FIXME URL class
+		window.location = 'https://auth.myadnat.co.uk/login'; //FIXME URL class
 		return;
 	}
 	// must encodeURI for FireFox or get an error alert
@@ -91,7 +92,8 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 		openOnEnter: false,
 		minimumInputLength: 2,
 		ajax: {
-			url: "https://api.myadnat.co.uk:4443/v1/persons",
+			//url: "https://api.myadnat.co.uk:4443/v1/persons",
+			url: "https://api.myadnat.co.uk/v1/persons",
 			dataType: 'json',
 			transport: function(queryParams) {
 				$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
@@ -265,7 +267,8 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $c
 		openOnEnter: false,
 		minimumInputLength: 2,
 		ajax: {
-			url: "https://api.myadnat.co.uk:4443/v1/persons",
+			//url: "https://api.myadnat.co.uk:4443/v1/persons",
+			url: "https://api.myadnat.co.uk/v1/persons",
 			dataType: 'json',
 			transport: function(queryParams) {
 				$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
