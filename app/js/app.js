@@ -62,7 +62,7 @@ myApp.config(['$routeProvider', function($routeProvider) {
 	}]).run(function($location, $logincheck) {
 	//fixme if not a deep link, then do this (bookmarks, email urls)
 	if ($logincheck) {
-		$location.path('/dashboard');
+		//$location.path('/dashboard');
 	}
 });
 //
