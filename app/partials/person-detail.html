@@ -9,7 +9,7 @@
 					<h2>Name</h2>
 					<div class="control-group" ng-class="{error: myform.name.$invalid}">
 						<label>Name</label>
-						<input name="name" ng-model="person.name" required/>
+						<input name="name" ng-model="$parent.person.name" required/>
 						<span ng-show="myform.name.$error.required" class="help-inline"> Required</span>
 					</div>
 				</div>
@@ -22,19 +22,25 @@
 			</div>
 			<div class="control-group" ng-class="{error: passwordInvalid()}">
 				<label>Password</label>
-				<input type="password" name="password" ng-model="password"  ui-reset required/>
+				<span ng-switch on="modeNew">
+					<input ng-switch-when="true"  type="password" name="password" ng-model="$parent.password"  ui-reset required/>
+					<input ng-switch-default      type="password" name="password" ng-model="$parent.password"  ui-reset />
+				</span>
 				<span ng-show="myForm.password.$error.required" class="help-inline"> Required</span>
 			</div>
 			<div class="control-group" ng-class="{error: passwordInvalid()}">
 				<label>Password Confirmation</label>
-				<input type="password" name="passwordConfirmation" ng-model="passwordConfirmation"  ui-reset required/>
+				<span ng-switch on="modeNew">
+					<input ng-switch-when="true" type="password" name="passwordConfirmation" ng-model="$parent.passwordConfirmation"  ui-reset required/>
+					<input ng-switch-default     type="password" name="passwordConfirmation" ng-model="$parent.passwordConfirmation"  ui-reset />
+				</span>
 				<span ng-show="myForm.passwordConfirmation.$error.required" class="help-inline"> Required</span>
 			</div>
 			<span ng-switch on="hasRoleSelected('Admin')">
 				<div ng-switch-when="true" class="control-group" ng-class="{error: myForm.roles.$invalid}">
 					<label>Roles</label>
 					<div ng-repeat="role in roles">
-						<input id="{{role}}"type="checkbox" ng-disabled="disableRoleEdit" ng-model="roleChoices[$index]"><label class="checkbox" for="{{role}}">{{role}}</label>
+						<input id="{{role}}"type="checkbox" ng-disabled="disableRoleEdit" ng-model="$parent.roleChoices[$index]"><label class="checkbox" for="{{role}}">{{role}}</label>
 					</div>
 				</div>  
 			</span>
@@ -43,17 +49,17 @@
 					<h2>Consent</h2>
 					<div class="control-group" ng-class="{error: myForm.agreedToInformationSheet.$invalid}">
 						<label>Read and Understood Information Sheet</label>
-						<input ui-date="{ dateFormat: 'dd-mm-yy' }" name="agreedToInformationSheet" ng-model="person.agreedToInformationSheet" required/> 
+						<input ui-date="{ dateFormat: 'dd-mm-yy' }" name="agreedToInformationSheet" ng-model="$parent.person.agreedToInformationSheet" required/> 
 						<span ng-show="myForm.agreedToInformationSheet.$error.required" class="help-inline"> Required</span>
 					</div>
 					<div class="control-group" ng-class="{error: myForm.agreedToConsent.$invalid}">
 						<label>Signed Consent Form</label>
-						<input ui-date="{ dateFormat: 'dd-mm-yy' }" name="agreedToConsent" ng-model="person.agreedToConsent" required/>
+						<input ui-date="{ dateFormat: 'dd-mm-yy' }" name="agreedToConsent" ng-model="$parent.person.agreedToConsent" required/>
 						<span ng-show="myForm.agreedToConsent.$error.required" class="help-inline"> Required</span>
 					</div>
 					<div class="control-group" ng-class="{error: myForm.agreedToAssent.$invalid}">
 						<label>Signed Assent Form</label>
-						<input ui-date="{ dateFormat: 'dd-mm-yy' }" name="agreedToAssent" ng-model="person.agreedToAssent" required/>
+						<input ui-date="{ dateFormat: 'dd-mm-yy' }" name="agreedToAssent" ng-model="$parent.person.agreedToAssent" required/>
 						<span ng-show="myForm.agreedToAssent.$error.required" class="help-inline"> Required</span>
 					</div>
 				</div>
@@ -126,9 +132,9 @@
         </div>
     </div>
 	<br/>
-			isClean {{isClean()}}
-			<br>
-			invalid {{myForm.$invalid}} {{isValid()}}
+	isClean {{isClean()}}
+	<br>
+	invalid {{myForm.$invalid}} {{isValid()}}
 	<a href="#/dashboard" class="btn">Cancel</a>
 	<button ng-click="save()" ng-disabled="isClean() || myForm.$invalid || !isValid()" class="btn btn-primary">Save</button>
 	<button ng-click="destroy()" ng-show="person.uuid" class="btn btn-danger">Delete</button>

@@ -219,6 +219,7 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 }
 
 function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $cookies) {
+	$scope.modeNew = true;
 	$scope.person = {};
 	$scope.person.agreedToInformationSheet = null;
 	$scope.person.agreedToConsent = null;
