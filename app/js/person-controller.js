@@ -1,13 +1,64 @@
 'use strict';
 
 var PersonCtrlHelper = {
-	'test': function() {
-		console.log('test');
+	'careTeamPersonsSelect2': function($http, $cookies) {
+		return {
+			allowClear: true,
+			blurOnChange: true,
+			openOnEnter: false,
+			minimumInputLength: 2,
+			ajax: {
+				url: Config.urlPersons,
+				dataType: 'json',
+				transport: function(queryParams) {
+					$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+					queryParams.data.params = {"qName": queryParams.data.q, "qRole": 'Practitioner'};
+					var result = $http.get(queryParams.url, queryParams.data).success(queryParams.success);
+					result.abort = function() {
+						return null;
+					};
+					return result;
+				},
+				data: function(term, page) {
+					return {"q": term};
+				},
+				results: function(data, page) {
+					return {results: data};
+				}
+			},
+			id: function(item) {
+				return item.uuid;
+			},
+			formatResult: function(data) {
+				return data.name;
+			},
+			formatSelection: function(data) {
+				return data.name;
+			}
+		};
 	},
-	'test2': function($scope) {
-		console.log($scope);
+	'addToCareTeam': function($scope) {
+		$scope.careTeam.push($scope.careTeamSearchItem);
+		$scope.careTeamSearchItem = null;
+	},
+	'canAddToCareTeam': function($scope) {
+		console.log($scope.careTeamSearchItem);
+		console.log($scope.careTeam);
+		var hasMember = false;
+		angular.forEach($scope.careTeam, function(value, key) {
+			if ($scope.careTeamSearchItem !== null) {
+				if ($scope.careTeamSearchItem.uuid.indexOf(value.uuid) > -1) {
+					console.log($scope.careTeamSearchItem.uuid);
+					console.log(value.uuid);
+					hasMember = true;
+				}
+			}
+		});
+		return !$scope.careTeamSearchItem || hasMember && $scope.careTeamSearchItem;
+	},
+	'removeFromCareTeam': function($scope, i) {
+		$scope.careTeam.splice(i, 1);
 	}
-			
 };
 
 function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, limitToFilter, $cookies) {
@@ -18,8 +69,6 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 	$scope.disableRoleEdit = false;
 	$scope.careTeamSearchItem = null;
 	$scope.careTeam = [];
-
-	PersonCtrlHelper.test2('ok');//$location);
 
 	$scope.person = Person.get({id: $routeParams.id}, function(person) {
 		person.agreedToInformationSheet = person.agreedToInformationSheet === null ? null : new Date(person.agreedToInformationSheet);
@@ -74,60 +123,14 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 		});
 		return found;
 	};
-	$scope.careTeamPersons = {
-		allowClear: true,
-		blurOnChange: true,
-		openOnEnter: false,
-		minimumInputLength: 2,
-		ajax: {
-			url: Config.urlPersons,
-			dataType: 'json',
-			transport: function(queryParams) {
-				$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
-				queryParams.data.params = {"qName": queryParams.data.q, "qRole": 'Practitioner'};
-				var result = $http.get(queryParams.url, queryParams.data).success(queryParams.success);
-				result.abort = function() {
-					return null;
-				};
-				return result;
-			},
-			data: function(term, page) {
-				return {"q": term};
-			},
-			results: function(data, page) {
-				return {results: data};
-			}
-		},
-		id: function(item) {
-			return item.uuid;
-		},
-		formatResult: function(data) {
-			return data.name;
-		},
-		formatSelection: function(data) {
-			return data.name;
-		}
-	};
-	$scope.addToCareTeam = function() {
-		$scope.careTeam.push($scope.careTeamSearchItem);
-		$scope.careTeamSearchItem = null;
-	};
-	$scope.canAddToCareTeam = function() {
-		var hasMember = false;
-		angular.forEach($scope.careTeam, function(value, key) {
-			if ($scope.careTeamSearchItem !== null) {
-				if ($scope.careTeamSearchItem.uuid.indexOf(value.uuid) > -1) {
-					console.log($scope.careTeamSearchItem.uuid);
-					console.log(value.uuid);
-					hasMember = true;
-				}
-			}
-		});
-		return !$scope.careTeamSearchItem || hasMember && $scope.careTeamSearchItem;
-	};
+
+	$scope.careTeamPersons = PersonCtrlHelper.careTeamPersonsSelect2($http, $cookies);
+	$scope.addToCareTeam = function() { PersonCtrlHelper.addToCareTeam($scope); };
+	$scope.canAddToCareTeam = function() { return PersonCtrlHelper.canAddToCareTeam($scope); };
 	$scope.removeFromCareTeam = function(i) {
-		$scope.careTeam.splice(i, 1);
+		PersonCtrlHelper.removeFromCareTeam($scope, i);
 	};
+
 	$scope.isClean = function() {
 		return angular.equals(self.original, $scope.person)
 				&&
@@ -250,40 +253,10 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $c
 		});
 		return found;
 	};
-	$scope.careTeamPersons = {
-		allowClear: true,
-		blurOnChange: true,
-		openOnEnter: false,
-		minimumInputLength: 2,
-		ajax: {
-			url: Config.urlPersons,
-			dataType: 'json',
-			transport: function(queryParams) {
-				$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
-				queryParams.data.params = {"qName": queryParams.data.q, "qRole": 'Practitioner'};
-				var result = $http.get(queryParams.url, queryParams.data).success(queryParams.success);
-				result.abort = function() {
-					return null;
-				};
-				return result;
-			},
-			data: function(term, page) {
-				return {"q": term};
-			},
-			results: function(data, page) {
-				return {results: data};
-			}
-		},
-		id: function(item) {
-			return item.uuid;
-		},
-		formatResult: function(data) {
-			return data.name;
-		},
-		formatSelection: function(data) {
-			return data.name;
-		}
-	};
+
+
+
+	$scope.careTeamPersons = PersonCtrlHelper.careTeamPersonsSelect2($http, $cookies);
 	$scope.addToCareTeam = function() {
 		$scope.careTeam.push($scope.careTeamSearchItem);
 		$scope.careTeamSearchItem = null;
@@ -304,6 +277,9 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $c
 	$scope.removeFromCareTeam = function(i) {
 		$scope.careTeam.splice(i, 1);
 	};
+
+
+
 	$scope.isClean = function() {
 		return angular.equals($scope.passwordConfirmation, $scope.password)
 				&&
