@@ -24,15 +24,15 @@ function PersonCtrl($scope, $routeParams, Person, $http, $cookies, $location) {
 	$scope.role = $routeParams.role;
 }
 
-
-
-
 function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, limitToFilter, $cookies) {
 	$scope.roleChoices = [];
 	$scope.passwordConfirmation = null;
 	$scope.password = null;
 	$scope.roles = RoleOptions();
 	$scope.disableRoleEdit = false;
+	$scope.careTeamSearchItem = null;
+	$scope.careTeam = [];
+
 	$scope.person = Person.get({id: $routeParams.id}, function(person) {
 		person.agreedToInformationSheet = person.agreedToInformationSheet === null ? null : new Date(person.agreedToInformationSheet);
 		person.agreedToConsent = person.agreedToConsent === null ? null : new Date(person.agreedToConsent);
@@ -125,6 +125,7 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 		$scope.careTeamSearchItem = null;
 	};
 	$scope.canAddToCareTeam = function() {
+		console.log($scope.careTeamSearchItem);
 		var hasMember = false;
 		angular.forEach($scope.careTeam, function(value, key) {
 			if ($scope.careTeamSearchItem !== null) {
@@ -223,6 +224,7 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $c
 	$scope.person.agreedToConsent = null;
 	$scope.person.agreedToAssent = null;
 	$scope.person.site = null;
+	$scope.careTeamSearchItem = null;
 
 	$scope.roleChoices = [];
 	$scope.careTeam = [];
@@ -359,9 +361,13 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $c
 				}
 		);
 	};
-	//$scope.passwordRequired = true;
 	$scope.passwordInvalid = function() {
-		return $scope.passwordConfirmation !== $scope.password;
+		return $scope.passwordConfirmation !== $scope.password
+				||
+				($scope.passwordConfirmation === null
+						&&
+						$scope.password === null
+						);
 	};
 }
 
