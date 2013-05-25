@@ -66,6 +66,7 @@
 			</span>
             <h2>Site</h2>
 			<div class="control-group" ng-class="{error: myForm.site.$invalid}">
+				<div>Selected site: {{person.site.name}}</div>
 				<select 
 					ui-select2
 					name="site"
@@ -75,7 +76,6 @@
 					required>
 				</select>		
 				<span ng-show="myForm.site.$error.required" class="help-inline"> Required</span>
-				<div>Selected site: {{person.site.name}}</div>
 			</div>
 
 			<br>

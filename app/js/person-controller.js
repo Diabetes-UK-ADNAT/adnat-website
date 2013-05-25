@@ -1,6 +1,6 @@
 'use strict';
 
-var PersonCtrlHelper = {
+var PersonCtrlHelper = { // FIXME promote all dupe controller code here
 	'careTeamPersonsSelect2': function($http, $cookies) {
 		return {
 			allowClear: true,
@@ -124,12 +124,11 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 		return found;
 	};
 
+	// wrap helpers in function to expose to view via scope, with all proper behavior (binding works correctly w/ function wrapper)
 	$scope.careTeamPersons = PersonCtrlHelper.careTeamPersonsSelect2($http, $cookies);
 	$scope.addToCareTeam = function() { PersonCtrlHelper.addToCareTeam($scope); };
 	$scope.canAddToCareTeam = function() { return PersonCtrlHelper.canAddToCareTeam($scope); };
-	$scope.removeFromCareTeam = function(i) {
-		PersonCtrlHelper.removeFromCareTeam($scope, i);
-	};
+	$scope.removeFromCareTeam = function(i) { PersonCtrlHelper.removeFromCareTeam($scope, i); };
 
 	$scope.isClean = function() {
 		return angular.equals(self.original, $scope.person)
@@ -257,26 +256,10 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $c
 
 
 	$scope.careTeamPersons = PersonCtrlHelper.careTeamPersonsSelect2($http, $cookies);
-	$scope.addToCareTeam = function() {
-		$scope.careTeam.push($scope.careTeamSearchItem);
-		$scope.careTeamSearchItem = null;
-	};
-	$scope.canAddToCareTeam = function() {
-		var hasMember = false;
-		angular.forEach($scope.careTeam, function(value, key) {
-			if ($scope.careTeamSearchItem !== null) {
-				if ($scope.careTeamSearchItem.uuid.indexOf(value.uuid) > -1) {
-					console.log($scope.careTeamSearchItem.uuid);
-					console.log(value.uuid);
-					hasMember = true;
-				}
-			}
-		});
-		return !$scope.careTeamSearchItem || hasMember && $scope.careTeamSearchItem;
-	};
-	$scope.removeFromCareTeam = function(i) {
-		$scope.careTeam.splice(i, 1);
-	};
+	$scope.addToCareTeam = function() { PersonCtrlHelper.addToCareTeam($scope); };
+	$scope.canAddToCareTeam = function() { return PersonCtrlHelper.canAddToCareTeam($scope); };
+	$scope.removeFromCareTeam = function(i) { PersonCtrlHelper.removeFromCareTeam($scope, i); };
+
 
 
 
