@@ -132,9 +132,9 @@
         </div>
     </div>
 	<br/>
-	isClean {{isClean()}}
+<!--	isClean {{isClean()}}
 	<br>
-	invalid {{myForm.$invalid}} {{isValid()}}
+	invalid {{myForm.$invalid}} {{isValid()}}-->
 	<a href="#/dashboard" class="btn">Cancel</a>
 	<button ng-click="save()" ng-disabled="isClean() || myForm.$invalid || !isValid()" class="btn btn-primary">Save</button>
 	<button ng-click="destroy()" ng-show="person.uuid" class="btn btn-danger">Delete</button>

@@ -1,6 +1,6 @@
 'use strict';
 
-var PersonHelper = {
+var PersonCtrlHelper = {
 	'test': function() {
 		console.log('test');
 	},
@@ -19,7 +19,7 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 	$scope.careTeamSearchItem = null;
 	$scope.careTeam = [];
 
-	PersonHelper.test2('ok');//$location);
+	PersonCtrlHelper.test2('ok');//$location);
 
 	$scope.person = Person.get({id: $routeParams.id}, function(person) {
 		person.agreedToInformationSheet = person.agreedToInformationSheet === null ? null : new Date(person.agreedToInformationSheet);
@@ -113,7 +113,6 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 		$scope.careTeamSearchItem = null;
 	};
 	$scope.canAddToCareTeam = function() {
-		console.log($scope.careTeamSearchItem);
 		var hasMember = false;
 		angular.forEach($scope.careTeam, function(value, key) {
 			if ($scope.careTeamSearchItem !== null) {
