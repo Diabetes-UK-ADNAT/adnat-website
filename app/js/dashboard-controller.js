@@ -2,7 +2,7 @@
 function DashboardCtrl($scope, $routeParams, Person, $http, $cookies, $location) {
 	// FIXME make auth service to guard no public functions ($cookies, $http)
 	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
-		window.location = 'https://auth.myadnat.co.uk/login'; //FIXME URL class
+		window.location = Config.urlLogin; 
 		return;
 	}
 	// must encodeURI for FireFox or get an error alert
@@ -18,7 +18,7 @@ function DashboardCtrl($scope, $routeParams, Person, $http, $cookies, $location)
 //			}
 //	);
 
-	$http.get('https://api.myadnat.co.uk/v1/persons', {
+	$http.get(Config.urlPersons, {
 		params: {qRole: 'Patient'}
 	}).then(function(response) {
 		$scope.patients = response.data;
@@ -27,15 +27,13 @@ function DashboardCtrl($scope, $routeParams, Person, $http, $cookies, $location)
 		});
 	}, function(error) {
 		//do things with error
-//		return "IT MESSED UP, YO";
 	});
-	$http.get('https://api.myadnat.co.uk/v1/persons', {
+	$http.get(Config.urlPersons, {
 		params: {qRole: 'Practitioner'}
 	}).then(function(response) {
 		$scope.practitioners = response.data;
 	}, function(error) {
 		//do things with error
-//		return "IT MESSED UP, YO";
 	});
 	$scope.roles = RoleOptions();
 	$scope.role = $routeParams.role;

@@ -1,35 +1,27 @@
 'use strict';
 
-var ServiceUrls = {
-	'isDev': false,
-	'rootServicesUrl': function() {
-		return this.isDev ? 'https://api.myadnat.co.uk\\:4443/v1' : 'https://api.myadnat.co.uk\\:443/v1';
-	}
-	, 'rootServicesUrlPlain': function() {
-		return this.isDev ? 'https://api.myadnat.co.uk:4443/v1' : 'https://api.myadnat.co.uk:443/v1';
-	}
-};
+var services = angular.module('myApp.services', ['ngResource']);
 
-angular.module('myApp.services', []).value('version', '2.0');
+services.value('version', Config.version);
 
-angular.module('myApp.faq', ['ngResource']).factory('Faq', function($resource) {
-	return $resource(ServiceUrls.rootServicesUrl() + '/faqs/:id', {});
+services.factory('Faq', function($resource) {
+	return $resource(Config.urlServicesRoot + '/faqs/:id', {});
 });
 
-angular.module('myApp.content', ['ngResource']).factory('Content', function($resource) {
-	return $resource(ServiceUrls.rootServicesUrl() + '/contents/:id', {});
+services.factory('Content', function($resource) {
+	return $resource(Config.urlServicesRoot+ '/contents/:id', {});
 });
 
-angular.module('myApp.group', ['ngResource']).factory('Group', function($resource) {
-	return $resource(ServiceUrls.rootServicesUrl() + '/groups/:id', {});
+services.factory('Group', function($resource) {
+	return $resource(Config.urlServicesRoot + '/groups/:id', {});
 });
 
-angular.module('myApp.person', ['ngResource']).factory('Person', function($resource) {
-    return $resource(ServiceUrls.rootServicesUrl() + '/persons/:id', {});
+services.factory('Person', function($resource) {
+	return $resource(Config.urlServicesRoot + '/persons/:id', {});
 });
 
-angular.module('myApp.assessment', ['ngResource']).factory('Assessment', function($resource) {
-	return $resource(ServiceUrls.rootServicesUrl() + '/assessments/:id', {});
+services.factory('Assessment', function($resource) {
+	return $resource(Config.urlServicesRoot + '/assessments/:id', {});
 });
 
 angular.module('myApp.handler', ['ng']).factory('$exceptionHandler', function() {

@@ -2,16 +2,11 @@
 
 // Declare app level module which depends on filters, and services
 var myApp = angular.module('myApp', [
-	'myApp.content',
+	'myApp.services',
 	'myApp.directives',
-//	'myApp.selectcontacts',
-	'myApp.faq',
-	'myApp.group',
 	'myApp.filters',
 	'myApp.handler',
-	'myApp.person',
-	'myApp.assessment',
-	'myApp.services',
+//	'myApp.selectcontacts',
 	'ui.reset',
 	'ui.tinymce',
 	'ui.date',
@@ -55,11 +50,13 @@ myApp.config(['$routeProvider', function($routeProvider) {
 		$routeProvider.when('/references', {redirectTo: '/page/view/512301e53004511159c6444c'});
 		$routeProvider.otherwise({redirectTo: '/page/hero/5121823f3004e6347d119bb4,51576ffee4b09cf566e5dfd9,51576fe7e4b09cf566e5dfd8'});
 		//
-
-
 //	}]);
 
-	}]).run(function($location, $logincheck) {
+	}]);
+		
+		
+		
+myApp.run(function($location, $logincheck) {
 	//fixme if not a deep link, then do this (bookmarks, email urls)
 	if ($logincheck) {
 		//$location.path('/dashboard');
