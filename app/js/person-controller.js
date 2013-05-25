@@ -1,28 +1,14 @@
 'use strict';
 
-function PersonCtrl($scope, $routeParams, Person, $http, $cookies, $location) {
-	// FIXME make auth service to guard no public functions ($cookies, $http)
-	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
-		window.location = Config.urlLogin;
-		return;
+var PersonHelper = {
+	'test': function() {
+		console.log('test');
+	},
+	'test2': function($scope) {
+		console.log($scope);
 	}
-	// must encodeURI for FireFox or get an error alert
-	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
-	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
-	// 
-	// +Role checks
-	$scope.persons = Person.query(
-			function() {
-			},
-			function() {
-				toastr.error('Error loading data');
-			}
-	);
-
-
-	$scope.roles = RoleOptions();
-	$scope.role = $routeParams.role;
-}
+			
+};
 
 function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, limitToFilter, $cookies) {
 	$scope.roleChoices = [];
@@ -32,6 +18,8 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 	$scope.disableRoleEdit = false;
 	$scope.careTeamSearchItem = null;
 	$scope.careTeam = [];
+
+	PersonHelper.test2('ok');//$location);
 
 	$scope.person = Person.get({id: $routeParams.id}, function(person) {
 		person.agreedToInformationSheet = person.agreedToInformationSheet === null ? null : new Date(person.agreedToInformationSheet);

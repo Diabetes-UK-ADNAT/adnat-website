@@ -35,7 +35,6 @@ myApp.config(['$routeProvider', function($routeProvider) {
 		$routeProvider.when('/group/edit/:groupId', {templateUrl: 'partials/group-detail.html', controller: GroupCtrlEdit});
 		$routeProvider.when('/group/new', {templateUrl: 'partials/group-detail.html', controller: GroupCtrlNew});
 		//
-		$routeProvider.when('/person', {templateUrl: 'partials/person.html', controller: PersonCtrl});
 		$routeProvider.when('/person/edit/:id', {templateUrl: 'partials/person-detail.html', controller: PersonCtrlEdit});
 		$routeProvider.when('/person/new/:roles', {templateUrl: 'partials/person-detail.html', controller: PersonCtrlNew});
 		$routeProvider.when('/person/new', {templateUrl: 'partials/person-detail.html', controller: PersonCtrlNew});

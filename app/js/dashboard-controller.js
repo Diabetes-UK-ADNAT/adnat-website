@@ -45,4 +45,3 @@ function RoleOptions() {
 	return ["Patient", "Practitioner", "Site Admin", "Admin"];
 }
 
-//PersonCtrl.$inject = ['$scope', '$location', '$routeParams', 'Person'];
