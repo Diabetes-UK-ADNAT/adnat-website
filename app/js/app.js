@@ -59,7 +59,6 @@ myApp.run(function($location, $logincheck) {
 	if ($logincheck) {
 		//if not a deep link, then do this (bookmarks, email urls)
 		// but only works on full refresh not redirect from login
-		console.log($location.path());
 		if ($location.path() === '/' || angular.equals("/page/hero/5121823f3004e6347d119bb4,51576ffee4b09cf566e5dfd9,51576fe7e4b09cf566e5dfd8", $location.path())) {
 			$location.path('/dashboard');
 		}

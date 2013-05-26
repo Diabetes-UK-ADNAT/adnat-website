@@ -29,8 +29,9 @@
 							<input ng-switch-default      type="password" name="password" ng-model="$parent.$parent.password"  ui-reset />
 						</span>
 						<span ng-show="myForm.password.$error.required" class="help-inline"> Required</span>
+						<div>Passwords must be at least 8 characters and contain a number, letter and special character.</div>
 					</div>
-					<div class="control-group" ng-class="{error: passwordInvalid()}">
+					<div class="control-group" ng-class="{error: passwordConfirmationInvalid()}">
 						<label>Password Confirmation</label>
 						<span ng-switch on="modeNew">
 							<input ng-switch-when="true" type="password" name="passwordConfirmation" ng-model="$parent.$parent.passwordConfirmation"  ui-reset required/>

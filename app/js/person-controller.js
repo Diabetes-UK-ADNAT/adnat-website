@@ -1,5 +1,4 @@
 'use strict';
-
 var PersonCtrlHelper = {// FIXME promote all dupe controller code here
 	'careTeamPersonsSelect2': function($http, $cookies) {
 		return {
@@ -42,14 +41,14 @@ var PersonCtrlHelper = {// FIXME promote all dupe controller code here
 		$scope.careTeamSearchItem = null;
 	},
 	'canAddToCareTeam': function($scope) {
-		console.log($scope.careTeamSearchItem);
-		console.log($scope.careTeam);
+//		console.log($scope.careTeamSearchItem);
+//		console.log($scope.careTeam);
 		var hasMember = false;
 		angular.forEach($scope.careTeam, function(value, key) {
 			if ($scope.careTeamSearchItem !== null) {
 				if ($scope.careTeamSearchItem.uuid.indexOf(value.uuid) > -1) {
-					console.log($scope.careTeamSearchItem.uuid);
-					console.log(value.uuid);
+//					console.log($scope.careTeamSearchItem.uuid);
+//					console.log(value.uuid);
 					hasMember = true;
 				}
 			}
@@ -58,9 +57,15 @@ var PersonCtrlHelper = {// FIXME promote all dupe controller code here
 	},
 	'removeFromCareTeam': function($scope, i) {
 		$scope.careTeam.splice(i, 1);
+	},
+	'passwordInvalid': function($scope) {
+		var rx = /^.*(?=.{8,})(?=.*\d)(?=.*[a-zA-Z])(?=.*[@#$%^&+=-_<>/{}]).*$/;
+		return rx.exec($scope.password) === null;
+	},
+	'passwordConfirmationInvalid': function($scope) {
+		return $scope.passwordConfirmation !== $scope.password;
 	}
 };
-
 function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, limitToFilter, $cookies) {
 	$scope.roleChoices = [];
 	$scope.passwordConfirmation = null;
@@ -69,7 +74,6 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 	$scope.disableRoleEdit = false;
 	$scope.careTeamSearchItem = null;
 	$scope.careTeam = [];
-
 	$scope.person = Person.get({id: $routeParams.id}, function(person) {
 		person.agreedToInformationSheet = person.agreedToInformationSheet === null ? null : new Date(person.agreedToInformationSheet);
 		person.agreedToConsent = person.agreedToConsent === null ? null : new Date(person.agreedToConsent);
@@ -89,7 +93,6 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 					toastr.error('Error loading data');
 				}
 		);
-
 //		$scope.contacts = [
 //			{
 //				"title": "David",
@@ -123,7 +126,6 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 		});
 		return found;
 	};
-
 	// wrap helpers in function to expose to view via scope, with all proper behavior (binding works correctly w/ function wrapper)
 	$scope.careTeamPersons = PersonCtrlHelper.careTeamPersonsSelect2($http, $cookies);
 	$scope.addToCareTeam = function() {
@@ -135,7 +137,6 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 	$scope.removeFromCareTeam = function(i) {
 		PersonCtrlHelper.removeFromCareTeam($scope, i);
 	};
-
 	$scope.isClean = function() {
 		return angular.equals(self.original, $scope.person)
 				&&
@@ -178,12 +179,6 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 		return true;
 	};
 	$scope.save = function() {
-		angular.forEach($scope.careTeam, function(value, key) { //poc
-			if (value) {
-				console.log(key);
-				console.log(value);
-			}
-		});
 		$scope.person.roles.length = 0;
 		angular.forEach($scope.roleChoices, function(value, key) {
 			if (value) {
@@ -209,10 +204,12 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 		);
 	};
 	$scope.passwordInvalid = function() {
-		return $scope.passwordConfirmation !== $scope.password;
+		return PersonCtrlHelper.passwordInvalid($scope);
+	};
+	$scope.passwordConfirmationInvalid = function() {
+		return PersonCtrlHelper.passwordConfirmationInvalid($scope);
 	};
 }
-
 function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $cookies) {
 	$scope.modeNew = true;
 	$scope.person = {};
@@ -221,7 +218,6 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $c
 	$scope.person.agreedToAssent = null;
 	$scope.person.site = null;
 	$scope.careTeamSearchItem = null;
-
 	$scope.roleChoices = [];
 	$scope.careTeam = [];
 	$scope.passwordConfirmation = null;
@@ -249,7 +245,7 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $c
 		$scope.roles = RoleOptions();
 	}
 	$scope.hasRoleSelected = function(role) {
-		// must use flag because returning from foreach just does continue on loop. 
+// must use flag because returning from foreach just does continue on loop. 
 		var found = false;
 		angular.forEach($scope.roles, function(value, key) {
 			if (value === role) {
@@ -258,9 +254,6 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $c
 		});
 		return found;
 	};
-
-
-
 	$scope.careTeamPersons = PersonCtrlHelper.careTeamPersonsSelect2($http, $cookies);
 	$scope.addToCareTeam = function() {
 		PersonCtrlHelper.addToCareTeam($scope);
@@ -271,10 +264,6 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $c
 	$scope.removeFromCareTeam = function(i) {
 		PersonCtrlHelper.removeFromCareTeam($scope, i);
 	};
-
-
-
-
 	$scope.isClean = function() {
 		return $scope.hasRoleSelected('Patient')
 				&&
@@ -292,7 +281,7 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $c
 					&& $scope.person.agreedToConsent !== null
 					&& $scope.person.agreedToAssent !== null
 					) {
-				// valid
+// valid
 			} else {
 				return false;
 			}
@@ -310,7 +299,6 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $c
 			}
 		});
 		$scope.person.password = $scope.password;
-
 		Person.save(
 				$scope.person,
 				function() {
@@ -323,15 +311,12 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $c
 		);
 	};
 	$scope.passwordInvalid = function() {
-		return $scope.passwordConfirmation !== $scope.password
-				||
-				($scope.passwordConfirmation === null
-						&&
-						$scope.password === null
-						);
+		return PersonCtrlHelper.passwordInvalid($scope);
+	};
+	$scope.passwordConfirmationInvalid = function() {
+		return PersonCtrlHelper.passwordConfirmationInvalid($scope);
 	};
 }
-
 function RoleOptions() {
 	return ["Patient", "Practitioner", "Site Admin", "Admin"];
 }
