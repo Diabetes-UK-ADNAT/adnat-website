@@ -4,7 +4,7 @@
     <input type="hidden" name="id" ng-model="person.id">
     <div class="row">
         <div class="span12">
-			<span ng-switch on="!hasRoleSelected('Patient')">
+			<span ng-switch on="hasRoleSelected('Practitioner') || hasRoleSelected('Admin') || hasRoleSelected('Site Admin')">
 				<div ng-switch-when="true">
 					<h2>Name</h2>
 					<div class="control-group" ng-class="{error: myForm.personName.$invalid}">
