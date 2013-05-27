@@ -180,7 +180,7 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 	};
 	$scope.save = function() {
 		$scope.person.roles.length = 0;
-		$scope.person.roles.push('user');
+		$scope.person.roles.push('User');
 		angular.forEach($scope.roleChoices, function(value, key) {
 			if (value) {
 				$scope.person.roles.push($scope.roles[key]);
@@ -297,6 +297,12 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $c
 		angular.forEach($scope.roleChoices, function(value, key) {
 			if (value) {
 				$scope.person.roles.push($scope.roles[key]);
+			}
+		});
+		$scope.person.careTeam = [];
+		angular.forEach($scope.careTeam, function(value, key) {
+			if (value) {
+				$scope.person.careTeam.push($scope.careTeam[key]);
 			}
 		});
 		$scope.person.password = $scope.password;
