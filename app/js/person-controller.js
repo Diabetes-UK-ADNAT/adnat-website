@@ -180,6 +180,7 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 	};
 	$scope.save = function() {
 		$scope.person.roles.length = 0;
+		$scope.person.roles.push('user');
 		angular.forEach($scope.roleChoices, function(value, key) {
 			if (value) {
 				$scope.person.roles.push($scope.roles[key]);
