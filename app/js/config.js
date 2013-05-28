@@ -1,4 +1,4 @@
-var ConfigIsDev = false;
+var ConfigIsDev = true;
 var Config = {
 	version: '2.1.71',
 	urlServicesRoot: ConfigIsDev ? 'https://api.myadnat.co.uk\\:4443/v1' : 'https://api.myadnat.co.uk\\:443/v1',
