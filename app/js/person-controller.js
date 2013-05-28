@@ -67,6 +67,25 @@ var PersonCtrlHelper = {// FIXME promote all dupe controller code here
 	}
 };
 function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, limitToFilter, $cookies) {
+	// auth subject
+	$http.get(Config.urlSubject).then(function(response) {
+		$scope.subject = response.data;
+	}, function(error) {
+	});
+	$scope.hasRole = function(role) {
+		// must use flag because returning from foreach just does continue on loop. 
+		var found = false;
+		if ($scope.subject) {
+			angular.forEach($scope.subject.roles, function(value, key) {
+				if (value === role) {
+					found = true;
+				}
+			});
+		}
+		return found;
+	};
+
+
 	$scope.roleChoices = [];
 	$scope.passwordConfirmation = null;
 	$scope.password = null;
@@ -74,6 +93,27 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 	$scope.disableRoleEdit = false;
 	$scope.careTeamSearchItem = null;
 	$scope.careTeam = [];
+
+
+	// auth subject
+	$http.get(Config.urlSubject).then(function(response) {
+		$scope.subject = response.data;
+	}, function(error) {
+	});
+	$scope.hasRole = function(role) {
+		// must use flag because returning from foreach just does continue on loop. 
+		var found = false;
+		if ($scope.subject) {
+			angular.forEach($scope.subject.roles, function(value, key) {
+				if (value === role) {
+					found = true;
+				}
+			});
+		}
+		return found;
+	};
+
+
 	$scope.person = Person.get({id: $routeParams.id}, function(person) {
 		person.agreedToInformationSheet = person.agreedToInformationSheet === null ? null : new Date(person.agreedToInformationSheet);
 		person.agreedToConsent = person.agreedToConsent === null ? null : new Date(person.agreedToConsent);
@@ -212,6 +252,8 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 	};
 }
 function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $cookies) {
+
+
 	$scope.modeNew = true;
 	$scope.person = {};
 	$scope.person.agreedToInformationSheet = null;
@@ -223,6 +265,28 @@ function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $c
 	$scope.careTeam = [];
 	$scope.passwordConfirmation = null;
 	$scope.password = null;
+
+	// auth subject
+	$http.get(Config.urlSubject).then(function(response) {
+		$scope.subject = response.data;
+		if (!$scope.hasRole('Admin')) {
+			$scope.person.site = $scope.subject.site;
+		}
+	}, function(error) {
+	});
+	$scope.hasRole = function(role) {
+		// must use flag because returning from foreach just does continue on loop. 
+		var found = false;
+		if ($scope.subject) {
+			angular.forEach($scope.subject.roles, function(value, key) {
+				if (value === role) {
+					found = true;
+				}
+			});
+		}
+		return found;
+	};
+
 	$scope.sites = Group.query(
 			function() {
 			},

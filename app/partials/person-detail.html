@@ -69,19 +69,23 @@
 					</div>
 				</div>
 			</span>
-            <h2>Site</h2>
-			<div class="control-group" ng-class="{error: myForm.site.$invalid}">
-				<div>Selected site: {{person.site.name}}</div>
-				<select 
-					ui-select2
-					name="site"
-					ng-model="person.site" 
-					ng-options="g.name for g in sites"
-					style="width:400px"
-					required>
-				</select>		
-				<span ng-show="myForm.site.$error.required" class="help-inline"> Required</span>
-			</div>
+			<span ng-switch on="hasRole('Admin')">
+				<div ng-switch-when="true">
+					<h2>Site</h2>
+					<div class="control-group" ng-class="{error: myForm.site.$invalid}">
+						<div>Selected site: {{person.site.name}}</div>
+						<select 
+							ui-select2
+							name="site"
+							ng-model="$parent.person.site" 
+							ng-options="g.name for g in sites"
+							style="width:400px"
+							required>
+						</select>		
+						<span ng-show="myForm.site.$error.required" class="help-inline"> Required</span>
+					</div>
+				</div>
+			</span>
 
 			<br>
 			<!--			<select                                                                      
@@ -94,7 +98,6 @@
 							>                                                                            
 							<option></option>                                                          
 						</select> -->
-			{{modelObj}}
 			<span ng-switch on="hasRoleSelected('Patient')">
 				<div ng-switch-when="true">
 					<h2>Care Team</h2>
@@ -137,9 +140,9 @@
         </div>
     </div>
 	<br/>
-<!--		isClean {{isClean()}}
-		<br>
-		invalid {{myForm.$invalid}} {{isValid()}}-->
+	<!--		isClean {{isClean()}}
+			<br>
+			invalid {{myForm.$invalid}} {{isValid()}}-->
 	<a href="#/dashboard" class="btn">Cancel</a>
 	<button ng-click="save()" ng-disabled="isClean() || myForm.$invalid || !isValid()" class="btn btn-primary">Save</button>
 	<button ng-click="destroy()" ng-show="person.uuid" class="btn btn-danger">Delete</button>
