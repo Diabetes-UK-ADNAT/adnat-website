@@ -1,6 +1,5 @@
 'use strict';
 function DashboardCtrl($scope, $routeParams, Person, $http, $cookies, $location) {
-	// FIXME make auth service to guard no public functions ($cookies, $http)
 	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
 		window.location = Config.urlLogin;
 		return;

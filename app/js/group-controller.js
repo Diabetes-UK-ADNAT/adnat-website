@@ -1,6 +1,14 @@
 'use strict';
 
-function GroupCtrl($scope, $routeParams, Group) {
+function GroupCtrl($scope, $routeParams, Group, $http, $cookies, $location) {
+	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
+		window.location = Config.urlLogin;
+		return;
+	}
+	// must encodeURI for FireFox or get an error alert
+	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
+
 	$scope.groups = Group.query(
 			function() {
 			},
@@ -10,7 +18,16 @@ function GroupCtrl($scope, $routeParams, Group) {
 	);
 }
 
-function GroupCtrlEdit($scope, $location, $routeParams, Group) {
+function GroupCtrlEdit($scope, $routeParams, Group, $http, $cookies, $location) {
+	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
+		window.location = Config.urlLogin;
+		return;
+	}
+	// must encodeURI for FireFox or get an error alert
+	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
+
+
 	var self = this;
 
 	$scope.group = Group.get({id: $routeParams.groupId}, function(group) {
@@ -46,7 +63,15 @@ function GroupCtrlEdit($scope, $location, $routeParams, Group) {
 	};
 }
 
-function GroupCtrlNew($scope, $location, Group) {
+function GroupCtrlNew($scope, Group, $http, $cookies, $location) {
+	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
+		window.location = Config.urlLogin;
+		return;
+	}
+	// must encodeURI for FireFox or get an error alert
+	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
+
 	$scope.save = function() {
 		Group.save($scope.group, function() {
 			toastr.info('Saved ' + $scope.group.name);

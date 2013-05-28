@@ -1,6 +1,14 @@
 'use strict';
 
-function AssessmentCtrl($scope, $routeParams, Assessment) {
+function AssessmentCtrl($scope, $routeParams, Assessment, $http, $cookies, $location) {
+	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
+		window.location = Config.urlLogin;
+		return;
+	}
+	// must encodeURI for FireFox or get an error alert
+	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
+
 	$scope.assessments = Assessment.query(
 			function() {
 			},
@@ -12,7 +20,16 @@ function AssessmentCtrl($scope, $routeParams, Assessment) {
 	$scope.category = $routeParams.category;
 }
 
-function AssessmentCtrlDetail($scope, $location, $routeParams, Assessment) {
+function AssessmentCtrlDetail($scope, $routeParams, Assessment, $http, $cookies, $location) {
+	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
+		window.location = Config.urlLogin;
+		return;
+	}
+	// must encodeURI for FireFox or get an error alert
+	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
+
+
 	$scope.categoryOptions = AssessmentControllerHelper.categoryOptions();
 	$scope.categoryFilter = function(response) {
 		return !$scope.cat || response.category.indexOf($scope.cat) === 0;

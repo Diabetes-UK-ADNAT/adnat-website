@@ -15,7 +15,15 @@ function PageFindCtrl($scope, $routeParams, Content) {
 	});
 }
 
-function PageCtrlEdit($scope, $location, $routeParams, Content) {
+function PageCtrlEdit($scope, $routeParams, Content, $http, $cookies, $location) {
+	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
+		window.location = Config.urlLogin;
+		return;
+	}
+	// must encodeURI for FireFox or get an error alert
+	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
+
 	var self = this;
 	$scope.content = Content.get({id: $routeParams.id}, function(content) {
 		self.original = content;
@@ -52,7 +60,15 @@ function PageCtrlEdit($scope, $location, $routeParams, Content) {
 	};
 }
 
-function PageCtrlNew($scope, $location, Content) {
+function PageCtrlNew($scope, Content, $http, $cookies, $location) {
+	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
+		window.location = Config.urlLogin;
+		return;
+	}
+	// must encodeURI for FireFox or get an error alert
+	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
+
 	$scope.content = new Content();
 	$scope.save = function() {
 		Content.save($scope.content,

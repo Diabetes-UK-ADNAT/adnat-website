@@ -66,7 +66,17 @@ var PersonCtrlHelper = {// FIXME promote all dupe controller code here
 		return $scope.passwordConfirmation !== $scope.password;
 	}
 };
-function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, limitToFilter, $cookies) {
+function PersonCtrlEdit($scope, $routeParams, Person, Group, limitToFilter, $http, $cookies, $location) {
+	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
+		window.location = Config.urlLogin;
+		return;
+	}
+	// must encodeURI for FireFox or get an error alert
+	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
+
+
+
 	// auth subject
 	$http.get(Config.urlSubject).then(function(response) {
 		$scope.subject = response.data;
@@ -251,8 +261,14 @@ function PersonCtrlEdit($scope, $location, $routeParams, Person, Group, $http, l
 		return PersonCtrlHelper.passwordConfirmationInvalid($scope);
 	};
 }
-function PersonCtrlNew($scope, $location, $routeParams, Person, Group, $http, $cookies) {
-
+function PersonCtrlNew($scope, $routeParams, Person, Group, $http, $cookies, $location) {
+	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
+		window.location = Config.urlLogin;
+		return;
+	}
+	// must encodeURI for FireFox or get an error alert
+	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
 
 	$scope.modeNew = true;
 	$scope.person = {};

@@ -16,7 +16,15 @@ function FaqCtrl($scope, $routeParams, Faq, $cookies, $http) {
 }
 
 //FaqCtrlEdit.$inject = ['$scope', '$location', '$routeParams', 'Faq'];
-function FaqCtrlEdit($scope, $location, $routeParams, Faq) {
+function FaqCtrlEdit($scope, $routeParams, Faq, $http, $cookies, $location) {
+	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
+		window.location = Config.urlLogin;
+		return;
+	}
+	// must encodeURI for FireFox or get an error alert
+	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
+
 	var self = this;
 
 	$scope.categoryOptions = FaqControllerHelper.categoryOptions();
@@ -74,7 +82,16 @@ function FaqCtrlEdit($scope, $location, $routeParams, Faq) {
 	};
 }
 
-function FaqCtrlNew($scope, $location, Faq) {
+function FaqCtrlNew($scope, Faq, $http, $cookies, $location) {
+	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
+		window.location = Config.urlLogin;
+		return;
+	}
+	// must encodeURI for FireFox or get an error alert
+	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
+
+
 	$scope.categoryOptions = FaqControllerHelper.categoryOptions();
 	$scope.categoryChoices = [];
 	$scope.save = function() {
