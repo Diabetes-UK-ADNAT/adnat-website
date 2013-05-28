@@ -1,42 +1,44 @@
 <div ng-show="true">
 	<span class="pull-right"><a target="_blank" href="/pdf/ADNAT.SOP.Research.Nurse.pdf"><i class="icon-question-sign"> SOP for Research Nurses</i></a></span>
 	<h1>Practitioner Dashboard</h1>
-	<h2>Patients</h2>
-	<div>
-		<input type="text" 
-			   ng-model="search" 
-			   autofocus
-			   class="search-query"
-			   placeholder="Search"
-			   ui-reset>
-		<span><a href="#/person/new/Patient" ><i class="icon-plus-sign"> Add a Patient</i></a></span>
-	</div>
+	<div ng-show="hasRole('Practitioner')">
+		<h2>Patients</h2>
+		<div>
+			<input type="text" 
+				   ng-model="search" 
+				   autofocus
+				   class="search-query"
+				   placeholder="Search"
+				   ui-reset>
+			<span><a href="#/person/new/Patient" ><i class="icon-plus-sign"> Add a Patient</i></a></span>
+		</div>
 
-	<table class="table-hover">
-		<!--<col class="column-name">-->
-		<col class="column-email">
-		<col class="column-date">
-		<thead>
-			<tr>
-				<!--<th>Name</th>-->
-				<th>Email</th>
-				<th><a href="" ng-click="predicate = 'activity.lastAssessmentPosted'; reverse=!reverse">Last Assessment Posted</a></th>
-				<!--<th>Action</th>-->
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="person in patients | filter:search | orderBy:predicate:reverse">
-				<!--<td><a href="#/person/edit/{{person.uuid}}">{{person.name}}</a></td>-->
-				<td><a href="#/person/edit/{{person.uuid}}">{{person.email}}</a></td>
-				<td>
-					<a href="#/assessment/view/{{person.activity.lastAssessmentUuid}}">{{person.activity.lastAssessmentPosted}}</a>
-				</td>
-				<!--            <td class="action">
-								<a href="#/person/edit/{{person.uuid}}"><i class="icon-pencil"></i></a>
-							</td>   -->
-			</tr>
-		</tbody>
-	</table>
+		<table class="table-hover">
+			<!--<col class="column-name">-->
+			<col class="column-email">
+			<col class="column-date">
+			<thead>
+				<tr>
+					<!--<th>Name</th>-->
+					<th>Email</th>
+					<th><a href="" ng-click="predicate = 'activity.lastAssessmentPosted'; reverse=!reverse">Last Assessment Posted</a></th>
+					<!--<th>Action</th>-->
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="person in patients | filter:search | orderBy:predicate:reverse">
+					<!--<td><a href="#/person/edit/{{person.uuid}}">{{person.name}}</a></td>-->
+					<td><a href="#/person/edit/{{person.uuid}}">{{person.email}}</a></td>
+					<td>
+						<a href="#/assessment/view/{{person.activity.lastAssessmentUuid}}">{{person.activity.lastAssessmentPosted}}</a>
+					</td>
+					<!--            <td class="action">
+									<a href="#/person/edit/{{person.uuid}}"><i class="icon-pencil"></i></a>
+								</td>   -->
+				</tr>
+			</tbody>
+		</table>
+	</div>
 	<h2>Practitioners</h2>
 	<div>
 		<input type="text" 
@@ -64,9 +66,9 @@
 			<tr ng-repeat="person in practitioners | filter:searchPractitioner | orderBy:predicate:reverse">
 				<td><a href="#/person/edit/{{person.uuid}}">{{person.name}}</a></td>
 				<td><a href="#/person/edit/{{person.uuid}}">{{person.email}}</a></td>
-<!--				<td>
-					<a href="#/assessment/view/{{person.activity.lastAssessmentUuid}}">{{person.activity.lastAssessmentPosted}}</a>
-				</td>-->
+				<!--				<td>
+									<a href="#/assessment/view/{{person.activity.lastAssessmentUuid}}">{{person.activity.lastAssessmentPosted}}</a>
+								</td>-->
 				<!--            <td class="action">
 								<a href="#/person/edit/{{person.uuid}}"><i class="icon-pencil"></i></a>
 							</td>   -->
@@ -76,55 +78,55 @@
 </div>
 
 
-<div ng-show="true">
+<div ng-show="hasRole('Admin')">
 	<h1>Admin Dashboard</h1>
-<!--	<h2>Patients</h2>
-	<div>
-		<input type="text" 
-			   ng-model="search" 
-			   autofocus
-			   class="search-query"
-			   placeholder="Search"
-			   ui-reset>
-		<span>Role</span>
-		<select 
-			ui-select2
-			name="role"
-			ng-model="role" 
-			ng-options="i as i for i in roles"
-			style="width:250px"
-			>
-			<option></option>
-		</select>
-		<span><a href="#/person/new/"><i class="icon-plus-sign"></i></a></span>
-	</div>-->
+	<!--	<h2>Patients</h2>
+		<div>
+			<input type="text" 
+				   ng-model="search" 
+				   autofocus
+				   class="search-query"
+				   placeholder="Search"
+				   ui-reset>
+			<span>Role</span>
+			<select 
+				ui-select2
+				name="role"
+				ng-model="role" 
+				ng-options="i as i for i in roles"
+				style="width:250px"
+				>
+				<option></option>
+			</select>
+			<span><a href="#/person/new/"><i class="icon-plus-sign"></i></a></span>
+		</div>-->
 
-<!--	<table class="table-hover">
-		<col class="column-name">
-		<col class="column-email">
-		<col class="column-role">
-		<col class="column-action">
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Email</th>
-				<th>Role</th>
-				<th>Action</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="person in persons | filter:search | filter:role ">
-				<td>{{person.name}}</td>
-				<td>{{person.email}}</td>
-				<td class="role">
-					<span ng-repeat="role in person.roles"><span ng-show="$index &gt; 0">, </span>{{role}}</span>
-				</td>
-				<td class="action">
-					<a href="#/person/edit/{{person.uuid}}"><i class="icon-pencil"></i></a>
-				</td>   
-			</tr>
-		</tbody>
-	</table>-->
+	<!--	<table class="table-hover">
+			<col class="column-name">
+			<col class="column-email">
+			<col class="column-role">
+			<col class="column-action">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Role</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="person in persons | filter:search | filter:role ">
+					<td>{{person.name}}</td>
+					<td>{{person.email}}</td>
+					<td class="role">
+						<span ng-repeat="role in person.roles"><span ng-show="$index &gt; 0">, </span>{{role}}</span>
+					</td>
+					<td class="action">
+						<a href="#/person/edit/{{person.uuid}}"><i class="icon-pencil"></i></a>
+					</td>   
+				</tr>
+			</tbody>
+		</table>-->
 
 	<div>
 		<h2>Admin Tasks</h2>
