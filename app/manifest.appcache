@@ -1,16 +1,16 @@
 CACHE MANIFEST
 
-#version 14-Apr-13 A
+#version 24-Jun-13 A
 CACHE:
 #data
-https://api.myadnat.co.uk/v1/faqs
-https://api.myadnat.co.uk/v1/contents/5122ff963004511159c6444b
-https://api.myadnat.co.uk/v1/contents/51576fe7e4b09cf566e5dfd8
-https://api.myadnat.co.uk/v1/contents/51576ffee4b09cf566e5dfd9
-https://api.myadnat.co.uk/v1/contents/5121823f3004e6347d119bb4
-https://api.myadnat.co.uk/v1/contents/512301e53004511159c6444c
-https://api.myadnat.co.uk/v1/contents/51217c703004e6347d119baf
-https://api.myadnat.co.uk/v1/contents/5122fdcd3004511159c6444a
+# https://api.myadnat.co.uk/v1/faqs
+# https://api.myadnat.co.uk/v1/contents/5122ff963004511159c6444b
+# https://api.myadnat.co.uk/v1/contents/51576fe7e4b09cf566e5dfd8
+# https://api.myadnat.co.uk/v1/contents/51576ffee4b09cf566e5dfd9
+# https://api.myadnat.co.uk/v1/contents/5121823f3004e6347d119bb4
+# https://api.myadnat.co.uk/v1/contents/512301e53004511159c6444c
+# https://api.myadnat.co.uk/v1/contents/51217c703004e6347d119baf
+# https://api.myadnat.co.uk/v1/contents/5122fdcd3004511159c6444a
 
 #images
 /img/1.jpg
@@ -24,16 +24,79 @@ https://api.myadnat.co.uk/v1/contents/5122fdcd3004511159c6444a
 /partials/page-list.html		
 /partials/page-hero-unit.html	
 /partials/person-detail.html
+/partials/assessment-detail.html
+/partials/dashboard.html
+/partials/group.html
+/partials/group-detail.html
 /partials/faq.html		
 /partials/page.html		
 /partials/person.html
 
 #libs
-/lib/tiny_mce/tiny_mce.js
+# jquery 
+/lib/jquery/ui/js/jquery-1.9.1.js
+/lib/jquery/ui/js/jquery-ui-1.10.3.custom.js
+
+# angular 
+/lib/angular/angular-loader.js
+/lib/angular/angular.js
+/lib/angular/angular-cookies.js
+/lib/angular/angular-resource.js
+/lib/angular/angular-sanitize.js
+
+# angular ui 
+/lib/angular-ui/reset.js
+/lib/angular-ui/date.js
+
+
+# select2 
+/lib/select2-3.3.2/select2.js
+/lib/angular-ui/select2.js
+
+# adnat 
+/js/config.js
+/lib/http-auth-interceptor.js
+/js/app.js
+/js/services.js
+/js/controllers.js
+/js/faq-controller.js
+/js/group-controller.js
+/js/assessment-controller.js
+/js/person-controller.js
+/js/dashboard-controller.js
+/js/page-controller.js
+/js/filters.js
+/js/directives.js
+/js/polyfills.js
+
+# tinymce 
+/lib/angular-ui/tinymce.js
 /lib/tiny_mce/jquery.tinymce.js
+/lib/tiny_mce/tiny_mce.js
+
+# bootstrap
+/lib/bootstrap/js/bootstrap-transition.js
+/lib/bootstrap/js/bootstrap-alert.js
+/lib/bootstrap/js/bootstrap-modal.js
+/lib/bootstrap/js/bootstrap-dropdown.js
+/lib/bootstrap/js/bootstrap-scrollspy.js
+/lib/bootstrap/js/bootstrap-tab.js
+/lib/bootstrap/js/bootstrap-tooltip.js
+/lib/bootstrap/js/bootstrap-popover.js
+/lib/bootstrap/js/bootstrap-button.js
+/lib/bootstrap/js/bootstrap-collapse.js
+/lib/bootstrap/js/bootstrap-carousel.js
+/lib/bootstrap/js/bootstrap-typeahead.js
+# toastr 
+/lib/toastr/toastr.js
 
 #style sheets
-/css/all.css
+/lib/bootstrap/css/bootstrap.css
+/lib/jquery/ui/css/smoothness/jquery-ui-1.10.3.custom.css
+/lib/select2-3.3.2/select2.css
+/lib/toastr/toastr.css
+/lib/fontawesome/css/font-awesome.min.css
+/css/app.css
 
 #style sheet images
 /lib/bootstrap/img/glyphicons-halflings.png

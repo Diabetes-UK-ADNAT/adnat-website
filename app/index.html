@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp">
+<html lang="en" ng-app="myApp" manifest="manifest.appcache">
     <head>
         <meta charset="utf-8">
         <title>ADNAT</title>
@@ -167,5 +167,14 @@
         <!-- for using mocked data while testing -->
         <!--<script type="text/javascript" src="../test/lib/angular/angular-mocks.js"></script>-->
         <!--<script type="text/javascript" src="../test/e2e/mocks.js"></script>-->
+		<script>
+			function onUpdateReady() {
+				window.location.reload();
+			}
+			window.applicationCache.addEventListener('updateready', onUpdateReady);
+			if (window.applicationCache.status === window.applicationCache.UPDATEREADY) {
+				onUpdateReady();
+			}
+		</script>
     </body>
 </html>
