@@ -37,6 +37,9 @@
            class="search-query"
            placeholder="Search"
            ui-reset>
+
+	<label style="display:inline;" for"scoring"> <input type="checkbox" ng-model="filterOnScoringQuestions"> Only Show Scoring Questions </label>
+
 </div>
 
 <table class="table-hover">
@@ -51,7 +54,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="response in assessment.responses | filter:search | filter:categoryFilter | orderBy:'ordinal'"
+        <tr ng-repeat="response in assessment.responses | filter:search | filter:categoryFilter | filter:isScoringQuestionFilter | orderBy:'ordinal'"
             ng-class-even="'even'" ng-class-odd="'odd'"
             >
             <td>{{response.category}}</td>

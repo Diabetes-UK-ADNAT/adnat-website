@@ -29,11 +29,21 @@ function AssessmentCtrlDetail($scope, $routeParams, Assessment, $http, $cookies,
 	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
 	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
 
+	$scope.filterOnScoringQuestions = false;
 
 	$scope.categoryOptions = AssessmentControllerHelper.categoryOptions();
 	$scope.categoryFilter = function(response) {
 		return !$scope.cat || response.category.indexOf($scope.cat) === 0;
 	};
+	$scope.isScoringQuestionFilter = function(response) {
+		if (!$scope.filterOnScoringQuestions) {
+			// all questions, no filter
+			return true;
+		}
+
+		// filter by response type
+		return angular.equals(response.type, 'SC-SL');	
+	}
 
 	$scope.assessment = Assessment.get({id: $routeParams.id}, function() {
 		$scope.updated = new Date($scope.assessment.updated).toString();
