@@ -35,14 +35,9 @@ function AssessmentCtrlDetail($scope, $routeParams, Assessment, $http, $cookies,
 	$scope.categoryFilter = function(response) {
 		return !$scope.cat || response.category.indexOf($scope.cat) === 0;
 	};
-	$scope.isScoringQuestionFilter = function(response) {
-		if (!$scope.filterOnScoringQuestions) {
-			// all questions, no filter
-			return true;
-		}
 
-		// filter by response type
-		return angular.equals(response.type, 'SC-SL');	
+	$scope.isScoringQuestionFilter = function(response) {
+		return !$scope.filterOnScoringQuestions || response.type === 'SC-SL';
 	}
 
 	$scope.assessment = Assessment.get({id: $routeParams.id}, function() {
