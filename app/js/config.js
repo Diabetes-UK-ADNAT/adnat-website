@@ -1,6 +1,6 @@
-var ConfigIsDev = false;
+var ConfigIsDev = true;
 var Config = {
-	version: '2.1.74',
+	version: '2.1.75',
 	urlServicesRoot: ConfigIsDev ? 'https://api.myadnat.co.uk\\:4443/v1' : 'https://api.myadnat.co.uk\\:443/v1',
 	urlPersons: ConfigIsDev ? 'https://api.myadnat.co.uk:4443/v1/persons' : 'https://api.myadnat.co.uk/v1/persons',
 	urlLogin: ConfigIsDev ? 'https://auth.myadnat.co.uk:4443/login' : 'https://auth.myadnat.co.uk/login',
