@@ -17,10 +17,14 @@
 			<h2>Account</h2>
 			<div class="control-group" ng-class="{error: myForm.email.$invalid}">
 				<label>Email</label>
-				<input type="email" name="email" ng-model="person.email" required/>
+				<input type="email" name="email" ng-model="person.email" required ng-disabled="emailDisabled"/>
 				<span ng-show="myForm.email.$error.required" class="help-inline"> Required</span>
+				<div ng-show="showPasswordToggle">
+					<div ng-show="!changePassword" ng-click="changePassword = !changePassword"><i class="icon-lock"></i>&nbsp;Change Password</div>
+					<div ng-show="changePassword" ng-click="changePassword = !changePassword"><i class="icon-unlock"></i>&nbsp;Cancel Change Password</div>
+				</div>
 			</div>
-			<span ng-switch on="hasRoleSelected('Patient') && modeNew">
+			<span ng-switch on="hasRoleSelected('Patient') && changePassword">
 				<div ng-switch-when="true">
 					<div class="control-group" ng-class="{error: passwordInvalid()}">
 						<label>Password</label>

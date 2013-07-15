@@ -103,7 +103,9 @@ function PersonCtrlEdit($scope, $routeParams, Person, Group, limitToFilter, $htt
 	$scope.disableRoleEdit = false;
 	$scope.careTeamSearchItem = null;
 	$scope.careTeam = [];
-
+	$scope.changePassword = false;
+	$scope.showPasswordToggle = true;
+	$scope.emailDisabled = true;
 
 	// auth subject
 	$http.get(Config.urlSubject).then(function(response) {
@@ -242,7 +244,9 @@ function PersonCtrlEdit($scope, $routeParams, Person, Group, limitToFilter, $htt
 				$scope.person.careTeam.push($scope.careTeam[key]);
 			}
 		});
-		$scope.person.password = $scope.password;
+
+		$scope.person.password = $scope.changePassword ? $scope.password : null;
+		
 		Person.save(
 				$scope.person,
 				function() {
@@ -270,7 +274,6 @@ function PersonCtrlNew($scope, $routeParams, Person, Group, $http, $cookies, $lo
 	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
 	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
 
-	$scope.modeNew = true;
 	$scope.person = {};
 	$scope.person.agreedToInformationSheet = null;
 	$scope.person.agreedToConsent = null;
@@ -281,6 +284,8 @@ function PersonCtrlNew($scope, $routeParams, Person, Group, $http, $cookies, $lo
 	$scope.careTeam = [];
 	$scope.passwordConfirmation = null;
 	$scope.password = null;
+	$scope.changePassword = true;
+	$scope.emailDisabled = false;
 
 	// auth subject
 	$http.get(Config.urlSubject).then(function(response) {
