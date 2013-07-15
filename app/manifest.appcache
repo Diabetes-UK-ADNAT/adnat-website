@@ -1,7 +1,6 @@
 CACHE MANIFEST
 
-#version 14-Jul-13 I
-#token=v2175
+#version 14-Jul-13v2.1.75
 
 CACHE:
 #data
@@ -20,8 +19,8 @@ CACHE:
 /img/3.jpg
 
 #internal HTML documents
-/?token=v2175
 # for plain routes on menus, not token it is not supported on route URIs
+/
 /v/index.html
 /partials/faq-list.html
 /partials/faq-detail.html
