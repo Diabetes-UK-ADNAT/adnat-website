@@ -19,7 +19,7 @@
 				<label>Email</label>
 				<input type="email" name="email" ng-model="person.email" required ng-disabled="emailDisabled"/>
 				<span ng-show="myForm.email.$error.required" class="help-inline"> Required</span>
-				<div ng-show="showPasswordToggle">
+				<div ng-show="hasRoleSelected('Patient') && showPasswordToggle">
 					<div ng-show="!changePassword" ng-click="changePassword = !changePassword"><i class="icon-lock"></i>&nbsp;Change Password</div>
 					<div ng-show="changePassword" ng-click="changePassword = !changePassword"><i class="icon-unlock"></i>&nbsp;Cancel Change Password</div>
 				</div>
