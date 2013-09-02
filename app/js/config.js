@@ -1,5 +1,4 @@
-var ConfigIsDev = true;
-//10.0.2.2 for VMs, myadnat.co.uk for 
+var ConfigIsDev = false;
 var UseLocalVmTestConfig = false;
 var Config = {
 	version: '2.1.75',
