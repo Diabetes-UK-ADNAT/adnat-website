@@ -608,345 +608,843 @@ h.chars(e.substr(0,g)),h.start("a",{href:f}),h.chars(b[0].replace(d,"")),h.end("
  */
 angular.module("ui.config",[]).value("ui.config",{}),angular.module("ui.filters",["ui.config"]),angular.module("ui.directives",["ui.config"]),angular.module("ui",["ui.filters","ui.directives","ui.config"]),angular.module("ui.directives").directive("uiAnimate",["ui.config","$timeout",function(e,t){var n={};return angular.isString(e.animate)?n["class"]=e.animate:e.animate&&(n=e.animate),{restrict:"A",link:function(e,r,i){var s={};i.uiAnimate&&(s=e.$eval(i.uiAnimate),angular.isString(s)&&(s={"class":s})),s=angular.extend({"class":"ui-animate"},n,s),r.addClass(s["class"]),t(function(){r.removeClass(s["class"])},20,!1)}}}]),angular.module("ui.directives").directive("uiCalendar",["ui.config","$parse",function(e,t){return e.uiCalendar=e.uiCalendar||{},{require:"ngModel",restrict:"A",link:function(t,n,r,i){function a(){t.calendar=n.html("");var i=t.calendar.fullCalendar("getView");i&&(i=i.name);var o,u={defaultView:i,eventSources:s};r.uiCalendar?o=t.$eval(r.uiCalendar):o={},angular.extend(u,e.uiCalendar,o),t.calendar.fullCalendar(u)}var s=t.$eval(r.ngModel),o=0,u=function(){var e=t.$eval(r.equalsTracker);return o=0,angular.forEach(s,function(e,t){angular.isArray(e)&&(o+=e.length)}),angular.isNumber(e)?o+s.length+e:o+s.length};a(),t.$watch(u,function(e,t){a()})}}}]),angular.module("ui.directives").directive("uiCodemirror",["ui.config","$timeout",function(e,t){"use strict";var n=["cursorActivity","viewportChange","gutterClick","focus","blur","scroll","update"];return{restrict:"A",require:"ngModel",link:function(r,i,s,o){var u,a,f,l,c;if(i[0].type!=="textarea")throw new Error("uiCodemirror3 can only be applied to a textarea element");u=e.codemirror||{},a=angular.extend({},u,r.$eval(s.uiCodemirror)),f=function(e){return function(t,n){var i=t.getValue();i!==o.$viewValue&&(o.$setViewValue(i),r.$apply()),typeof e=="function"&&e(t,n)}},l=function(){c=CodeMirror.fromTextArea(i[0],a),c.on("change",f(a.onChange));for(var e=0,u=n.length,l;e<u;++e){l=a["on"+n[e].charAt(0).toUpperCase()+n[e].slice(1)];if(l===void 0)continue;if(typeof l!="function")continue;c.on(n[e],l)}o.$formatters.push(function(e){if(angular.isUndefined(e)||e===null)return"";if(angular.isObject(e)||angular.isArray(e))throw new Error("ui-codemirror cannot use an object or an array as a model");return e}),o.$render=function(){c.setValue(o.$viewValue)},s.uiRefresh&&r.$watch(s.uiRefresh,function(e,n){e!==n&&t(c.refresh)})},t(l)}}}]),angular.module("ui.directives").directive("uiCurrency",["ui.config","currencyFilter",function(e,t){var n={pos:"ui-currency-pos",neg:"ui-currency-neg",zero:"ui-currency-zero"};return e.currency&&angular.extend(n,e.currency),{restrict:"EAC",require:"ngModel",link:function(e,r,i,s){var o,u,a;o=angular.extend({},n,e.$eval(i.uiCurrency)),u=function(e){var n;return n=e*1,r.toggleClass(o.pos,n>0),r.toggleClass(o.neg,n<0),r.toggleClass(o.zero,n===0),e===""?r.text(""):r.text(t(n,o.symbol)),!0},s.$render=function(){a=s.$viewValue,r.val(a),u(a)}}}}]),angular.module("ui.directives").directive("uiDate",["ui.config",function(e){"use strict";var t;return t={},angular.isObject(e.date)&&angular.extend(t,e.date),{require:"?ngModel",link:function(t,n,r,i){var s=function(){return angular.extend({},e.date,t.$eval(r.uiDate))},o=function(){var e=s();if(i){var r=function(){t.$apply(function(){var e=n.datepicker("getDate");n.datepicker("setDate",n.val()),i.$setViewValue(e),n.blur()})};if(e.onSelect){var o=e.onSelect;e.onSelect=function(e,n){r(),t.$apply(function(){o(e,n)})}}else e.onSelect=r;n.bind("change",r),i.$render=function(){var e=i.$viewValue;if(angular.isDefined(e)&&e!==null&&!angular.isDate(e))throw new Error("ng-Model value must be a Date object - currently it is a "+typeof e+" - use ui-date-format to convert it from a string");n.datepicker("setDate",e)}}n.datepicker("destroy"),n.datepicker(e),i&&i.$render()};t.$watch(s,o,!0)}}}]).directive("uiDateFormat",["ui.config",function(e){var t={require:"ngModel",link:function(t,n,r,i){var s=r.uiDateFormat||e.dateFormat;s?(i.$formatters.push(function(e){if(angular.isString(e))return $.datepicker.parseDate(s,e)}),i.$parsers.push(function(e){if(e)return $.datepicker.formatDate(s,e)})):(i.$formatters.push(function(e){if(angular.isString(e))return new Date(e)}),i.$parsers.push(function(e){if(e)return e.toISOString()}))}};return t}]),angular.module("ui.directives").directive("uiEvent",["$parse",function(e){return function(t,n,r){var i=t.$eval(r.uiEvent);angular.forEach(i,function(r,i){var s=e(r);n.bind(i,function(e){var n=Array.prototype.slice.call(arguments);n=n.splice(1),t.$apply(function(){s(t,{$event:e,$params:n})})})})}}]),angular.module("ui.directives").directive("uiIf",[function(){return{transclude:"element",priority:1e3,terminal:!0,restrict:"A",compile:function(e,t,n){return function(e,t,r){var i,s;e.$watch(r.uiIf,function(r){i&&(i.remove(),i=undefined),s&&(s.$destroy(),s=undefined),r&&(s=e.$new(),n(s,function(e){i=e,t.after(e)}))})}}}}]),angular.module("ui.directives").directive("uiJq",["ui.config","$timeout",function(t,n){return{restrict:"A",compile:function(r,i){if(!angular.isFunction(r[i.uiJq]))throw new Error('ui-jq: The "'+i.uiJq+'" function does not exist');var s=t.jq&&t.jq[i.uiJq];return function(t,r,i){function u(){n(function(){r[i.uiJq].apply(r,o)},0,!1)}var o=[];i.uiOptions?(o=t.$eval("["+i.uiOptions+"]"),angular.isObject(s)&&angular.isObject(o[0])&&(o[0]=angular.extend({},s,o[0]))):s&&(o=[s]),i.ngModel&&r.is("select,input,textarea")&&r.on("change",function(){r.trigger("input")}),i.uiRefresh&&t.$watch(i.uiRefresh,function(e){u()}),u()}}}}]),angular.module("ui.directives").factory("keypressHelper",["$parse",function(t){var n={8:"backspace",9:"tab",13:"enter",27:"esc",32:"space",33:"pageup",34:"pagedown",35:"end",36:"home",37:"left",38:"up",39:"right",40:"down",45:"insert",46:"delete"},r=function(e){return e.charAt(0).toUpperCase()+e.slice(1)};return function(e,i,s,o){var u,a=[];u=i.$eval(o["ui"+r(e)]),angular.forEach(u,function(e,n){var r,i;i=t(e),angular.forEach(n.split(" "),function(e){r={expression:i,keys:{}},angular.forEach(e.split("-"),function(e){r.keys[e]=!0}),a.push(r)})}),s.bind(e,function(t){var r=t.metaKey||t.altKey,s=t.ctrlKey,o=t.shiftKey,u=t.keyCode;e==="keypress"&&!o&&u>=97&&u<=122&&(u-=32),angular.forEach(a,function(e){var u=e.keys[n[t.keyCode]]||e.keys[t.keyCode.toString()]||!1,a=e.keys.alt||!1,f=e.keys.ctrl||!1,l=e.keys.shift||!1;u&&a==r&&f==s&&l==o&&i.$apply(function(){e.expression(i,{$event:t})})})})}}]),angular.module("ui.directives").directive("uiKeydown",["keypressHelper",function(e){return{link:function(t,n,r){e("keydown",t,n,r)}}}]),angular.module("ui.directives").directive("uiKeypress",["keypressHelper",function(e){return{link:function(t,n,r){e("keypress",t,n,r)}}}]),angular.module("ui.directives").directive("uiKeyup",["keypressHelper",function(e){return{link:function(t,n,r){e("keyup",t,n,r)}}}]),function(){function t(e,t,n,r){angular.forEach(t.split(" "),function(t){var i={type:"map-"+t};google.maps.event.addListener(n,t,function(t){r.triggerHandler(angular.extend({},i,t)),e.$$phase||e.$apply()})})}function n(n,r){e.directive(n,[function(){return{restrict:"A",link:function(e,i,s){e.$watch(s[n],function(n){t(e,r,n,i)})}}}])}var e=angular.module("ui.directives");e.directive("uiMap",["ui.config","$parse",function(e,n){var r="bounds_changed center_changed click dblclick drag dragend dragstart heading_changed idle maptypeid_changed mousemove mouseout mouseover projection_changed resize rightclick tilesloaded tilt_changed zoom_changed",i=e.map||{};return{restrict:"A",link:function(e,s,o){var u=angular.extend({},i,e.$eval(o.uiOptions)),a=new google.maps.Map(s[0],u),f=n(o.uiMap);f.assign(e,a),t(e,r,a,s)}}}]),e.directive("uiMapInfoWindow",["ui.config","$parse","$compile",function(e,n,r){var i="closeclick content_change domready position_changed zindex_changed",s=e.mapInfoWindow||{};return{link:function(e,o,u){var a=angular.extend({},s,e.$eval(u.uiOptions));a.content=o[0];var f=n(u.uiMapInfoWindow),l=f(e);l||(l=new google.maps.InfoWindow(a),f.assign(e,l)),t(e,i,l,o),o.replaceWith("<div></div>");var c=l.open;l.open=function(n,i,s,u,a,f){r(o.contents())(e),c.call(l,n,i,s,u,a,f)}}}}]),n("uiMapMarker","animation_changed click clickable_changed cursor_changed dblclick drag dragend draggable_changed dragstart flat_changed icon_changed mousedown mouseout mouseover mouseup position_changed rightclick shadow_changed shape_changed title_changed visible_changed zindex_changed"),n("uiMapPolyline","click dblclick mousedown mousemove mouseout mouseover mouseup rightclick"),n("uiMapPolygon","click dblclick mousedown mousemove mouseout mouseover mouseup rightclick"),n("uiMapRectangle","bounds_changed click dblclick mousedown mousemove mouseout mouseover mouseup rightclick"),n("uiMapCircle","center_changed click dblclick mousedown mousemove mouseout mouseover mouseup radius_changed rightclick"),n("uiMapGroundOverlay","click dblclick")}(),angular.module("ui.directives").directive("uiMask",[function(){return{require:"ngModel",link:function(e,t,n,r){r.$render=function(){var i=r.$viewValue||"";t.val(i),t.mask(e.$eval(n.uiMask))},r.$parsers.push(function(e){var n=t.isMaskValid()||angular.isUndefined(t.isMaskValid())&&t.val().length>0;return r.$setValidity("mask",n),n?e:undefined}),t.bind("keyup",function(){e.$apply(function(){r.$setViewValue(t.mask())})})}}}]),angular.module("ui.directives").directive("uiReset",["ui.config",function(e){var t=null;return e.reset!==undefined&&(t=e.reset),{require:"ngModel",link:function(e,n,r,i){var s;s=angular.element('<a class="ui-reset" />'),n.wrap('<span class="ui-resetwrap" />').after(s),s.bind("click",function(n){n.preventDefault(),e.$apply(function(){r.uiReset?i.$setViewValue(e.$eval(r.uiReset)):i.$setViewValue(t),i.$render()})})}}}]),angular.module("ui.directives").directive("uiRoute",["$location","$parse",function(e,t){return{restrict:"AC",compile:function(n,r){var i;if(r.uiRoute)i="uiRoute";else if(r.ngHref)i="ngHref";else{if(!r.href)throw new Error("uiRoute missing a route or href property on "+n[0]);i="href"}return function(n,r,s){function a(t){(hash=t.indexOf("#"))>-1&&(t=t.substr(hash+1)),u=function(){o(n,e.path().indexOf(t)>-1)},u()}function f(t){(hash=t.indexOf("#"))>-1&&(t=t.substr(hash+1)),u=function(){var i=new RegExp("^"+t+"$",["i"]);o(n,i.test(e.path()))},u()}var o=t(s.ngModel||s.routeModel||"$uiRoute").assign,u=angular.noop;switch(i){case"uiRoute":s.uiRoute?f(s.uiRoute):s.$observe("uiRoute",f);break;case"ngHref":s.ngHref?a(s.ngHref):s.$observe("ngHref",a);break;case"href":a(s.href)}n.$on("$routeChangeSuccess",function(){u()})}}}}]),angular.module("ui.directives").directive("uiScrollfix",["$window",function(e){"use strict";return{link:function(t,n,r){var i=n.offset().top;r.uiScrollfix?r.uiScrollfix.charAt(0)==="-"?r.uiScrollfix=i-r.uiScrollfix.substr(1):r.uiScrollfix.charAt(0)==="+"&&(r.uiScrollfix=i+parseFloat(r.uiScrollfix.substr(1))):r.uiScrollfix=i,angular.element(e).on("scroll.ui-scrollfix",function(){var t;if(angular.isDefined(e.pageYOffset))t=e.pageYOffset;else{var i=document.compatMode&&document.compatMode!=="BackCompat"?document.documentElement:document.body;t=i.scrollTop}!n.hasClass("ui-scrollfix")&&t>r.uiScrollfix?n.addClass("ui-scrollfix"):n.hasClass("ui-scrollfix")&&t<r.uiScrollfix&&n.removeClass("ui-scrollfix")})}}}]),angular.module("ui.directives").directive("uiSelect2",["ui.config","$timeout",function(e,t){var n={};return e.select2&&angular.extend(n,e.select2),{require:"?ngModel",compile:function(e,r){var i,s,o,u=e.is("select"),a=r.multiple!==undefined;return e.is("select")&&(s=e.find("option[ng-repeat], option[data-ng-repeat]"),s.length&&(o=s.attr("ng-repeat")||s.attr("data-ng-repeat"),i=jQuery.trim(o.split("|")[0]).split(" ").pop())),function(e,r,s,o){var f=angular.extend({},n,e.$eval(s.uiSelect2));u?(delete f.multiple,delete f.initSelection):a&&(f.multiple=!0);if(o){o.$render=function(){u?r.select2("val",o.$modelValue):a?o.$modelValue?angular.isArray(o.$modelValue)?r.select2("data",o.$modelValue):r.select2("val",o.$modelValue):r.select2("data",[]):angular.isObject(o.$modelValue)?r.select2("data",o.$modelValue):r.select2("val",o.$modelValue)},i&&e.$watch(i,function(e,n,i){if(!e)return;t(function(){r.select2("val",o.$viewValue),r.trigger("change")})});if(!u){r.bind("change",function(){e.$apply(function(){o.$setViewValue(r.select2("data"))})});if(f.initSelection){var l=f.initSelection;f.initSelection=function(e,t){l(e,function(e){o.$setViewValue(e),t(e)})}}}}s.$observe("disabled",function(e){r.select2(e&&"disable"||"enable")}),s.ngMultiple&&e.$watch(s.ngMultiple,function(e){r.select2(f)}),r.val(e.$eval(s.ngModel)),t(function(){r.select2(f),!f.initSelection&&!u&&o.$setViewValue(r.select2("data"))})}}}}]),angular.module("ui.directives").directive("uiShow",[function(){return function(e,t,n){e.$watch(n.uiShow,function(e,n){e?t.addClass("ui-show"):t.removeClass("ui-show")})}}]).directive("uiHide",[function(){return function(e,t,n){e.$watch(n.uiHide,function(e,n){e?t.addClass("ui-hide"):t.removeClass("ui-hide")})}}]).directive("uiToggle",[function(){return function(e,t,n){e.$watch(n.uiToggle,function(e,n){e?t.removeClass("ui-hide").addClass("ui-show"):t.removeClass("ui-show").addClass("ui-hide")})}}]),angular.module("ui.directives").directive("uiSortable",["ui.config",function(e){return{require:"?ngModel",link:function(t,n,r,i){var s,o,u,a,f,l,c,h,p;f=angular.extend({},e.sortable,t.$eval(r.uiSortable)),i&&(i.$render=function(){n.sortable("refresh")},u=function(e,t){t.item.sortable={index:t.item.index()}},a=function(e,t){t.item.sortable.resort=i},s=function(e,t){t.item.sortable.relocate=!0,i.$modelValue.splice(t.item.index(),0,t.item.sortable.moved)},o=function(e,t){i.$modelValue.length===1?t.item.sortable.moved=i.$modelValue.splice(0,1)[0]:t.item.sortable.moved=i.$modelValue.splice(t.item.sortable.index,1)[0]},onStop=function(e,n){if(n.item.sortable.resort&&!n.item.sortable.relocate){var r,i;i=n.item.sortable.index,r=n.item.index(),i<r&&r--,n.item.sortable.resort.$modelValue.splice(r,0,n.item.sortable.resort.$modelValue.splice(i,1)[0])}(n.item.sortable.resort||n.item.sortable.relocate)&&t.$apply()},h=f.start,f.start=function(e,t){u(e,t),typeof h=="function"&&h(e,t)},_stop=f.stop,f.stop=function(e,t){onStop(e,t),typeof _stop=="function"&&_stop(e,t)},p=f.update,f.update=function(e,t){a(e,t),typeof p=="function"&&p(e,t)},l=f.receive,f.receive=function(e,t){s(e,t),typeof l=="function"&&l(e,t)},c=f.remove,f.remove=function(e,t){o(e,t),typeof c=="function"&&c(e,t)}),n.sortable(f)}}}]),angular.module("ui.directives").directive("uiTinymce",["ui.config",function(e){return e.tinymce=e.tinymce||{},{require:"ngModel",link:function(t,n,r,i){var s,o={onchange_callback:function(e){e.isDirty()&&(e.save(),i.$setViewValue(n.val()),t.$$phase||t.$apply())},handle_event_callback:function(e){return this.isDirty()&&(this.save(),i.$setViewValue(n.val()),t.$$phase||t.$apply()),!0},setup:function(e){e.onSetContent.add(function(e,r){e.isDirty()&&(e.save(),i.$setViewValue(n.val()),t.$$phase||t.$apply())})}};r.uiTinymce?s=t.$eval(r.uiTinymce):s={},angular.extend(o,e.tinymce,s),setTimeout(function(){n.tinymce(o)})}}}]),angular.module("ui.directives").directive("uiValidate",function(){return{restrict:"A",require:"ngModel",link:function(e,t,n,r){var i,s,o={},u=e.$eval(n.uiValidate);if(!u)return;angular.isString(u)&&(u={validator:u}),angular.forEach(u,function(t,n){i=function(i){return e.$eval(t,{$value:i})?(r.$setValidity(n,!0),i):(r.$setValidity(n,!1),undefined)},o[n]=i,r.$formatters.push(i),r.$parsers.push(i)}),n.uiValidateWatch&&(s=e.$eval(n.uiValidateWatch),angular.isString(s)?e.$watch(s,function(){angular.forEach(o,function(e,t){e(r.$modelValue)})}):angular.forEach(s,function(t,n){e.$watch(t,function(){o[n](r.$modelValue)})}))}}}),angular.module("ui.filters").filter("format",function(){return function(e,t){if(!e)return e;var n=e.toString(),r;return t===undefined?n:!angular.isArray(t)&&!angular.isObject(t)?n.split("$0").join(t):(r=angular.isArray(t)&&"$"||":",angular.forEach(t,function(e,t){n=n.split(r+t).join(e)}),n)}}),angular.module("ui.filters").filter("highlight",function(){return function(e,t,n){return t||angular.isNumber(t)?(e=e.toString(),t=t.toString(),n?e.split(t).join('<span class="ui-match">'+t+"</span>"):e.replace(new RegExp(t,"gi"),'<span class="ui-match">$&</span>')):e}}),angular.module("ui.filters").filter("inflector",function(){function e(e){return e.replace(/^([a-z])|\s+([a-z])/g,function(e){return e.toUpperCase()})}function t(e,t){return e.replace(/[A-Z]/g,function(e){return t+e})}var n={humanize:function(n){return e(t(n," ").split("_").join(" "))},underscore:function(e){return e.substr(0,1).toLowerCase()+t(e.substr(1),"_").toLowerCase().split(" ").join("_")},variable:function(t){return t=t.substr(0,1).toLowerCase()+e(t.split("_").join(" ")).substr(1).split(" ").join(""),t}};return function(e,t,r){return t!==!1&&angular.isString(e)?(t=t||"humanize",n[t](e)):e}}),angular.module("ui.filters").filter("unique",function(){return function(e,t){if(t===!1)return e;if((t||angular.isUndefined(t))&&angular.isArray(e)){var n={},r=[],i=function(e){return angular.isObject(e)&&angular.isString(t)?e[t]:e};angular.forEach(e,function(e){var t,n=!1;for(var s=0;s<r.length;s++)if(angular.equals(i(r[s]),i(e))){n=!0;break}n||r.push(e)}),e=r}return e}});'use strict';
 
-
 // Declare app level module which depends on filters, and services
 var myApp = angular.module('myApp', [
-    'myApp.content',
-    'myApp.directives',
-    'myApp.faq',
-    'myApp.filters',
-    'myApp.handler',
-    'myApp.person',
-    'myApp.assessment',
-    'myApp.services',
-    'ui', //angular-ui
-//    'ui.bootstrap',
-    'ngSanitize'
+	'myApp.services',
+	'myApp.directives',
+	'myApp.filters',
+	'myApp.handler',
+//	'myApp.selectcontacts',
+	'ui.reset',
+	'ui.tinymce',
+	'ui.date',
+	'ui.select2',
+	'ngSanitize',
+	'ngCookies',
+	'http-auth-interceptor',
+	'myLoginCheck'
 ]);
 
 myApp.config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/assessment/view/:id', {templateUrl: 'partials/assessment-detail.html', controller: AssessmentCtrlDetail});
-        //
-        $routeProvider.when('/page/edit/:id', {templateUrl: 'partials/page-detail.html', controller: PageCtrlEdit});
-        $routeProvider.when('/page/new', {templateUrl: 'partials/page-detail.html', controller: PageCtrlNew});
-        $routeProvider.when('/page/view/:id', {templateUrl: 'partials/page.html', controller: PageFindCtrl});
-        $routeProvider.when('/page/hero/:id', {templateUrl: 'partials/page-hero-unit.html', controller: PageFindCtrl});
-        $routeProvider.when('/page-list', {templateUrl: 'partials/page-list.html', controller: PageCtrl});
-        //
-        $routeProvider.when('/faq-list/:category', {templateUrl: 'partials/faq-list.html', controller: FaqCtrl});
-        $routeProvider.when('/faq', {templateUrl: 'partials/faq.html', controller: FaqCtrl});
-        $routeProvider.when('/faq/edit/:faqId', {templateUrl: 'partials/faq-detail.html', controller: FaqCtrlEdit});
-        $routeProvider.when('/faq/new', {templateUrl: 'partials/faq-detail.html', controller: FaqCtrlNew});
-        //
-        $routeProvider.when('/person', {templateUrl: 'partials/person.html', controller: PersonCtrl});
-        $routeProvider.when('/person/edit/:id', {templateUrl: 'partials/person-detail.html', controller: PersonCtrlEdit});
-        $routeProvider.when('/person/new', {templateUrl: 'partials/person-detail.html', controller: PersonCtrlNew});
-        //
-        $routeProvider.when('/about', {redirectTo: '/page/view/5121823f3004e6347d119bb4'});
-        $routeProvider.when('/contact', {redirectTo: '/page/view/5121823f3004e6347d119bb4'});
-        $routeProvider.when('/for-patients', {redirectTo: '/page/view/51217c703004e6347d119baf'});
-        $routeProvider.when('/for-clinicians', {redirectTo: '/page/view/5122fdcd3004511159c6444a'});
-        $routeProvider.when('/contact', {redirectTo: '/page/view/5122ff963004511159c6444b'});
-        $routeProvider.when('/references', {redirectTo: '/page/view/512301e53004511159c6444c'});
-        //
-        $routeProvider.otherwise({redirectTo: '/page/hero/5121823f3004e6347d119bb4,51576ffee4b09cf566e5dfd9,51576fe7e4b09cf566e5dfd8'});
+		$routeProvider.when('/assessment/view/:id', {templateUrl: 'partials/assessment-detail.html', controller: AssessmentCtrlDetail});
+		//
+		$routeProvider.when('/page/edit/:id', {templateUrl: 'partials/page-detail.html', controller: PageCtrlEdit});
+		$routeProvider.when('/page/new', {templateUrl: 'partials/page-detail.html', controller: PageCtrlNew});
+		$routeProvider.when('/page/view/:id', {templateUrl: 'partials/page.html', controller: PageFindCtrl});
+		$routeProvider.when('/page/hero/:id', {templateUrl: 'partials/page-hero-unit.html', controller: PageFindCtrl});
+		$routeProvider.when('/page-list', {templateUrl: 'partials/page-list.html', controller: PageCtrl});
+		//
+		$routeProvider.when('/faq-list/:category', {templateUrl: 'partials/faq-list.html', controller: FaqCtrl});
+		$routeProvider.when('/faq', {templateUrl: 'partials/faq.html', controller: FaqCtrl});
+		$routeProvider.when('/faq/edit/:faqId', {templateUrl: 'partials/faq-detail.html', controller: FaqCtrlEdit});
+		$routeProvider.when('/faq/new', {templateUrl: 'partials/faq-detail.html', controller: FaqCtrlNew});
+		//
+		$routeProvider.when('/group', {templateUrl: 'partials/group.html', controller: GroupCtrl});
+		$routeProvider.when('/group/edit/:groupId', {templateUrl: 'partials/group-detail.html', controller: GroupCtrlEdit});
+		$routeProvider.when('/group/new', {templateUrl: 'partials/group-detail.html', controller: GroupCtrlNew});
+		//
+		$routeProvider.when('/person/edit/:id', {templateUrl: 'partials/person-detail.html', controller: PersonCtrlEdit});
+		$routeProvider.when('/person/new/:roles', {templateUrl: 'partials/person-detail.html', controller: PersonCtrlNew});
+		$routeProvider.when('/person/new', {templateUrl: 'partials/person-detail.html', controller: PersonCtrlNew});
+		//
+		$routeProvider.when('/dashboard', {templateUrl: 'partials/dashboard.html', controller: DashboardCtrl});
+		//
+		$routeProvider.when('/about', {redirectTo: '/page/view/5121823f3004e6347d119bb4'});
+		$routeProvider.when('/contact', {redirectTo: '/page/view/5121823f3004e6347d119bb4'});
+		$routeProvider.when('/for-patients', {redirectTo: '/page/view/51217c703004e6347d119baf'});
+		$routeProvider.when('/for-practitioners', {redirectTo: '/page/view/5122fdcd3004511159c6444a'});
+		$routeProvider.when('/contact', {redirectTo: '/page/view/5122ff963004511159c6444b'});
+		$routeProvider.when('/references', {redirectTo: '/page/view/512301e53004511159c6444c'});
+		$routeProvider.otherwise({redirectTo: '/page/hero/5121823f3004e6347d119bb4,51576ffee4b09cf566e5dfd9,51576fe7e4b09cf566e5dfd8'});
+		//
+//	}]);
 
-    }]);
+	}]);
+
+
+
+myApp.run(function($location, $logincheck) {
+	if ($logincheck) {
+		//if not a deep link, then do this (bookmarks, email urls)
+		// but only works on full refresh not redirect from login
+		if ($location.path() === '/' || angular.equals("/page/hero/5121823f3004e6347d119bb4,51576ffee4b09cf566e5dfd9,51576fe7e4b09cf566e5dfd8", $location.path())) {
+			$location.path('/dashboard');
+		}
+	}
+});
+//
+//	$scope.$watch(function() {
+//		return $location.path();
+//	}, function(newValue, oldValue) {
+//		if ($scope.loggedIn === false && newValue !== 'https://auth.myadnat.co.uk:4443/login') {
+//			$location.path('https://auth.myadnat.co.uk:4443/login');
+//		}
+//	});
 'use strict';
 
-//http://localhost:9000/faqs.json
-var DEV_ROOT_SERVICES_URL = 'https://api.myadnat.co.uk\\:4443/v1';
-var DEV_ROOT_SERVICES_URL_PLAIN = 'https://api.myadnat.co.uk:4443/v1';
-var PROD_ROOT_SERVICES_URL = 'https://api.myadnat.co.uk\\:443/v1';
-var PROD_ROOT_SERVICES_URL_PLAIN = 'https://api.myadnat.co.uk:443/v1';
-var ROOT_SERVICES_URL = DEV_ROOT_SERVICES_URL;
-var ROOT_SERVICES_URL_PLAIN = DEV_ROOT_SERVICES_URL_PLAIN;
+var services = angular.module('myApp.services', ['ngResource']);
 
-angular.module('myApp.services', []).value('version', '2.0');
+services.value('version', Config.version);
 
-angular.module('myApp.faq', ['ngResource']).factory('Faq', function($resource) {
-   return $resource(ROOT_SERVICES_URL+'/faqs/:id', {} );
+services.factory('Faq', function($resource) {
+	return $resource(Config.urlServicesRoot + '/faqs/:id', {});
 });
 
-angular.module('myApp.content', ['ngResource']).factory('Content', function($resource) {
-   return $resource(ROOT_SERVICES_URL+'/contents/:id', {} );
+services.factory('Content', function($resource) {
+	return $resource(Config.urlServicesRoot+ '/contents/:id', {});
 });
 
-angular.module('myApp.person', ['ngResource']).factory('Person', function($resource) {
-   return $resource(ROOT_SERVICES_URL+'/persons/:id', {} );
+services.factory('Group', function($resource) {
+	return $resource(Config.urlServicesRoot + '/groups/:id', {});
 });
 
-angular.module('myApp.assessment', ['ngResource']).factory('Assessment', function($resource) {
-   return $resource(ROOT_SERVICES_URL+'/assessments/:id', {} );
+services.factory('Person', function($resource) {
+	return $resource(Config.urlServicesRoot + '/persons/:id', {});
 });
-//override exception handler
-angular.module('myApp.handler', ['ng']).factory('$exceptionHandler', function () {
-    return function (exception, cause) {
-        alert(exception.message); //fixme user messages?
-    };
+
+services.factory('Assessment', function($resource) {
+	return $resource(Config.urlServicesRoot + '/assessments/:id', {});
 });
+
+angular.module('myApp.handler', ['ng']).factory('$exceptionHandler', function() {
+	return function(exception, cause) {
+		alert(exception.message); //fixme user messages?
+	};
+});
+'use strict';
+
+var login = angular.module('myLoginCheck', []).
+		factory('$logincheck', function($cookies) {
+	//alert($cookies.aut);
+	return !(
+			typeof $cookies.aut === 'undefined'
+			|| $cookies.aut.indexOf('pa.u.id') === -1
+			&& $cookies.aut.indexOf('pa.u.exp') === -1
+			&& $cookies.aut.indexOf('pa.p.id') === -1
+			);
+});
+
+function MenuCtrl($scope, $cookies) { //fixme make a service for cross controller use?
+
+	$scope.isLoggedIn = function() {
+		return !(
+				typeof $cookies.aut === 'undefined'
+				|| $cookies.aut.indexOf('pa.u.id') === -1
+				&& $cookies.aut.indexOf('pa.u.exp') === -1
+				&& $cookies.aut.indexOf('pa.p.id') === -1
+				);
+	};
+
+	$scope.urlLogin = Config.urlLogin;
+	$scope.urlLogout = Config.urlLogout;
+	$scope.urlProfile = Config.urlProfile;
+}
+'use strict';
+
+
+function FaqCtrl($scope, $routeParams, Faq, $cookies, $http) {
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
+	$scope.faqs = Faq.query(
+			function() {
+			},
+			function() {
+				toastr.error('Error loading data');
+			}
+	);
+	$scope.categoryOptions = FaqControllerHelper.categoryOptions();
+	$scope.category = $routeParams.category;
+}
+
+//FaqCtrlEdit.$inject = ['$scope', '$location', '$routeParams', 'Faq'];
+function FaqCtrlEdit($scope, $routeParams, Faq, $http, $cookies, $location) {
+	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
+		window.location = Config.urlLogin;
+		return;
+	}
+	// must encodeURI for FireFox or get an error alert
+	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
+
+	var self = this;
+
+	$scope.categoryOptions = FaqControllerHelper.categoryOptions();
+	$scope.faq = Faq.get({id: $routeParams.faqId}, function(faq) {
+		self.original = faq;
+		$scope.categoryChoices = [];
+		angular.forEach($scope.categoryOptions, function(value, key) {
+			if (faq.categories.indexOf(value) > -1) {
+				$scope.categoryChoices[key] = true;
+			} else {
+				$scope.categoryChoices[key] = false;
+			}
+		});
+
+		$scope.categoryChoicesOriginal = [];
+		angular.copy($scope.categoryChoices, $scope.categoryChoicesOriginal);
+		$scope.faq = new Faq(self.original);
+	},
+			function() {
+				toastr.error('Error loading data');
+			});
+
+	$scope.isClean = function() {
+		return angular.equals(self.original, $scope.faq)
+				&&
+				angular.equals($scope.categoryChoices, $scope.categoryChoicesOriginal)
+				;
+	};
+
+	$scope.destroy = function() {
+		Faq.delete({id: $routeParams.faqId}, function() {
+			toastr.info('Deleted ' + $scope.faq.question);
+			$location.path('/faq');
+		},
+				function() {
+					toastr.error('Error deleting ' + $scope.faq.question);
+				}
+		);
+	};
+	$scope.save = function() {
+		$scope.faq.categories.length = 0;
+		angular.forEach($scope.categoryChoices, function(value, key) {
+			if (value) {
+				$scope.faq.categories.push($scope.categoryOptions[key]);
+			}
+		});
+
+		Faq.save($scope.faq, function() {
+			toastr.info('Saved ' + $scope.faq.question);
+			$location.path('/faq');
+		},
+				function() {
+					toastr.error('Error saving ' + $scope.faq.question);
+				});
+	};
+}
+
+function FaqCtrlNew($scope, Faq, $http, $cookies, $location) {
+	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
+		window.location = Config.urlLogin;
+		return;
+	}
+	// must encodeURI for FireFox or get an error alert
+	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
+
+
+	$scope.categoryOptions = FaqControllerHelper.categoryOptions();
+	$scope.categoryChoices = [];
+	$scope.save = function() {
+		$scope.faq.categories = [];
+		angular.forEach($scope.categoryChoices, function(value, key) {
+			if (value) {
+				$scope.faq.categories.push($scope.categoryOptions[key]);
+			}
+		});
+
+		Faq.save($scope.faq, function() {
+			toastr.info('Saved ' + $scope.faq.question);
+			$location.path('/faq');
+		},
+				function() {
+					toastr.error('Error saving ' + $scope.faq.question);
+				});
+	};
+}
+
+var FaqControllerHelper = {
+	'categoryOptions': function() {
+		return ["Young People", "Health Professionals"];
+	}
+};
 
 'use strict';
 
-'use strict';
+function AssessmentCtrl($scope, $routeParams, Assessment, $http, $cookies, $location) {
+	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
+		window.location = Config.urlLogin;
+		return;
+	}
+	// must encodeURI for FireFox or get an error alert
+	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
 
-function FaqCtrl($scope, $routeParams, Faq) {
-    $scope.faqs = Faq.query();
-    $scope.categoryOptions = CategoryOptions();
-    $scope.category = $routeParams.category;
+	$scope.assessments = Assessment.query(
+			function() {
+			},
+			function() {
+				toastr.error('Error loading data');
+			}
+	);
+	$scope.categoryOptions = AssessmentControllerHelper.categoryOptions();
+	$scope.category = $routeParams.category;
 }
 
-function FaqCtrlEdit($scope, $location, $routeParams, Faq) {
-    var self = this;
+function AssessmentCtrlDetail($scope, $routeParams, Assessment, $http, $cookies, $location) {
+	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
+		window.location = Config.urlLogin;
+		return;
+	}
+	// must encodeURI for FireFox or get an error alert
+	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
 
-    $scope.categoryOptions = CategoryOptions();
-    $scope.faq = Faq.get({id: $routeParams.faqId}, function(faq) {
-        self.original = faq;
-        $scope.categoryChoices = [];
-        angular.forEach($scope.categoryOptions, function(value, key) {
-            if (faq.categories.indexOf(value) > -1) {
-                $scope.categoryChoices[key] = true;
-            } else {
-                $scope.categoryChoices[key] = false;
-            }
-        });
+	$scope.filterOnScoringQuestions = false;
 
-        $scope.categoryChoicesOriginal = [];
-        angular.copy($scope.categoryChoices, $scope.categoryChoicesOriginal);
-        $scope.faq = new Faq(self.original);
-    });
+	$scope.categoryOptions = AssessmentControllerHelper.categoryOptions();
+	$scope.categoryFilter = function(response) {
+		return !$scope.cat || response.category.indexOf($scope.cat) === 0;
+	};
 
-    $scope.isClean = function() {
-        return angular.equals(self.original, $scope.faq)
-                &&
-                angular.equals($scope.categoryChoices, $scope.categoryChoicesOriginal)
-                ;
-    };
+	$scope.isScoringQuestionFilter = function(response) {
+		return !$scope.filterOnScoringQuestions || response.type === 'SC-SL';
+	}
 
-    $scope.destroy = function() {
-        Faq.delete({id: $routeParams.faqId}, function() {
-            $location.path('/faq');
-        });
-    };
-    $scope.save = function() {
-        $scope.faq.categories.length = 0;
-        angular.forEach($scope.categoryChoices, function(value, key) {
-            if (value) {
-                $scope.faq.categories.push($scope.categoryOptions[key]);
-            }
-        });
-
-        Faq.save($scope.faq, function() {
-            $location.path('/faq');
-        });
-    };
+	$scope.assessment = Assessment.get({id: $routeParams.id}, function() {
+		$scope.updated = new Date($scope.assessment.updated).toString();
+		if ($scope.assessment.score.psychColor) {
+			$scope.psychImage = '/img/tl-' + $scope.assessment.score.psychColor.toLowerCase() + '.png';
+		} else {
+			$scope.psychImage = '/img/tl-none.png';
+		}
+		if ($scope.assessment.score.generalColor) {
+			$scope.generalImage = '/img/tl-' + $scope.assessment.score.generalColor.toLowerCase() + '.png';
+			;
+		} else {
+			$scope.generalImage = '/img/tl-none.png';
+		}
+	},
+			function() {
+				toastr.error('Error loading data');
+			});
 }
 
-function FaqCtrlNew($scope, $location, Faq) {
-    $scope.categoryOptions = CategoryOptions();
-    $scope.categoryChoices = [];
-    $scope.save = function() {
-        $scope.faq.categories = [];
-        angular.forEach($scope.categoryChoices, function(value, key) {
-            if (value) {
-                $scope.faq.categories.push($scope.categoryOptions[key]);
-            }
-        });
-
-        Faq.save($scope.faq, function() {
-            $location.path('/faq');
-        });
-    };
-}
-
-function CategoryOptions() {
-    return ["Young People", "Health Professionals"];
-}
-
-//FaqCtrl.$inject = ['$scope', '$location', '$routeParams', 'Faq'];
-'use strict';
-
-function AssessmentCtrl($scope, $routeParams, Assessment) {
-    $scope.assessments = Assessment.query();
-    $scope.categoryOptions = CategoryOptions();
-    $scope.category = $routeParams.category;
-}
-
-function AssessmentCtrlDetail($scope, $location, $routeParams, Assessment) {
-    $scope.categoryOptions = CategoryOptions();
-    $scope.categoryFilter = function(response) {
-        return !$scope.cat || response.category.indexOf($scope.cat) === 0;
-    };
-
-    $scope.assessment = Assessment.get({id: $routeParams.id}, function() {
-        $scope.updated = new Date($scope.assessment.updated).toString();
-        if ($scope.assessment.score.psychColor) {
-            $scope.psychImage = '/img/tl-' + $scope.assessment.score.psychColor.toLowerCase() + '.png';
-        } else {
-            $scope.psychImage = '/img/tl-none.png';
-        }
-        if ($scope.assessment.score.generalColor) {
-            $scope.generalImage = '/img/tl-' + $scope.assessment.score.generalColor.toLowerCase() + '.png';
-;        } else {
-            $scope.generalImage = '/img/tl-none.png';
-        }
-    });
-}
-
-function CategoryOptions() {
-    return [
-        "About You",
-        "Carbohydrates",
-        "Drinking Alcohol",
-        "Eating",
-        "Eye Care",
-        "Foot Care",
-        "Going Out For The Day",
-        "Going to Parties",
-        "Illness",
-        "Insulin Injections",
-        "Insulin",
-        "Living With Diabetes",
-        "Making Food Choices",
-        "Managing Your Blood Glucose When Being Active",
-        "Managing Your Blood Glucose – HbA1c",
-        "Managing Your Blood Glucose – Highs",
-        "Managing Your Blood Glucose – Lows",
-        "Managing Your Blood Glucose",
-        "Medication Taking",
-        "Physical Activity",
-        "Smoking",
-        "Staying Over at a Friends House",
-        "Testing Your Blood Glucose",
-        "Treating Hypos",
-        "Using Your Insulin Pump",
-        "Your Weight"
-    ];
-}
+var AssessmentControllerHelper = {
+	'categoryOptions': function() {
+		return [
+			"About You",
+			"Carbohydrates",
+			"Drinking Alcohol",
+			"Eating",
+			"Eye Care",
+			"Foot Care",
+			"Going Out For The Day",
+			"Going to Parties",
+			"Illness",
+			"Insulin Injections",
+			"Insulin",
+			"Living With Diabetes",
+			"Making Food Choices",
+			"Managing Your Blood Glucose When Being Active",
+			"Managing Your Blood Glucose – HbA1c",
+			"Managing Your Blood Glucose – Highs",
+			"Managing Your Blood Glucose – Lows",
+			"Managing Your Blood Glucose",
+			"Medication Taking",
+			"Physical Activity",
+			"Smoking",
+			"Staying Over at a Friends House",
+			"Testing Your Blood Glucose",
+			"Treating Hypos",
+			"Using Your Insulin Pump",
+			"Your Weight"
+		];
+	}
+};
 
 //AssessmentCtrl.$inject = ['$scope', '$location', '$routeParams', 'Assessment'];
 'use strict';
+var PersonCtrlHelper = {// FIXME promote all dupe controller code here
+	'careTeamPersonsSelect2': function($http, $cookies) {
+		return {
+			allowClear: true,
+			blurOnChange: true,
+			openOnEnter: false,
+			minimumInputLength: 2,
+			ajax: {
+				url: Config.urlPersons,
+				dataType: 'json',
+				transport: function(queryParams) {
+					$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+					queryParams.data.params = {"qName": queryParams.data.q, "qRole": 'Practitioner'};
+					var result = $http.get(queryParams.url, queryParams.data).success(queryParams.success);
+					result.abort = function() {
+						return null;
+					};
+					return result;
+				},
+				data: function(term, page) {
+					return {"q": term};
+				},
+				results: function(data, page) {
+					return {results: data};
+				}
+			},
+			id: function(item) {
+				return item.uuid;
+			},
+			formatResult: function(data) {
+				return data.name;
+			},
+			formatSelection: function(data) {
+				return data.name;
+			}
+		};
+	},
+	'addToCareTeam': function($scope) {
+		$scope.careTeam.push($scope.careTeamSearchItem);
+		$scope.careTeamSearchItem = null;
+	},
+	'canAddToCareTeam': function($scope) {
+		var hasMember = false;
+		angular.forEach($scope.careTeam, function(value, key) {
+			if ($scope.careTeamSearchItem !== null) {
+				if ($scope.careTeamSearchItem.uuid.indexOf(value.uuid) > -1) {
+					hasMember = true;
+				}
+			}
+		});
+		return !$scope.careTeamSearchItem || hasMember && $scope.careTeamSearchItem;
+	},
+	'removeFromCareTeam': function($scope, i) {
+		$scope.careTeam.splice(i, 1);
+	},
+	'passwordInvalid': function($scope) {
+		var rx = /^.*(?=.{8,})(?=.*\d)(?=.*[a-zA-Z])(?=.*[*+!@#$%^&+=\-_<>/{}]).*$/;
+		return rx.exec($scope.password) === null;
+	},
+	'passwordConfirmationInvalid': function($scope) {
+		return $scope.passwordConfirmation !== $scope.password;
+	}
+};
+function PersonCtrlEdit($scope, $routeParams, Person, Group, limitToFilter, $http, $cookies, $location) {
+	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
+		window.location = Config.urlLogin;
+		return;
+	}
+	// must encodeURI for FireFox or get an error alert
+	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
 
-function PersonCtrl($scope, $routeParams, Person) {
-    $scope.persons = Person.query();
-    $scope.roles = RoleOptions();
-    $scope.role = $routeParams.role;
+
+
+	// auth subject
+	$http.get(Config.urlSubject).then(function(response) {
+		$scope.subject = response.data;
+	}, function(error) {
+	});
+	$scope.hasRole = function(role) {
+		// must use flag because returning from foreach just does continue on loop. 
+		var found = false;
+		if ($scope.subject) {
+			angular.forEach($scope.subject.roles, function(value, key) {
+				if (value === role) {
+					found = true;
+				}
+			});
+		}
+		return found;
+	};
+
+
+	$scope.roleChoices = [];
+	$scope.passwordConfirmation = null;
+	$scope.password = null;
+	$scope.roles = RoleOptions();
+	$scope.disableRoleEdit = false;
+	$scope.careTeamSearchItem = null;
+	$scope.careTeam = [];
+	$scope.changePassword = false;
+	$scope.showPasswordToggle = true;
+	$scope.emailDisabled = true;
+
+	// auth subject
+	$http.get(Config.urlSubject).then(function(response) {
+		$scope.subject = response.data;
+	}, function(error) {
+	});
+	$scope.hasRole = function(role) {
+		// must use flag because returning from foreach just does continue on loop. 
+		var found = false;
+		if ($scope.subject) {
+			angular.forEach($scope.subject.roles, function(value, key) {
+				if (value === role) {
+					found = true;
+				}
+			});
+		}
+		return found;
+	};
+
+
+	$scope.person = Person.get({id: $routeParams.id}, function(person) {
+		person.agreedToInformationSheet = person.agreedToInformationSheet === null ? null : new Date(person.agreedToInformationSheet);
+		person.agreedToConsent = person.agreedToConsent === null ? null : new Date(person.agreedToConsent);
+		person.agreedToAssent = person.agreedToAssent === null ? null : new Date(person.agreedToAssent);
+		self.original = person;
+		angular.forEach($scope.roles, function(value, key) {
+			if (person.roles.indexOf(value) > -1) {
+				$scope.roleChoices[key] = true;
+			} else {
+				$scope.roleChoices[key] = false;
+			}
+		});
+		$scope.sites = Group.query(
+				function() {
+				},
+				function() {
+					toastr.error('Error loading data');
+				}
+		);
+//		$scope.contacts = [
+//			{
+//				"title": "David",
+//				"data": "whatever"
+//			},
+//			{
+//				"title": "Alexander",
+//				"data": "something"
+//			}
+//		];
+//
+//		$scope.modelObj = $scope.contacts[1];
+
+
+		$scope.roleChoicesOriginal = [];
+		angular.copy($scope.roleChoices, $scope.roleChoicesOriginal);
+		$scope.careTeam = $scope.person.careTeam;
+		$scope.person = new Person(self.original);
+	},
+			function() {
+				toastr.error('Error loading data');
+			});
+// care team list builder
+	$scope.hasRoleSelected = function(role) {
+		// must use flag because returning from foreach just does continue on loop. 
+		var found = false;
+		angular.forEach($scope.person.roles, function(value, key) {
+			if (value === role) {
+				found = true;
+			}
+		});
+		return found;
+	};
+	// wrap helpers in function to expose to view via scope, with all proper behavior (binding works correctly w/ function wrapper)
+	$scope.careTeamPersons = PersonCtrlHelper.careTeamPersonsSelect2($http, $cookies);
+	$scope.addToCareTeam = function() {
+		PersonCtrlHelper.addToCareTeam($scope);
+	};
+	$scope.canAddToCareTeam = function() {
+		return PersonCtrlHelper.canAddToCareTeam($scope);
+	};
+	$scope.removeFromCareTeam = function(i) {
+		PersonCtrlHelper.removeFromCareTeam($scope, i);
+	};
+	$scope.isClean = function() {
+		return angular.equals(self.original, $scope.person)
+				&&
+				angular.equals($scope.roleChoices, $scope.roleChoicesOriginal)
+				&&
+				angular.equals($scope.passwordConfirmation, $scope.password)
+				&&
+				$scope.passwordConfirmation === null
+				&&
+				$scope.password === null
+				;
+	};
+	$scope.destroy = function() {
+		Person.delete(
+				{id: $routeParams.id},
+		function() {
+			toastr.info('Deleted ' + $scope.person.email);
+			$location.path('/dashboard');
+		},
+				function() {
+					toastr.error('Error deleting ' + $scope.person.email);
+				}
+		);
+	};
+	$scope.isValid = function() {
+		if ($scope.hasRoleSelected('Patient')) {
+			if ($scope.careTeam.length > 0
+					&& $scope.person.agreedToInformationSheet !== null
+					&& $scope.person.agreedToConsent !== null
+					&& $scope.person.agreedToAssent !== null
+					) {
+				// valid
+			} else {
+				return false;
+			}
+		}
+		if ($scope.person.site === null) {
+			return false;
+		}
+		return true;
+	};
+	$scope.save = function() {
+		$scope.person.roles.length = 0;
+		$scope.person.roles.push('User');
+		angular.forEach($scope.roleChoices, function(value, key) {
+			if (value) {
+				$scope.person.roles.push($scope.roles[key]);
+			}
+		});
+		$scope.person.careTeam.length = 0;
+		angular.forEach($scope.careTeam, function(value, key) {
+			if (value) {
+				$scope.person.careTeam.push($scope.careTeam[key]);
+			}
+		});
+
+		$scope.person.password = $scope.changePassword ? $scope.password : null;
+		
+		Person.save(
+				$scope.person,
+				function() {
+					toastr.info('Saved ' + $scope.person.email);
+					$location.path('/dashboard');
+				},
+				function() {
+					toastr.error('Error saving ' + $scope.person.email);
+				}
+		);
+	};
+	$scope.passwordInvalid = function() {
+		return PersonCtrlHelper.passwordInvalid($scope);
+	};
+	$scope.passwordConfirmationInvalid = function() {
+		return PersonCtrlHelper.passwordConfirmationInvalid($scope);
+	};
 }
+function PersonCtrlNew($scope, $routeParams, Person, Group, $http, $cookies, $location) {
+	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
+		window.location = Config.urlLogin;
+		return;
+	}
+	// must encodeURI for FireFox or get an error alert
+	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
 
-function PersonCtrlEdit($scope, $location, $routeParams, Person) {
-    var self = this;
+	$scope.person = {};
+	$scope.person.agreedToInformationSheet = null;
+	$scope.person.agreedToConsent = null;
+	$scope.person.agreedToAssent = null;
+	$scope.person.site = null;
+	$scope.careTeamSearchItem = null;
+	$scope.roleChoices = [];
+	$scope.careTeam = [];
+	$scope.passwordConfirmation = null;
+	$scope.password = null;
+	$scope.changePassword = true;
+	$scope.emailDisabled = false;
 
-    $scope.roles = RoleOptions();
-    $scope.person = Person.get({id: $routeParams.id}, function(person) {
-        person.dob = new Date(person.dob);
-        person.agreedToTermsAndConditions = new Date(person.agreedToTermsAndConditions);
-        person.agreedToPrivacyPolicy = new Date(person.agreedToPrivacyPolicy);
-        self.original = person;
-        $scope.roleChoices = [];
-        angular.forEach($scope.roles, function(value, key) {
-            if (person.roles.indexOf(value) > -1) {
-                $scope.roleChoices[key] = true;
-            } else {
-                $scope.roleChoices[key] = false;
-            }
-        });
+	// auth subject
+	$http.get(Config.urlSubject).then(function(response) {
+		$scope.subject = response.data;
+		if (!$scope.hasRole('Admin')) {
+			$scope.person.site = $scope.subject.site;
+		}
+	}, function(error) {
+	});
+	$scope.hasRole = function(role) {
+		// must use flag because returning from foreach just does continue on loop. 
+		var found = false;
+		if ($scope.subject) {
+			angular.forEach($scope.subject.roles, function(value, key) {
+				if (value === role) {
+					found = true;
+				}
+			});
+		}
+		return found;
+	};
 
-        $scope.roleChoicesOriginal = [];
-        angular.copy($scope.roleChoices, $scope.roleChoicesOriginal);
-        $scope.person = new Person(self.original);
-    });
-
-    $scope.isClean = function() {
-        return angular.equals(self.original, $scope.person)
-                &&
-                angular.equals($scope.roleChoices, $scope.roleChoicesOriginal)
-                ;
-    };
-
-    $scope.destroy = function() {
-        Person.delete({id: $routeParams.id}, function() {
-            $location.path('/person');
-        });
-    };
-    $scope.save = function() {
-        $scope.person.roles.length = 0;
-        angular.forEach($scope.roleChoices, function(value, key) {
-            if (value) {
-                $scope.person.roles.push($scope.roles[key]);
-            }
-        });
-
-        Person.save($scope.person, function() {
-            $location.path('/person');
-        });
-    };
+	$scope.sites = Group.query(
+			function() {
+			},
+			function() {
+				toastr.error('Error loading data');
+			}
+	);
+	// take passed in roles or default to all available
+	//fixme validate passedin existin in RoleOptions();
+	$scope.roleChoices = [];
+	//$scope.person.roles = [];
+	if ($routeParams.roles) {
+		$scope.disableRoleEdit = true;
+		$scope.roles = $routeParams.roles.split(',');
+		angular.forEach($scope.roles, function(value, key) {
+			$scope.roleChoices[key] = true;
+			//$scope.person.roles.push(value);
+		});
+	} else {
+		$scope.disableRoleEdit = false;
+		$scope.roles = RoleOptions();
+	}
+	$scope.hasRoleSelected = function(role) {
+// must use flag because returning from foreach just does continue on loop. 
+		var found = false;
+		angular.forEach($scope.roles, function(value, key) {
+			if (value === role) {
+				found = true;
+			}
+		});
+		return found;
+	};
+	$scope.careTeamPersons = PersonCtrlHelper.careTeamPersonsSelect2($http, $cookies);
+	$scope.addToCareTeam = function() {
+		PersonCtrlHelper.addToCareTeam($scope);
+	};
+	$scope.canAddToCareTeam = function() {
+		return PersonCtrlHelper.canAddToCareTeam($scope);
+	};
+	$scope.removeFromCareTeam = function(i) {
+		PersonCtrlHelper.removeFromCareTeam($scope, i);
+	};
+	$scope.isClean = function() {
+		return $scope.hasRoleSelected('Patient')
+				&&
+				angular.equals($scope.passwordConfirmation, $scope.password)
+				&&
+				$scope.passwordConfirmation === null
+				&&
+				$scope.password === null
+				;
+	};
+	$scope.isValid = function() {
+		if ($scope.hasRoleSelected('Patient')) {
+			if ($scope.careTeam.length > 0
+					&& $scope.person.agreedToInformationSheet !== null
+					&& $scope.person.agreedToConsent !== null
+					&& $scope.person.agreedToAssent !== null
+					) {
+// valid
+			} else {
+				return false;
+			}
+		}
+		if ($scope.person.site === null) {
+			return false;
+		}
+		return true;
+	};
+	$scope.save = function() {
+		$scope.person.roles = [];
+		angular.forEach($scope.roleChoices, function(value, key) {
+			if (value) {
+				$scope.person.roles.push($scope.roles[key]);
+			}
+		});
+		$scope.person.careTeam = [];
+		angular.forEach($scope.careTeam, function(value, key) {
+			if (value) {
+				$scope.person.careTeam.push($scope.careTeam[key]);
+			}
+		});
+		$scope.person.password = $scope.password;
+		Person.save(
+				$scope.person,
+				function() {
+					toastr.info('Saved ' + $scope.person.email);
+					$location.path('/dashboard');
+				},
+				function() {
+					toastr.error('Error saving ' + $scope.person.email);
+				}
+		);
+	};
+	$scope.passwordInvalid = function() {
+		return PersonCtrlHelper.passwordInvalid($scope);
+	};
+	$scope.passwordConfirmationInvalid = function() {
+		return PersonCtrlHelper.passwordConfirmationInvalid($scope);
+	};
 }
-
-function PersonCtrlNew($scope, $location, Person) {
-    $scope.roles = RoleOptions();
-    $scope.roleChoices = [];
-    $scope.save = function() {
-        $scope.person.roles = [];
-        angular.forEach($scope.roleChoices, function(value, key) {
-            if (value) {
-                $scope.person.roles.push($scope.roles[key]);
-            }
-        });
-
-        Person.save($scope.person, function() {
-            $location.path('/person');
-        });
-    };
-}
-
 function RoleOptions() {
-    return ["Patient", "Clinician", "Admin"];
+	return ["Patient", "Practitioner", "Site Admin", "Admin"];
 }
 
 //PersonCtrl.$inject = ['$scope', '$location', '$routeParams', 'Person'];
 'use strict';
-function PageCtrl($scope, $routeParams, Content) {
-    $scope.pages = Content.query();
+function PageCtrl($scope, $routeParams, Content, $http) {
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
+	$scope.pages = Content.query(
+			function() {
+			},
+			function() {
+				toastr.error('Error loading data');
+			});
 }
-function PageFindCtrl($scope, $routeParams, Content) {
-    var ids = $routeParams.id.split(',');
-    $scope.content = [];
-    ids.forEach(function(item) {
-        $scope.content.push(Content.get({id: item}));
-    });
-}
-
-function PageCtrlEdit($scope, $location, $routeParams, Content) {
-    var self = this;
-    $scope.content = Content.get({id: $routeParams.id}, function(content) {
-        self.original = content;
-        $scope.content = new Content(self.original);
-    });
-
-    $scope.isClean = function() {
-        return angular.equals(self.original, $scope.content);
-    };
-
-    $scope.destroy = function() {
-        Content.delete({id: $routeParams.id}, function() {
-            $location.path('/page-list');
-        });
-    };
-    $scope.save = function() {
-        Content.save($scope.content, function() {
-            $location.path('/page-list');
-        });
-    };
+function PageFindCtrl($scope, $routeParams, Content, $http) {
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
+	var ids = $routeParams.id.split(',');
+	$scope.content = [];
+	ids.forEach(function(item) {
+		$scope.content.push(Content.get({id: item}));
+	});
 }
 
-function PageCtrlNew($scope, $location, Content) {
-    $scope.content = new Content();
-    $scope.save = function() {
-        Content.save($scope.content, function() {
-            // location in header
-            $location.path('/page-list');
-        });
-    };
+function PageCtrlEdit($scope, $routeParams, Content, $http, $cookies, $location) {
+	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
+		window.location = Config.urlLogin;
+		return;
+	}
+// must encodeURI for FireFox or get an error alert
+	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
+	var self = this;
+	$scope.content = Content.get({id: $routeParams.id}, function(content) {
+		self.original = content;
+		$scope.content = new Content(self.original);
+	},
+			function() {
+				toastr.error('Error loading data');
+			});
+	$scope.isClean = function() {
+		return angular.equals(self.original, $scope.content);
+	};
+	$scope.destroy = function() {
+		Content.delete({id: $routeParams.id},
+		function() {
+			toastr.info('Deleted ' + $scope.content.title);
+			$location.path('/page-list');
+		},
+				function() {
+					toastr.error('Error deleting ' + $scope.content.title);
+				}
+		);
+	};
+	$scope.save = function() {
+		Content.save($scope.content,
+				function() {
+					toastr.info('Saved ' + $scope.content.title);
+					$location.path('/page-list');
+				},
+				function() {
+					toastr.error('Error saving ' + $scope.content.title);
+				});
+	};
+}
+
+function PageCtrlNew($scope, Content, $http, $cookies, $location) {
+	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
+		window.location = Config.urlLogin;
+		return;
+	}
+// must encodeURI for FireFox or get an error alert
+	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
+	$scope.content = new Content();
+	$scope.save = function() {
+		Content.save($scope.content,
+				function() {
+					toastr.info('Saved ' + $scope.content.title);
+					$location.path('/page-list');
+				},
+				function() {
+					toastr.error('Error saving ' + $scope.content.title);
+				});
+	};
 }
 
 //ContentCtrl.$inject = ['$scope', '$location', '$routeParams', 'Content'];
@@ -962,15 +1460,54 @@ angular.module('myApp.filters', []).
     }]);
 'use strict';
 
-/* Directives */
+angular.module('myApp.directives', [])
+		.directive('appVersion', ['version', function(version) {
+		return function(scope, elm, attrs) {
+			elm.text(version);
+		};
+	}]);
+//		.directive('loginManager', function() {
+////	return {
+////		restrict: 'C',
+////		link: function(scope, elem, attrs) {
+////			scope.$on('event:auth-loginRequired', function() {
+////			});
+////			scope.$on('event:auth-loginConfirmed', function() {
+////			});
+////		}
+////	}
+//});
 
 
-angular.module('myApp.directives', []).
-  directive('appVersion', ['version', function(version) {
-    return function(scope, elm, attrs) {
-      elm.text(version);
-    };
-  }]);
+//var app = angular.module('myApp.selectcontacts', []);
+//
+//app.directive('selectcontacts', function() {
+//  var linkFunc = function(scope, element, attr, ngModel) {
+//        sel = element.select2();    
+//
+//        ngModel.$render = function() {
+//          if (ngModel.$viewValue !== null) {
+//            sel.val(ngModel.$viewValue);
+//            setTimeout(function(){
+//              sel.trigger('change');
+//            },0);
+//              
+//          }
+//          else
+//          {
+//            sel.val(undefined).trigger('change');
+//          }
+//        };
+//
+//      };
+//      
+//  return {
+//      restrict:'A',
+//      require: '?ngModel',
+//      link: linkFunc
+//    };
+//});
+
 
 // https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Date/toISOString
 // JavaScript provides a direct way to convert a date object into a string in ISO format, the ISO 8601 Extended Format.
