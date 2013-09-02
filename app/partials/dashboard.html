@@ -33,12 +33,13 @@
 		<!--<col class="column-name">-->
 		<col class="column-email">
 		<col class="column-date">
+		<col class="column-testpw">
 		<thead>
 			<tr>
 				<!--<th>Name</th>-->
 				<th>Email</th>
 				<th><a href="" ng-click="predicate = 'activity.lastAssessmentPosted'; reverse=!reverse">Last Assessment Posted</a></th>
-				<!--<th>Action</th>-->
+				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -48,9 +49,9 @@
 				<td>
 					<a href="#/assessment/view/{{person.activity.lastAssessmentUuid}}">{{person.activity.lastAssessmentPosted}}</a>
 				</td>
-				<!--            <td class="action">
-								<a href="#/person/edit/{{person.uuid}}"><i class="icon-pencil"></i></a>
-							</td>   -->
+				<td class="action">
+					<a href="#/person/testpw/{{person.uuid}}"><i class="icon-lock" title="Test Password"></i></a>
+				</td>   
 			</tr>
 		</tbody>
 	</table>

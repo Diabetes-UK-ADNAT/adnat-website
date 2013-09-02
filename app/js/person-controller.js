@@ -242,7 +242,7 @@ function PersonCtrlEdit($scope, $routeParams, Person, Group, limitToFilter, $htt
 		});
 
 		$scope.person.password = $scope.changePassword ? $scope.password : null;
-		
+
 		Person.save(
 				$scope.person,
 				function() {
@@ -408,5 +408,40 @@ function PersonCtrlNew($scope, $routeParams, Person, Group, $http, $cookies, $lo
 function RoleOptions() {
 	return ["Patient", "Practitioner", "Site Admin", "Admin"];
 }
+function PersonCtrlTestPw($scope, $routeParams, Person, Group, $http, $cookies, $location) {
+	if (typeof $cookies.aut === 'undefined' || $cookies.aut.indexOf('pa.u.id') === -1 && $cookies.aut.indexOf('pa.u.exp') === -1 && $cookies.aut.indexOf('pa.p.id') === -1) {
+		window.location = Config.urlLogin;
+		return;
+	}
+	// must encodeURI for FireFox or get an error alert
+	$http.defaults.headers.common['X-Auth-Token'] = encodeURI($cookies.aut);
+	$http.defaults.headers.common['X-App-Key'] = "13B6EFE5-63EE-4F1C-A486-76B24AAE1704";
 
+	$scope.person = Person.get({id: $routeParams.id}, function(person) {
+	});
+	$scope.password = null;
+
+	$scope.isClean = function() {
+		return  $scope.passwordConfirmation === null
+				&&
+				$scope.password === null
+				;
+	};
+	$scope.isValid = function() {
+		return true;
+	};
+	$scope.save = function() {
+		$http.post(
+				Config.urlHttpServicesRoot + '/persons/testauthtxn',
+				{"email": $scope.person.email, "password": $scope.password}
+		).success(function(data, status) {
+			toastr.info('Password was Correct');
+		}).error(function(data, status) {
+			toastr.warning('Password was Incorrect');
+		});
+		$scope.passwordInvalid = function() {
+			return PersonCtrlHelper.passwordInvalid($scope);
+		};
+	};
+}
 //PersonCtrl.$inject = ['$scope', '$location', '$routeParams', 'Person'];
