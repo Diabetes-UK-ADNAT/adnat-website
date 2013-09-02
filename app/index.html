@@ -171,9 +171,11 @@
 			function onUpdateReady() {
 				window.location.reload();
 			}
-			window.applicationCache.addEventListener('updateready', onUpdateReady);
-			if (window.applicationCache.status === window.applicationCache.UPDATEREADY) {
-				onUpdateReady();
+			if (window.applicationCache) {
+				window.applicationCache.addEventListener('updateready', onUpdateReady);
+				if (window.applicationCache.status === window.applicationCache.UPDATEREADY) {
+					onUpdateReady();
+				}
 			}
 		</script>
     </body>

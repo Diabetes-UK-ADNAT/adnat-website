@@ -41,14 +41,10 @@ var PersonCtrlHelper = {// FIXME promote all dupe controller code here
 		$scope.careTeamSearchItem = null;
 	},
 	'canAddToCareTeam': function($scope) {
-//		console.log($scope.careTeamSearchItem);
-//		console.log($scope.careTeam);
 		var hasMember = false;
 		angular.forEach($scope.careTeam, function(value, key) {
 			if ($scope.careTeamSearchItem !== null) {
 				if ($scope.careTeamSearchItem.uuid.indexOf(value.uuid) > -1) {
-//					console.log($scope.careTeamSearchItem.uuid);
-//					console.log(value.uuid);
 					hasMember = true;
 				}
 			}

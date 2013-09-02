@@ -11,10 +11,8 @@ angular.module('myApp.directives', [])
 ////		restrict: 'C',
 ////		link: function(scope, elem, attrs) {
 ////			scope.$on('event:auth-loginRequired', function() {
-////				console.log('login req');
 ////			});
 ////			scope.$on('event:auth-loginConfirmed', function() {
-////				console.log('login conf');
 ////			});
 ////		}
 ////	}
