@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#version 02-Sep-13v2.1.75 prod 
+#version 29-Sep-13v2.1.76 prod 
 
 CACHE:
 #data
@@ -20,20 +20,21 @@ CACHE:
 
 #internal HTML documents
 # for plain routes on menus, not token it is not supported on route URIs
-/
-/v/index.html
-/partials/faq-list.html
-/partials/faq-detail.html
-/partials/page-list.html
-/partials/page-hero-unit.html
-/partials/person-detail.html
-/partials/assessment-detail.html
-/partials/dashboard.html
-/partials/group.html
-/partials/group-detail.html
-/partials/faq.html
-/partials/page.html
-/partials/person.html
+#/
+#/v/index.html
+#/partials/faq-list.html
+#/partials/faq-detail.html
+#/partials/page-list.html
+#/partials/page-hero-unit.html
+#/partials/person-detail.html
+#/partials/person-testpw.html?v=2176
+#/partials/assessment-detail.html
+#/partials/dashboard.html
+#/partials/group.html
+#/partials/group-detail.html
+#/partials/faq.html
+#/partials/page.html
+#/partials/person.html
 
 #libs
 # jquery 
