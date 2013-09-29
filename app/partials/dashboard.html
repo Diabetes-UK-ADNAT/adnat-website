@@ -39,6 +39,8 @@
 				<!--<th>Name</th>-->
 				<th>Email</th>
 				<th><a href="" ng-click="predicate = 'activity.lastAssessmentPosted'; reverse=!reverse">Last Assessment Posted</a></th>
+				<!--<th><a href="" ng-click="predicate = 'activity.lastAssessmentReviewed'; reverse=!reverse">Last Assessment Reviewed</a></th>-->
+				<!--<th><a href="" ng-click="predicate = 'activity.nextAssessmentScheduled'; reverse=!reverse">Next Assessment Scheduled</a></th>-->
 				<th>Action</th>
 			</tr>
 		</thead>
@@ -49,6 +51,8 @@
 				<td>
 					<a href="#/assessment/view/{{person.activity.lastAssessmentUuid}}">{{person.activity.lastAssessmentPosted}}</a>
 				</td>
+				<!--<td>{{person.activity.lastAssessmentReviewed}}</td>-->
+				<!--<td>{{person.activity.nextAssessmentScheduled}}</td>-->
 				<td class="action">
 					<a href="#/person/testpw/{{person.uuid}}"><i class="icon-lock" title="Test Password"></i></a>
 				</td>   

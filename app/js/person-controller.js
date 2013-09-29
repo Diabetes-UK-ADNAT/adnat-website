@@ -55,7 +55,10 @@ var PersonCtrlHelper = {// FIXME promote all dupe controller code here
 		$scope.careTeam.splice(i, 1);
 	},
 	'passwordInvalid': function($scope) {
-		var rx = /^.*(?=.{8,})(?=.*\d)(?=.*[a-zA-Z])(?=.*[*+!@#$%^&+=\-_<>/{}]).*$/;
+		// original 8 char, 1 number, 1+letters and 1+ special char
+		//var rx = /^.*(?=.{8,})(?=.*\d)(?=.*[a-zA-Z])(?=.*[*+!@#$%^&+=\-_<>/{}]).*$/;
+		// remove special char until users can do self service acct mgmt
+		var rx = /^.*(?=.{8,})(?=.*\d)(?=.*[a-zA-Z]).*$/;
 		return rx.exec($scope.password) === null;
 	},
 	'passwordConfirmationInvalid': function($scope) {
