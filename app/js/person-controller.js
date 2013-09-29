@@ -58,7 +58,7 @@ var PersonCtrlHelper = {// FIXME promote all dupe controller code here
 		// original 8 char, 1 number, 1+letters and 1+ special char
 		//var rx = /^.*(?=.{8,})(?=.*\d)(?=.*[a-zA-Z])(?=.*[*+!@#$%^&+=\-_<>/{}]).*$/;
 		// remove special char until users can do self service acct mgmt
-		var rx = /^.*(?=.{8,})(?=.*\d)(?=.*[a-zA-Z]).*$/;
+		var rx = /^.*(?=.{6,})(?=.*\d)(?=.*[a-zA-Z]).*$/;
 		return rx.exec($scope.password) === null;
 	},
 	'passwordConfirmationInvalid': function($scope) {
