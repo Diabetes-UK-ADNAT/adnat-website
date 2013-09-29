@@ -425,10 +425,7 @@ function PersonCtrlTestPw($scope, $routeParams, Person, Group, $http, $cookies, 
 	$scope.password = null;
 
 	$scope.isClean = function() {
-		return  $scope.passwordConfirmation === null
-				&&
-				$scope.password === null
-				;
+		return  $scope.password === null;
 	};
 	$scope.isValid = function() {
 		return true;
