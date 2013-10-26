@@ -1,7 +1,7 @@
 var ConfigIsDev = false;
 var UseLocalVmTestConfig = false;
 var Config = {
-	version: '2.1.76',
+	version: '2.1.77',
 	urlServicesRoot: 
 		ConfigIsDev ? UseLocalVmTestConfig ? 'https://10.0.2.2\\:4443/api/v1' : 'https://myadnat.co.uk\\:4443/api/v1'  
 		: 'https://myadnat.co.uk\\:443/api/v1',
