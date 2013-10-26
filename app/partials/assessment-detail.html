@@ -59,7 +59,9 @@
             >
             <td>{{response.category}}</td>
             <td>{{response.text}}</td>
-            <td><span ng-repeat="opt in response.optionsText">{{opt}}<br></span>{{response.other}}</td>
+            <td><span ng-repeat="opt in response.optionsText">{{opt}}<br></span>
+				<div class="alert-info">{{response.other}}</div>
+			</td>
         </tr>
     </tbody>
 </table>
