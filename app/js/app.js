@@ -48,7 +48,7 @@ myApp.config(['$routeProvider', function($routeProvider) {
 		$routeProvider.when('/for-practitioners', {redirectTo: '/page/view/5122fdcd3004511159c6444a'});
 		$routeProvider.when('/contact', {redirectTo: '/page/view/5122ff963004511159c6444b'});
 		$routeProvider.when('/references', {redirectTo: '/page/view/512301e53004511159c6444c'});
-		$routeProvider.otherwise({redirectTo: '/page/hero/5121823f3004e6347d119bb4,51576ffee4b09cf566e5dfd9,51576fe7e4b09cf566e5dfd8'});
+		$routeProvider.otherwise({redirectTo: '/page/hero/5121823f3004e6347d119bb4,51576ffee4b09cf566e5dfd9,51576fe7e4b09cf566e5dfd8,530e9a5ae4b09f0b73a9aecc'});
 		//
 //	}]);
 
